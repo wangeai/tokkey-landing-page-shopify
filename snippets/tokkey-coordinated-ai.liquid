@@ -1,9 +1,9 @@
 {% doc %}
   Renders the "Coordinated local AI" section ported from the prototype homepage v3 (.c6-sec): a MacBook
   logic-board cutaway where an intro video plays once on first view, then callouts, memory segments and
-  the "Loaded when needed" flow light up and loop. Phones and reduced motion skip straight to the end
-  state. The intro video is read from Shopify Files (tk-cl6-board-intro.mp4). Behaviour lives in
-  assets/tokkey-coordinated-ai.js.
+  the "Loaded when needed" flow light up and loop. Below 1024px the board and video stack above the
+  callouts; reduced motion skips straight to the end state. The intro video is read from Shopify Files
+  (tk-cl6-board-intro.mp4). Behaviour lives in assets/tokkey-coordinated-ai.js.
 
   @example
   {% render 'tokkey-coordinated-ai' %}
@@ -14,10 +14,19 @@
   <h2 class="c6-h"><span>Run</span><b>bigger</b><b>AI</b><b>models</b><span class="c6-pill c6-pk" aria-hidden="true"><i class="c6-key"></i><i class="c6-port"></i></span><span>on</span><span>the</span><span>memory</span><span>you</span><span>already</span><span>have</span><span class="c6-pill c6-pl"><i></i>LOCAL</span></h2>
   <p class="c6-lead">Tokkey loads only the part of a model each step needs, so big AI models run on a 16GB or 24GB Mac.</p>
   <div class="c6-st">
-    <div class="c6-bd"><img width="940" height="604" loading="lazy" src="{{ 'tk-cl6-board.png' | asset_url }}" alt="MacBook logic board with Tokkey plugged in, cutaway — concept render"></div>
-    <video class="c6-vd" id="c6v" muted playsinline preload="auto" poster="{{ 'tk-cl6-board-poster.jpg' | asset_url }}" data-src="{{ 'tk-cl6-board-intro.mp4' | file_url }}" aria-hidden="true"></video>
-    <i class="c6-rim c6-r1"></i><i class="c6-rim c6-r2"></i><i class="c6-rim c6-r3"></i><i class="c6-rim c6-r4"></i><i class="c6-rim c6-r5"></i>
-    <img width="119" height="128" loading="lazy" class="c6-halo" src="{{ 'tk-cl6-halo.svg' | asset_url }}" alt=""><i class="c6-slit"></i>
+    <div class="c6-art">
+      <div class="c6-bd"><img width="940" height="604" loading="lazy" src="{{ 'tk-cl6-board.png' | asset_url }}" alt="MacBook logic board with Tokkey plugged in, cutaway — concept render"></div>
+      <video class="c6-vd" id="c6v" muted playsinline preload="auto" poster="{{ 'tk-cl6-board-poster.jpg' | asset_url }}" data-src="{{ 'tk-cl6-board-intro.mp4' | file_url }}" aria-hidden="true"></video>
+      <i class="c6-rim c6-r1"></i><i class="c6-rim c6-r2"></i><i class="c6-rim c6-r3"></i><i class="c6-rim c6-r4"></i><i class="c6-rim c6-r5"></i>
+      <img width="119" height="128" loading="lazy" class="c6-halo" src="{{ 'tk-cl6-halo.svg' | asset_url }}" alt=""><i class="c6-slit"></i>
+      {%- comment -%} Mobile-only tags; same numbers as the callouts the desktop leader lines point to {%- endcomment -%}
+      <span class="c6-tag" style="--x:2.2%;--y:22.83%" aria-hidden="true">TK</span>
+      <span class="c6-tag" style="--x:51%;--y:28.868%" aria-hidden="true">02</span>
+      <span class="c6-tag" style="--x:39.8%;--y:34.151%" aria-hidden="true">04</span>
+      <span class="c6-tag" style="--x:62.95%;--y:34.151%" aria-hidden="true">04</span>
+      <span class="c6-tag" style="--x:10.55%;--y:47.736%" aria-hidden="true">03</span>
+      <span class="c6-tag" style="--x:93.85%;--y:47.736%" aria-hidden="true">03</span>
+    </div>
     <div class="c6-fade"></div>
     <svg class="c6-ld" viewBox="0 0 1204 333" fill="none" aria-hidden="true">
       <path pathLength="1" opacity=".55" d="M1 83V111.286H206V170" stroke-width="2" stroke="#BDD9EE"/>
@@ -188,6 +197,16 @@
     width: 1562px;
     height: 620px;
     overflow: hidden;
+  }
+
+  /* Board art layer; on desktop it covers the stage so child coordinates are unchanged */
+  .c6-art {
+    position: absolute;
+    inset: 0;
+  }
+
+  .c6-tag {
+    display: none;
   }
 
   .c6-bd {
@@ -694,14 +713,110 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: 24px;
-      grid-template-areas: "a b" "c d" "e f";
+      grid-template-areas: "m m" "a b" "c d" "e f";
+    }
+
+    /* Board art scaled to the desktop 1000×530 visible area; overlays use % of that box */
+    .c6-art {
+      grid-area: m;
+      position: relative;
+      inset: auto;
+      aspect-ratio: 1000 / 530;
+      margin-bottom: 32px;
     }
 
     .c6-bd,
-    .c6-vd,
-    .c6-rim,
-    .c6-halo,
-    .c6-slit,
+    .c6-vd {
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-mask-image: linear-gradient(180deg,#000 64%,rgba(0,0,0,.15) 94%,transparent);
+      mask-image: linear-gradient(180deg,#000 64%,rgba(0,0,0,.15) 94%,transparent);
+    }
+
+    /* The board image is taller than the box; its masked-out tail is clipped */
+    .c6-bd {
+      overflow: hidden;
+    }
+
+    .c6-bd img {
+      height: auto;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    .c6-r1 {
+      left: 47.3%;
+      top: 28.868%;
+      width: 7.4%;
+      height: 13.774%;
+    }
+
+    .c6-r2 {
+      left: 60.3%;
+      top: 34.151%;
+      width: 5.3%;
+      height: 21.698%;
+    }
+
+    .c6-r3 {
+      left: 37.2%;
+      top: 34.151%;
+      width: 5.2%;
+      height: 21.698%;
+    }
+
+    .c6-r4,
+    .c6-r5 {
+      top: 47.736%;
+      width: 5.3%;
+      height: 22.83%;
+    }
+
+    .c6-r4 {
+      left: 7.9%;
+    }
+
+    .c6-r5 {
+      left: 91.2%;
+    }
+
+    .c6-halo {
+      left: -3.7%;
+      top: 22.83%;
+      width: 11.9%;
+      height: 24.151%;
+    }
+
+    .c6-slit {
+      left: 2.1%;
+      top: 34.151%;
+      width: 1px;
+      height: 2.453%;
+    }
+
+    /* Numbered tag centred above each component, revealed with the outlines */
+    .c6-tag {
+      display: block;
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      padding: 2px 5px;
+      border: 1px solid rgba(140,204,240,.6);
+      border-radius: 4px;
+      background: rgba(5,5,7,.75);
+      font: 500 10px/1 'Geist Mono','Commit Mono',monospace;
+      color: #4ABE18;
+      opacity: 0;
+      transform: translate(-50%,calc(-100% - 4px));
+      transition: opacity .5s ease .6s;
+    }
+
+    .c6-sec.done .c6-tag {
+      opacity: 1;
+    }
+
     .c6-fade,
     .c6-ld,
     .c6-dots,
@@ -765,7 +880,7 @@
   @media (max-width:560px) {
     .c6-st {
       grid-template-columns: 1fr;
-      grid-template-areas: "a" "b" "c" "e" "d" "f";
+      grid-template-areas: "m" "a" "b" "c" "e" "d" "f";
     }
 
     .c6-ls {

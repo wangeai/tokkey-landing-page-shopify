@@ -2,7 +2,7 @@
  * "Coordinated local AI" section, ported from the prototype homepage v3 (.c6-sec).
  * On first view the board intro video plays once; when it ends (or fails, or after 9s) the section
  * steps through `done` → `lit` → `loop`, which CSS uses to reveal the callouts and start the loops.
- * Phones and reduced motion skip the video. Animations pause while the section is off screen.
+ * Reduced motion skips the video. Animations pause while the section is off screen.
  */
 class TokkeyCoordinatedAi extends HTMLElement {
   connectedCallback() {
@@ -15,7 +15,6 @@ class TokkeyCoordinatedAi extends HTMLElement {
     this.finished = false;
     this.timers = [];
     this.reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    this.mobileQuery = matchMedia('(max-width: 1023px)');
 
     window.addEventListener('resize', () => this.fit(), { signal: this.abort.signal });
     this.fit();
@@ -53,9 +52,9 @@ class TokkeyCoordinatedAi extends HTMLElement {
     this.timers?.forEach(clearTimeout);
   }
 
-  /** The intro video runs on desktop only, and not with reduced motion */
+  /** The intro video runs on every screen size, except with reduced motion */
   playsVideo() {
-    return Boolean(this.video) && !this.reducedMotion && !this.mobileQuery.matches;
+    return Boolean(this.video) && !this.reducedMotion;
   }
 
   start() {

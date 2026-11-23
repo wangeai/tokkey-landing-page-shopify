@@ -1,7 +1,8 @@
 {% doc %}
   Renders the floating glass nav bar shared by the Tokkey pages: wordmark, page links and the
-  "Reserve your spot" CTA, which jumps to the early-access form in tokkey-footer. Positioned absolutely,
-  so render it inside the page's first (relatively positioned) section.
+  "Reserve your spot" CTA, which jumps to the early-access form in tokkey-footer. Fixed to the viewport so it
+  stays visible while scrolling; render it outside any ancestor with transform, filter or container-type,
+  which would trap the fixed positioning.
 
   @example
   {% render 'tokkey-topnav' %}
@@ -18,18 +19,17 @@
 </header>
 
 {% stylesheet %}
-  /* Floating glass nav bar over the hero (Figma node 1639:11205: 1888px wide on a 1920 frame) */
+  /* Full-width glass nav bar pinned to the top edge of the viewport */
   .tk-topnav {
-    position: absolute;
-    z-index: 3;
-    inset-block-start: 16px;
-    inset-inline: 16px;
+    position: fixed;
+    z-index: 50;
+    inset-block-start: 0;
+    inset-inline: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
     padding: 16px 36px;
-    border-radius: 10px;
     background: var(--tk-topnav-bg) center / 100% 100% no-repeat;
     line-height: normal;
     font-family: Geist, Inter, -apple-system, Helvetica Neue, Arial, sans-serif;
@@ -89,8 +89,6 @@
 
   @media (max-width: 768px) {
     .tk-topnav {
-      inset-block-start: 10px;
-      inset-inline: 10px;
       padding: 10px 14px;
     }
 
@@ -117,7 +115,6 @@
   /* Phones: shrink everything so logo, both links and the CTA still fit on one row */
   @media (max-width: 420px) {
     .tk-topnav {
-      inset-inline: 8px;
       gap: 10px;
       padding: 8px 10px;
     }
