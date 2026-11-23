@@ -1,0 +1,756 @@
+{% doc %}
+  Renders the "Pay once" cost-compare section ported from the prototype homepage v3 (.s3-sec):
+  a monthly-usage slider and cloud-model chips drive a live cloud API cost against Tokkey's $0,
+  with the "$0 per token. On Mac mini and iPhone too." band underneath. Pricing is placeholder
+  copy from the prototype. Behaviour lives in assets/tokkey-cost-compare.js.
+
+  @example
+  {% render 'tokkey-cost-compare' %}
+{% enddoc %}
+
+<tokkey-cost-compare>
+<section class="s3-sec" id="s3sec" aria-label="Cost compare">
+<div class="s3-c">
+  <h2 class="s3-h"><span>Pay</span><span><b>once</b>.</span><span class="s2-pill s2-pk" aria-hidden="true"><i></i><u></u></span><span>Not</span><span>per</span><span><b>token</b>.</span><span class="s2-pill s3-mt" role="img" aria-label="Tokens keep running, cost stays at zero"><span class="s3-mn" id="s3mn">0</span><span class="s3-mu">tokens</span><span class="s3-mc">$0.00</span></span></h2>
+  <div class="s3-glass s3-bar">
+    <span class="s3-mono s3-ul" id="s3ul">Monthly usage</span>
+    <span class="s3-uv" id="s3uv">200M tokens</span>
+    <input class="s3-rng" id="s3rng" type="range" min="0" max="1000" value="651" aria-labelledby="s3ul" aria-valuetext="200M tokens">
+    <span class="s3-mono s3-e0">10M</span><span class="s3-mono s3-e1">1B</span>
+    <span class="s3-mono s3-vs">VS</span>
+    <div class="s3-chips" role="group" aria-label="Cloud model"><button type="button" data-m="0" aria-pressed="true"><svg class="s3-lg" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></svg>GPT-6.2 Astra</button><button type="button" data-m="1" aria-pressed="false"><svg class="s3-lg" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z"></path></svg>Claude Opus 5.5</button><button type="button" data-m="2" aria-pressed="false"><svg class="s3-lg" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z"></path></svg>Gemini 3.1 Pro</button></div>
+  </div>
+  <div class="s3-glass s3-card s3-cl"><div class="s3-in">
+    <span class="s3-mono" id="s3cn">Cloud API · GPT-6.2 Astra</span>
+    <p class="s3-big" id="s3cost">$3,520</p>
+    <p class="s3-n1" id="s3for">for 200M tokens this month</p>
+    <p class="s3-n2">paid every month</p>
+    <p class="s3-n3" id="s3yr">$42,240 over 12 months at list price.</p>
+  </div><div class="s3-bc s3-bcc" aria-hidden="true"><span class="s3-bp" id="s3bp">$17.60 / 1M</span><i class="s3-bb" id="s3bb"></i></div></div>
+  <div class="s3-glass s3-card s3-tk"><div class="s3-in">
+    <span class="s3-mono"><span class="s3-dot"></span>Tokkey · Free models</span>
+    <p class="s3-big">$0</p>
+    <p class="s3-n1">use as much as you want, same price</p>
+    <p class="s3-n2">per month</p>
+    <p class="s3-n3">One-time purchase. At this usage it pays for itself in <b id="s3pb">about 2 days</b>.</p>
+    <div class="s3-free"><span><svg class="s3-lg" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M19.713 2.825h-5.907c0-.251-.066-.503-.196-.728L12.819.728A1.46 1.46 0 0 0 11.559 0h-1.58c-.52 0-1 .275-1.26.728l-2.42 4.19a1.45 1.45 0 0 0 0 1.453l.791 1.37c.26.448.74.727 1.26.727h11.36c.52 0 1-.275 1.26-.728l.79-1.37a1.45 1.45 0 0 0 0-1.451l-.79-1.37a1.46 1.46 0 0 0-1.26-.728zM.195 9.905l2.951 5.115a1.46 1.46 0 0 0-.531.531l-.791 1.37a1.45 1.45 0 0 0 0 1.452l.79 1.37c.26.448.74.727 1.26.727h4.84c.52 0 1-.275 1.26-.728l.79-1.37a1.45 1.45 0 0 0 0-1.451L5.086 7.083a1.46 1.46 0 0 0-1.26-.728h-1.58c-.52 0-1 .276-1.26.728l-.79 1.37a1.45 1.45 0 0 0 0 1.452m15.888 13.367 2.951-5.115c.217.125.469.196.728.196h1.582c.52 0 1-.275 1.26-.728l.79-1.37a1.45 1.45 0 0 0 0-1.451l-2.42-4.191a1.46 1.46 0 0 0-1.259-.728h-1.582c-.52 0-1 .276-1.259.728l-5.678 9.838a1.45 1.45 0 0 0 0 1.452l.79 1.37c.26.448.74.727 1.26.727h1.582c.52 0 1-.275 1.26-.728z"></path></svg>Qwen3.6 35B<em>FREE</em></span><span><svg class="s3-lg" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M6.897 4c1.915 0 3.516.932 5.43 3.376l.282-.373c.19-.246.383-.484.58-.71l.313-.35C14.588 4.788 15.792 4 17.225 4c1.273 0 2.469.557 3.491 1.516l.218.213c1.73 1.765 2.917 4.71 3.053 8.026l.011.392.002.25c0 1.501-.28 2.759-.818 3.7l-.14.23-.108.153c-.301.42-.664.758-1.086 1.009l-.265.142-.087.04a3.493 3.493 0 01-.302.118 4.117 4.117 0 01-1.33.208c-.524 0-.996-.067-1.438-.215-.614-.204-1.163-.56-1.726-1.116l-.227-.235c-.753-.812-1.534-1.976-2.493-3.586l-1.43-2.41-.544-.895-1.766 3.13-.343.592C7.597 19.156 6.227 20 4.356 20c-1.21 0-2.205-.42-2.936-1.182l-.168-.184c-.484-.573-.837-1.311-1.043-2.189l-.067-.32a8.69 8.69 0 01-.136-1.288L0 14.468c.002-.745.06-1.49.174-2.23l.1-.573c.298-1.53.828-2.958 1.536-4.157l.209-.34c1.177-1.83 2.789-3.053 4.615-3.16L6.897 4zm-.033 2.615l-.201.01c-.83.083-1.606.673-2.252 1.577l-.138.199-.01.018c-.67 1.017-1.185 2.378-1.456 3.845l-.004.022a12.591 12.591 0 00-.207 2.254l.002.188c.004.18.017.36.04.54l.043.291c.092.503.257.908.486 1.208l.117.137c.303.323.698.492 1.17.492 1.1 0 1.796-.676 3.696-3.641l2.175-3.4.454-.701-.139-.198C9.11 7.3 8.084 6.616 6.864 6.616zm10.196-.552l-.176.007c-.635.048-1.223.359-1.82.933l-.196.198c-.439.462-.887 1.064-1.367 1.807l.266.398c.18.274.362.56.55.858l.293.475 1.396 2.335.695 1.114c.583.926 1.03 1.6 1.408 2.082l.213.262c.282.326.529.54.777.673l.102.05c.227.1.457.138.718.138.176.002.35-.023.518-.073.338-.104.61-.32.813-.637l.095-.163.077-.162c.194-.459.29-1.06.29-1.785l-.006-.449c-.08-2.871-.938-5.372-2.2-6.798l-.176-.189c-.67-.683-1.444-1.074-2.27-1.074z"></path></svg>Llama 3.3 70B<em>FREE</em></span><span><svg class="s3-lg" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></svg>gpt-oss 120B<em>FREE</em></span></div>
+  </div><div class="s3-bc s3-bct" aria-hidden="true"><span class="s3-bp">$0.00 / 1M</span><i class="s3-bb"></i></div></div>
+  <h3 class="s3-sch">$0 per token. <span>On Mac mini and iPhone too.</span></h3>
+  <div class="s3-sc">
+    <figure class="s3-scc"><img width="1512" height="960" src="{{ 'tk-sc-macmini.webp' | asset_url }}" alt="Tokkey plugged into the front port of a Mac mini on a desk" loading="lazy"><figcaption><span>Mac mini</span><b>Plug into the front port. Run AI all day at $0.</b></figcaption></figure>
+    <figure class="s3-scc s3-ip"><img width="1112" height="992" src="{{ 'tk-sc-iphone.webp' | asset_url }}" alt="Tokkey plugged into an iPhone, held in one hand" loading="lazy"><figcaption><span>iPhone</span><b>Plug into your iPhone. Private AI on the go.</b></figcaption></figure>
+  </div>
+  <p class="s3-foot">Tokkey price is a placeholder. Cloud cost uses public API list prices (Nov 2026), 70% input / 30% output tokens, no discounts; verify before publishing.</p>
+</div>
+</section>
+</tokkey-cost-compare>
+
+<script src="{{ 'tokkey-cost-compare.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  /* Ported from the prototype homepage v3; a 1920px design canvas scaled by --z below 1920px */
+  tokkey-cost-compare {
+    display: block;
+    line-height: normal;
+  }
+
+  .s3-sec {
+    --z: 1;
+    position: relative;
+    height: calc(1753px * var(--z));
+    background: #000;
+    overflow: hidden;
+    color: #f2f2f2;
+  }
+
+  .s3-c {
+    position: absolute;
+    left: 50%;
+    top: calc(11px * var(--z));
+    width: 1920px;
+    height: 1753px;
+    transform: translateX(-50%) scale(var(--z));
+    transform-origin: top center;
+    font-family: 'Inter',sans-serif;
+  }
+
+  .s3-mono {
+    font: 500 13px/16px 'Geist Mono','Commit Mono',monospace;
+    letter-spacing: .06em;
+    color: #8e8e93;
+    text-transform: uppercase;
+  }
+
+  .s3-h {
+    position: absolute;
+    left: 179px;
+    top: 132px;
+    margin: 0;
+    font-family: 'Geist','Inter',sans-serif;
+    font-size: 62.638px;
+    line-height: 76.21px;
+    letter-spacing: -1.8792px;
+    font-weight: 300;
+    color: #808080;
+    white-space: nowrap;
+  }
+
+  .s3-h {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 14.616px;
+    width: 1562px;
+  }
+
+  .s3-h b {
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .s3-mt {
+    gap: 10.44px;
+    padding: 0 16px;
+    font: 500 25.055px/1 'Geist Mono','Commit Mono',monospace;
+    letter-spacing: .5px;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .s3-mt:before {
+    content: "";
+    width: 14.616px;
+    height: 14.616px;
+    border-radius: 50%;
+    background: #4ABE18;
+    flex: none;
+    animation: s3blink 1.2s steps(2) infinite;
+  }
+
+  .s3-mn {
+    display: inline-block;
+    min-width: 9.2ch;
+    text-align: right;
+  }
+
+  .s3-mu {
+    color: #808080;
+  }
+
+  .s3-mc {
+    padding-left: 10.44px;
+    border-left: 1px solid rgba(255,255,255,.2);
+    color: #4ABE18;
+  }
+
+  @media (prefers-reduced-motion:reduce) {
+    .s3-mt:before {
+      animation: none;
+    }
+  }
+
+  .s3-glass {
+    position: absolute;
+    -webkit-backdrop-filter: blur(17.721px);
+    backdrop-filter: blur(17.721px);
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.18);
+    box-sizing: border-box;
+  }
+
+  .s3-bar {
+    left: 179px;
+    top: 288px;
+    width: 1562px;
+    height: 96px;
+    border-radius: 24px;
+  }
+
+  .s3-bar>* {
+    position: absolute;
+  }
+
+  .s3-ul {
+    left: 32px;
+    top: 23px;
+  }
+
+  .s3-uv {
+    left: 32px;
+    top: 45px;
+    font: 600 24px/32px 'Geist','Inter',sans-serif;
+    color: #f2f2f2;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .s3-rng {
+    left: 240px;
+    top: 37px;
+    width: 560px;
+    height: 22px;
+    margin: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .s3-rng::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg,#fff 0 var(--f,65%),rgba(255,255,255,.2) var(--f,65%));
+  }
+
+  .s3-rng::-moz-range-track {
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg,#fff 0 var(--f,65%),rgba(255,255,255,.2) var(--f,65%));
+  }
+
+  .s3-rng::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    margin-top: -8px;
+    border-radius: 50%;
+    background: #fff;
+    border: 0;
+  }
+
+  .s3-rng::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    border: 0;
+  }
+
+  .s3-rng:focus-visible {
+    outline: 2px solid #4ABE18;
+    outline-offset: 6px;
+    border-radius: 4px;
+  }
+
+  .s3-e0 {
+    left: 240px;
+    top: 61px;
+  }
+
+  .s3-e1 {
+    left: 784px;
+    top: 61px;
+  }
+
+  .s3-vs {
+    left: 848px;
+    top: 23px;
+  }
+
+  .s3-chips {
+    left: 848px;
+    top: 43px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .s3-chips button {
+    height: 40px;
+    padding: 0 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.24);
+    background: transparent;
+    color: #f2f2f2;
+    font: 500 14px/1 'Inter',sans-serif;
+    cursor: pointer;
+    transition: background .25s,color .25s;
+  }
+
+  .s3-chips button[aria-pressed="true"] {
+    background: #fff;
+    color: #111110;
+  }
+
+  .s3-chips button:focus-visible {
+    outline: 2px solid #4ABE18;
+    outline-offset: 2px;
+  }
+
+  .s3-card {
+    top: 416px;
+    width: 769px;
+    height: 472px;
+    border-radius: 24px;
+  }
+
+  .s3-cl {
+    left: 179px;
+  }
+
+  .s3-tk {
+    left: 972px;
+    background: rgba(255,255,255,.12);
+  }
+
+  .s3-in {
+    position: absolute;
+    left: 56px;
+    right: 56px;
+    top: 56px!important;
+    transform: none!important;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .s3-cl .s3-in {
+    top: 40px;
+  }
+
+  .s3-tk .s3-in {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .s3-big {
+    font-family: 'Geist','Inter',sans-serif;
+    font-size: 96px;
+    line-height: 96px;
+    letter-spacing: -.03em;
+    font-variant-numeric: tabular-nums;
+    margin: 16px 0 0;
+  }
+
+  .s3-cl .s3-big {
+    font-weight: 300;
+    color: #808080;
+  }
+
+  .s3-tk .s3-big {
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .s3-n1 {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #b0b0ac;
+    margin: 0;
+  }
+
+  .s3-n2 {
+    font: 600 28px/36px 'Geist','Inter',sans-serif;
+    letter-spacing: -.02em;
+    margin: 24px 0 -8px;
+  }
+
+  .s3-n3 {
+    font-size: 16px;
+    line-height: 24px;
+    color: #b0b0ac;
+    margin: 0;
+  }
+
+  .s3-n3 b {
+    color: #f2f2f2;
+    font-weight: 600;
+  }
+
+  .s3-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ABE18;
+    margin-right: 8px;
+    vertical-align: 1px;
+  }
+
+  .s3-free {
+    display: flex;
+    gap: 8px;
+  }
+
+  .s3-free span {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 12px;
+    border: 1px solid rgba(255,255,255,.24);
+    border-radius: 16px;
+    font: 500 13px/1 'Inter',sans-serif;
+    color: #f2f2f2;
+    box-sizing: border-box;
+  }
+
+  .s3-free span:before {
+    content: none;
+  }
+
+  .s3-free em {
+    font: 500 11px/1 'Geist Mono',monospace;
+    font-style: normal;
+    letter-spacing: .3px;
+    color: #dadad6;
+    margin-left: 12px;
+  }
+
+  .s3-sch {
+    position: absolute;
+    left: 179px;
+    top: 968px;
+    width: 1562px;
+    margin: 0;
+    font: 600 40px/48px 'Inter',sans-serif;
+    letter-spacing: -.02em;
+    color: #fff;
+  }
+
+  .s3-sch span {
+    font-weight: 400;
+    color: #8a8a8e;
+  }
+
+  .s3-sc {
+    position: absolute;
+    left: 179px;
+    top: 1048px;
+    width: 1562px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .s3-scc {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 756/480;
+    border-radius: 32px;
+    overflow: hidden;
+    background: #1a1a1a;
+    border: 1px solid rgba(255,255,255,.18);
+  }
+
+  .s3-scc img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .s3-ip img {
+    object-position: 50% 30%;
+  }
+
+  .s3-scc:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0,0,0,0) 45%,rgba(0,0,0,.78));
+    pointer-events: none;
+  }
+
+  .s3-scc figcaption {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .s3-scc figcaption span {
+    font: 400 13px/17px 'Roboto Mono','Geist Mono',monospace;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+  }
+
+  .s3-scc figcaption b {
+    font: 600 24px/32px 'Inter',sans-serif;
+    letter-spacing: -.01em;
+    color: #fff;
+  }
+
+  .s3-foot {
+    position: absolute;
+    left: 179px;
+    top: 1584px;
+    width: 1562px;
+    margin: 0;
+    font-size: 13px;
+    line-height: 20px;
+    color: #8a8a86;
+  }
+
+  .s3-lg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    margin-right: 8px;
+  }
+
+  .s3-chips button {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  @media (max-width:1023px) {
+    .s3-sec {
+      height: auto;
+    }
+
+    .s3-c {
+      position: static;
+      width: auto;
+      height: auto;
+      transform: none;
+      padding: var(--sp) 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .s3-h {
+      position: static;
+      width: auto;
+      white-space: normal;
+      font-size: clamp(32px,7vw,48px)!important;
+      line-height: 1.22!important;
+      letter-spacing: -.03em!important;
+      gap: 0 .22em;
+    }
+
+    .s3-mt {
+      font-size: 15px;
+      padding: 0 12px;
+      gap: 8px;
+    }
+
+    .s3-mt:before {
+      width: 9px;
+      height: 9px;
+    }
+
+    .s3-mc {
+      padding-left: 8px;
+    }
+
+    .s3-mn {
+      min-width: 0;
+    }
+
+    .s3-glass {
+      position: relative;
+    }
+
+    .s3-bar {
+      left: auto;
+      top: auto;
+      width: auto;
+      height: auto;
+      margin-top: 40px;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "ul ul" "uv uv" "rg rg" "e0 e1" "vs vs" "ch ch";
+      gap: 8px 0;
+    }
+
+    .s3-bar>* {
+      position: static;
+    }
+
+    .s3-ul {
+      grid-area: ul;
+    }
+
+    .s3-uv {
+      grid-area: uv;
+    }
+
+    .s3-rng {
+      grid-area: rg;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .s3-e0 {
+      grid-area: e0;
+    }
+
+    .s3-e1 {
+      grid-area: e1;
+    }
+
+    .s3-vs {
+      grid-area: vs;
+      margin-top: 16px;
+    }
+
+    .s3-chips {
+      grid-area: ch;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      margin: 0 -24px;
+      padding: 0 24px;
+      scrollbar-width: none;
+    }
+
+    .s3-chips button {
+      flex: none;
+    }
+
+    .s3-card {
+      left: auto;
+      top: auto;
+      width: auto;
+      height: auto;
+      margin-top: 16px;
+    }
+
+    .s3-in {
+      position: static;
+      transform: none!important;
+      padding: 32px 24px;
+    }
+
+    .s3-big {
+      font-size: 64px;
+      line-height: 64px;
+    }
+
+    .s3-free {
+      flex-wrap: wrap;
+    }
+
+    .s3-foot {
+      position: static;
+      width: auto;
+      margin-top: 24px;
+    }
+
+    .s3-sch {
+      position: static;
+      width: auto;
+      margin: 56px 0 20px;
+      font-size: 26px;
+      line-height: 32px;
+    }
+
+    .s3-sc {
+      position: static;
+      width: auto;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .s3-scc {
+      border-radius: 20px;
+    }
+
+    .s3-scc figcaption {
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+    }
+
+    .s3-scc figcaption b {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+
+  .s3-free {
+    margin-top: 16px;
+  }
+
+  @media (max-width:1023px) {
+    .s3-in {
+      padding: 40px 24px!important;
+    }
+  }
+
+  .s3-bc {
+    position: absolute;
+    right: 56px;
+    bottom: 128px;
+    width: 150px;
+    height: 288px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    pointer-events: none;
+  }
+
+  .s3-bp {
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 20px;
+    font: 600 18px/1 'Geist','Inter',sans-serif;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .s3-bb {
+    display: block;
+    width: 64px;
+    border-radius: 12px;
+    transition: height .5s cubic-bezier(.2,.8,.2,1);
+  }
+
+  .s3-bcc .s3-bp {
+    background: rgba(255,255,255,.08);
+    color: #b0b0ac;
+  }
+
+  .s3-bcc .s3-bb {
+    height: 160px;
+    background: rgba(255,255,255,.14);
+  }
+
+  .s3-bct .s3-bp {
+    background: rgba(74,190,24,.14);
+    color: #4ABE18;
+  }
+
+  .s3-bct .s3-bb {
+    height: 16px;
+    width: 64px;
+    border-radius: 8px;
+    background: #4ABE18;
+  }
+
+  @media (min-width:1024px) {
+    .s3-in {
+      right: 216px;
+    }
+  }
+
+  .s3-free span {
+    white-space: nowrap;
+  }
+
+  @media (max-width:1023px) {
+    .s3-bc {
+      display: none;
+    }
+  }
+
+  .s3-sec {
+    background: transparent!important;
+  }
+
+  @keyframes s3blink {
+    50% {
+      opacity: .35;
+    }
+  }
+{% endstylesheet %}
