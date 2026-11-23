@@ -1,2 +1,79 @@
-(function(){var KS_URL="",FB_URL="",thanks=window.TK_STEP==="thanks";thanks?document.title="Tokkey - You Just Unlocked VIP Pricing & Priority shipping!":document.title="Tokkey - Pay $5 Deposit, Lock the VIP Exclusive $129";var dlg=document.getElementById("tyd");if(dlg){var closeDlg2=function(){dlg.hidden=!0,root.classList.remove("tyd-open"),document.removeEventListener("keydown",onKey2);try{var u=new URL(location.href);u.searchParams.delete("step"),history.replaceState(null,"",u.pathname+u.search+u.hash)}catch(e){}last&&last.focus&&last.focus()},onKey2=function(e){if(e.key==="Escape"){closeDlg2();return}if(e.key==="Tab"){var f=dlg.querySelectorAll("button, a[href]");if(!f.length)return;var first=f[0],end=f[f.length-1];e.shiftKey&&document.activeElement===first?(e.preventDefault(),end.focus()):!e.shiftKey&&document.activeElement===end&&(e.preventDefault(),first.focus())}},closeDlg=closeDlg2,onKey=onKey2,root=document.documentElement,last=document.activeElement;root.classList.add("tyd-open");var x=dlg.querySelector(".tyd-x");x&&x.focus(),document.addEventListener("keydown",onKey2),dlg.addEventListener("click",function(e){e.target.closest("[data-tyd-close]")&&closeDlg2()})}[["[data-ks-link]",KS_URL],["[data-fb-link]",FB_URL]].forEach(function(p){Array.prototype.forEach.call(document.querySelectorAll(p[0]),function(a){p[1]&&(a.href=p[1],a.target="_blank",a.rel="noopener")})})})();
-//# sourceMappingURL=/s/files/1/0870/1535/8529/files/tk18-deposit.js.map?v=1795075548
+/**
+ * Behavior for the deposit page (product.deposit.liquid): sets the page title,
+ * runs the "thank you" dialog (#tyd), and fills in the Kickstarter / Facebook links.
+ * Expects window.TK_STEP from tk18-deposit-body.js.
+ */
+(function () {
+  // Leave empty to keep the links' default href
+  const KS_URL = '';
+  const FB_URL = '';
+
+  const thanks = window.TK_STEP === 'thanks';
+  document.title = thanks
+    ? 'Tokkey - You Just Unlocked VIP Pricing & Priority shipping!'
+    : 'Tokkey - Pay $5 Deposit, Lock the VIP Exclusive $129';
+
+  const dialog = document.getElementById('tyd');
+  if (dialog) {
+    const root = document.documentElement;
+    const lastFocused = document.activeElement;
+
+    function closeDialog() {
+      dialog.hidden = true;
+      root.classList.remove('tyd-open');
+      document.removeEventListener('keydown', onKeyDown);
+
+      // Drop ?step=done so a reload doesn't reopen the dialog
+      try {
+        const url = new URL(location.href);
+        url.searchParams.delete('step');
+        history.replaceState(null, '', url.pathname + url.search + url.hash);
+      } catch (e) {}
+
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+    }
+
+    function onKeyDown(event) {
+      if (event.key === 'Escape') {
+        closeDialog();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+
+      // Keep keyboard focus inside the dialog
+      const focusable = dialog.querySelectorAll('button, a[href]');
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    root.classList.add('tyd-open');
+    const closeButton = dialog.querySelector('.tyd-x');
+    if (closeButton) closeButton.focus();
+    document.addEventListener('keydown', onKeyDown);
+    dialog.addEventListener('click', function (event) {
+      if (event.target.closest('[data-tyd-close]')) closeDialog();
+    });
+  }
+
+  const links = [
+    ['[data-ks-link]', KS_URL],
+    ['[data-fb-link]', FB_URL],
+  ];
+  for (const [selector, url] of links) {
+    if (!url) continue;
+    for (const link of document.querySelectorAll(selector)) {
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener';
+    }
+  }
+})();
