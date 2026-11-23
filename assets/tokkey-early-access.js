@@ -2,9 +2,16 @@
  * "Get updates" early-access form. On submit it validates the email natively, POSTs it as JSON
  * ({ user_email }) to the endpoint in the form's data-endpoint, then sends the visitor to the URL in
  * data-redirect. Failures show in the form's status line and re-enable the button.
- * Mirrors EarlyAccessForm in the tokkey-landing-page repo.
+ * When a link brings the visitor to this element's id (on load or a same-page click), the empty email
+ * field shakes once it is on screen. Mirrors EarlyAccessForm in the tokkey-landing-page repo.
  */
 class TokkeyEarlyAccess extends HTMLElement {
+  /** Class that plays the shake animation (styles: tokkey-early-access-attrs.liquid) */
+  static NUDGE_CLASS = 'is-nudged';
+
+  /** How long a nudge waits for the field to scroll into view, in ms */
+  static NUDGE_WAIT = 3000;
+
   connectedCallback() {
     this.abort = new AbortController();
     this.form = this.querySelector('form');
@@ -22,10 +29,48 @@ class TokkeyEarlyAccess extends HTMLElement {
       },
       { signal: this.abort.signal }
     );
+    this.bindNudge();
   }
 
   disconnectedCallback() {
     this.abort?.abort();
+    clearTimeout(this.nudgeTimer);
+  }
+
+  /** Nudge when the page opens on this element's anchor, or a same-page link points at it */
+  bindNudge() {
+    if (!this.id) return;
+    const signal = this.abort.signal;
+    const hash = `#${this.id}`;
+    // Typing clears the reminder
+    this.input.addEventListener('input', () => this.input.classList.remove(TokkeyEarlyAccess.NUDGE_CLASS), { signal });
+    if (location.hash === hash) this.nudge();
+    document.addEventListener(
+      'click',
+      (event) => {
+        const link = event.target instanceof Element ? event.target.closest('a[href]') : null;
+        if (link && link.pathname === location.pathname && link.hash === hash) this.nudge();
+      },
+      { signal }
+    );
+  }
+
+  /** Shake the empty email field once it is fully on screen (the anchor scroll may still be under way) */
+  nudge() {
+    if (this.input.value) return;
+    clearTimeout(this.nudgeTimer);
+    const deadline = Date.now() + TokkeyEarlyAccess.NUDGE_WAIT;
+    const check = () => {
+      const rect = this.input.getBoundingClientRect();
+      if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+        this.input.classList.remove(TokkeyEarlyAccess.NUDGE_CLASS);
+        void this.input.offsetWidth; // reflow so the animation plays again
+        this.input.classList.add(TokkeyEarlyAccess.NUDGE_CLASS);
+      } else if (Date.now() < deadline) {
+        this.nudgeTimer = setTimeout(check, 100);
+      }
+    };
+    this.nudgeTimer = setTimeout(check, 100);
   }
 
   /** Validate, send, then redirect (or show an error) */

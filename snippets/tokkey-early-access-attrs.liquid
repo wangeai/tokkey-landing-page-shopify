@@ -1,9 +1,41 @@
 {% doc %}
   Outputs the data attributes that assets/tokkey-early-access.js reads from an early-access <form>:
   the sign-up endpoint (same as EarlyAccessForm in the tokkey-landing-page repo), where to send the
-  visitor afterwards, and the busy / error copy. Shared by every early-access form on the homepage.
+  visitor afterwards, and the busy / error copy. Shared by every early-access form on the homepage, so it
+  also owns the shake played on the email field when a link brings the visitor to the form.
 
   @example
   <form class="eb-form" {% render 'tokkey-early-access-attrs' %}>
 {% enddoc %}
 data-endpoint="https://amis-wifi-backend-947027167514.us-central1.run.app/api/v1/earlyaccess" data-redirect="/products/tokkey-deposit-reservation" data-busy-label="Sending…" data-error-message="Something went wrong. Please try again."
+
+{% stylesheet %}
+  /* Reminder from TokkeyEarlyAccess.nudge(): shake the email field */
+  tokkey-early-access input.is-nudged {
+    animation: tk-ea-shake 0.5s ease-in-out;
+  }
+
+  @keyframes tk-ea-shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+
+    20%,
+    60% {
+      transform: translateX(-8px);
+    }
+
+    40%,
+    80% {
+      transform: translateX(8px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    tokkey-early-access input.is-nudged {
+      animation: none;
+      border-color: #4abe18;
+    }
+  }
+{% endstylesheet %}

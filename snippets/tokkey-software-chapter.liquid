@@ -1,0 +1,31 @@
+{% doc %}
+  Renders one chapter of the Software features story: its copy and the empty slot that the chapter's preview
+  moves into below 1200px (assets/tokkey-software.js). Styles live in tokkey-software-features.
+
+  @param {string} id - Anchor id, also the target of the chapter bar link
+  @param {string} label - Eyebrow label
+  @param {string} lead - First headline line, in muted ink
+  @param {string} emphasis - Second headline line, in full ink
+  @param {string} text - Body copy; ` <br>` marks Figma's line breaks, kept from 1200px
+  @param {string} [note] - Small note under the body
+  @param {boolean} [note_lock] - Show the lock icon before the note
+
+  @example
+  {% render 'tokkey-software-chapter', id: 'router', label: 'Router', lead: 'Local power.', emphasis: 'Cloud by choice.', text: 'Router matches each task to local or cloud AI.', note: 'See the route.', note_lock: true %}
+{% enddoc %}
+<article id="{{ id }}" class="chapter" data-ref="chapter" aria-labelledby="{{ id }}-title">
+  <div class="copy" data-ref="copy">
+    <p class="eyebrow">{{ label }}</p>
+    <h2 id="{{ id }}-title" class="title">{{ lead }}<br><em>{{ emphasis }}</em></h2>
+    <p class="text">{{ text }}</p>
+    {%- if note != blank %}
+      <p class="note">
+        {%- if note_lock -%}
+          <img src="{{ 'tk-sw-lock.svg' | asset_url }}" width="15" height="15" alt="" aria-hidden="true">
+        {%- endif -%}
+        {{ note }}
+      </p>
+    {%- endif %}
+  </div>
+  <div class="slot" data-ref="slot"></div>
+</article>

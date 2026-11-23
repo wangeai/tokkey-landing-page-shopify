@@ -1,0 +1,12 @@
+{
+  "layout": "tokkey",
+  "sections": {
+    "tokkey_software": {
+      "type": "tokkey-software",
+      "settings": {}
+    }
+  },
+  "order": [
+    "tokkey_software"
+  ]
+}

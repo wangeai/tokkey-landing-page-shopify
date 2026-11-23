@@ -1,0 +1,193 @@
+{% doc %}
+  Renders the Software page hero (Figma: Software · D · 01_hero, node 1166:286), ported from SoftwareHero.astro in
+  the tokkey-landing-page repo: "Own your AI." centred over the dark backdrop with a drifting ambient character
+  field, two pill CTAs, and a 160px fade into the paper-coloured features below. Sizes are Figma px via --fx
+  (set by sections/tokkey-software.liquid, which also loads assets/tokkey-software.js for the field).
+
+  @example
+  {% render 'tokkey-software-hero' %}
+{% enddoc %}
+
+<tokkey-software-hero>
+  <section class="tk-swh">
+    {% render 'tokkey-topnav' %}
+    <img
+      class="tk-swh__bg"
+      src="{{ 'tk-sw-hero-bg.jpg' | asset_url }}"
+      width="1920"
+      height="1080"
+      alt=""
+      fetchpriority="high"
+    >
+    <canvas class="tk-swh__ambient" data-ref="ambient" aria-hidden="true"></canvas>
+    {%- comment -%} Fade to paper (#fafaf7), 160 tall {%- endcomment -%}
+    <div class="tk-swh__fade" aria-hidden="true"></div>
+
+    {%- comment -%} Copy block: title top at 171, body at 331, buttons at 480 on the 1920 frame {%- endcomment -%}
+    <div class="tk-swh__copy">
+      <h1 class="tk-swh__title">Own your AI<span class="tk-swh__period">.</span></h1>
+      {%- comment -%} Line breaks follow Figma; they only apply from 768px (white-space: pre-line) {%- endcomment -%}
+      <p class="tk-swh__text">Run larger models on the Mac you already own.
+Keep private and routine work off your cloud
+API bill.</p>
+      <div class="tk-swh__actions">
+        <a class="tk-swh__btn tk-swh__btn--cream" href="#fs-early-access">Get early access →</a>
+        <a class="tk-swh__btn tk-swh__btn--ghost" href="#features">See what it does</a>
+      </div>
+    </div>
+  </section>
+</tokkey-software-hero>
+
+{% stylesheet %}
+  tokkey-software-hero {
+    display: block;
+  }
+
+  .tk-swh {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;
+    padding: 72px 16px 0;
+    overflow: hidden;
+    background: #050605;
+    color: #fff;
+    text-align: center;
+  }
+
+  .tk-swh__bg,
+  .tk-swh__ambient {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .tk-swh__bg {
+    object-fit: cover;
+  }
+
+  .tk-swh__fade {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 120px;
+    background: linear-gradient(rgb(250 250 247 / 0), #fafaf7);
+    pointer-events: none;
+  }
+
+  .tk-swh__copy {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 64px;
+  }
+
+  .tk-swh__title {
+    margin: 0;
+    font-size: 48px;
+    line-height: 56px;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+  }
+
+  .tk-swh__period {
+    color: #4abe18;
+  }
+
+  .tk-swh__text {
+    max-width: 360px;
+    margin: 20px 0 0;
+    color: rgb(255 255 255 / 0.68);
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .tk-swh__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  /* Pill CTA (Figma: .btn.cream / .btn.ghost): 44 tall, 23 side padding, 16 semibold */
+  .tk-swh__btn {
+    display: inline-flex;
+    align-items: center;
+    height: 44px;
+    padding-inline: 23px;
+    border-radius: 999px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .tk-swh__btn:hover {
+    opacity: 0.88;
+  }
+
+  .tk-swh__btn:focus-visible {
+    outline: 2px solid #4abe18;
+    outline-offset: 2px;
+  }
+
+  .tk-swh__btn--cream {
+    background: #fff;
+    color: #000;
+  }
+
+  .tk-swh__btn--ghost {
+    border: 1px solid rgb(255 255 255 / 0.22);
+    background: rgb(255 255 255 / 0.1);
+    color: #fff;
+    backdrop-filter: blur(20px);
+  }
+
+  @media (min-width: 768px) {
+    .tk-swh {
+      height: calc(756 * var(--fx));
+      min-height: 0;
+      padding: 0 40px;
+    }
+
+    .tk-swh__fade {
+      height: calc(160 * var(--fx));
+    }
+
+    .tk-swh__copy {
+      padding-bottom: calc(61 * var(--fx));
+    }
+
+    .tk-swh__title {
+      font-size: calc(128 * var(--fx));
+      line-height: calc(121.6 * var(--fx));
+      white-space: nowrap;
+    }
+
+    .tk-swh__text {
+      max-width: none;
+      margin-top: calc(38.4 * var(--fx));
+      font-size: calc(24 * var(--fx));
+      line-height: calc(33.6 * var(--fx));
+      white-space: pre-line;
+    }
+
+    .tk-swh__actions {
+      gap: calc(12 * var(--fx));
+      margin-top: calc(48.3 * var(--fx));
+    }
+
+    .tk-swh__btn {
+      height: calc(44 * var(--fx));
+      padding-inline: calc(23 * var(--fx));
+      font-size: calc(16 * var(--fx));
+      line-height: calc(20 * var(--fx));
+    }
+  }
+{% endstylesheet %}

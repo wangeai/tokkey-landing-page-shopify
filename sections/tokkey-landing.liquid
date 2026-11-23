@@ -13,17 +13,7 @@
   <main class="lp">
     <section class="sec" id="hero">
       {%- comment -%} Floating nav bar overlaid on the hero; it carries the Tokkey wordmark, so the hero images omit it {%- endcomment -%}
-      <header class="tk-topnav" style="--tk-topnav-bg: url({{ 'tk-nav-bg.png' | asset_url }})">
-        <a class="tk-topnav__logo" href="{{ routes.root_url }}">
-          <img src="{{ 'tokkey-logo-green.svg' | asset_url }}" width="171" height="32" alt="Tokkey">
-        </a>
-        <nav class="tk-topnav__menu" aria-label="Main">
-          <a class="tk-topnav__link" href="/pages/software">Software</a>
-          <a class="tk-topnav__link" href="/pages/technology">Technology</a>
-          <a class="tk-topnav__link" href="/blogs/news">Blog</a>
-          <a class="tk-topnav__cta" href="/products/tokkey-deposit-reservation">Reserve your spot</a>
-        </nav>
-      </header>
+      {% render 'tokkey-topnav' %}
       <picture>
         <source media="(max-width: 768px)" srcset="{{ 'tk-hero-m-01.jpg' | asset_url }}" width="1080" height="1269">
         <img src="{{ 'tk-hero-pc-01.jpg' | asset_url }}" width="1920" height="1166" alt="Turn Your PC into AI PC. This Time, Own Your Intelligence">
@@ -84,98 +74,6 @@
   /* The homepage spans the full viewport; lift the 1920px cap tokkey.css sets for other pages */
   .tokkey-landing .lp {
     max-width: none;
-  }
-
-  /* Floating glass nav bar over the hero (Figma node 1639:11205: 1888px wide on a 1920 frame) */
-  .tk-topnav {
-    position: absolute;
-    z-index: 3;
-    inset-block-start: 16px;
-    inset-inline: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 16px 36px;
-    border-radius: 10px;
-    background: var(--tk-topnav-bg) center / 100% 100% no-repeat;
-    line-height: normal;
-    font-family: Geist, Inter, -apple-system, Helvetica Neue, Arial, sans-serif;
-  }
-
-  .tk-topnav__logo {
-    display: flex;
-    flex: none;
-  }
-
-  .tk-topnav .tk-topnav__logo img {
-    display: block;
-    width: 171px;
-    height: 32px;
-  }
-
-  .tk-topnav__menu {
-    display: flex;
-    align-items: center;
-    gap: 37px;
-    min-width: 0;
-  }
-
-  .tk-topnav__link {
-    color: rgb(255 255 255 / 0.72);
-    font-size: 16px;
-    font-weight: 400;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .tk-topnav__link:hover {
-    color: #fff;
-  }
-
-  .tk-topnav__cta {
-    padding: 0 22px;
-    border-radius: 23px;
-    background: #fff;
-    color: #000;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 44px;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .tk-topnav a:focus-visible {
-    outline: 2px solid #fff;
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
-
-  .tk-topnav .tk-topnav__cta:focus-visible {
-    border-radius: 23px;
-  }
-
-  @media (max-width: 768px) {
-    .tk-topnav {
-      inset-block-start: 10px;
-      inset-inline: 10px;
-      padding: 10px 14px;
-    }
-
-    .tk-topnav .tk-topnav__logo img {
-      width: 107px;
-      height: 20px;
-    }
-
-    .tk-topnav__link {
-      display: none;
-    }
-
-    .tk-topnav__cta {
-      padding: 0 16px;
-      font-size: 14px;
-      line-height: 36px;
-    }
   }
 {% endstylesheet %}
 

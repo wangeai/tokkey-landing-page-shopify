@@ -1,0 +1,55 @@
+{% comment %}
+  Section contract.
+  Tokkey Software page, ported from the tokkey-landing-page repo (src/pages/software.astro): the "Own your AI"
+  hero, the five-chapter features story, and the shared Tokkey footer. Owns the page-wide tokens the two
+  software snippets use (--fx, the Commit Mono face) and loads their behaviour, assets/tokkey-software.js.
+  @example
+  <!-- templates/page.software.json renders this section with "layout": "tokkey"; assign the "software"
+       template to the /pages/software page in Shopify Admin -->
+{% endcomment %}
+
+{%- comment -%} Asset URLs need Liquid, so the font face lives in a style tag rather than the static stylesheet {%- endcomment -%}
+{% style %}
+  /* Commit Mono for the software page's mono labels (brand fonts: Inter + Commit Mono) */
+  @font-face {
+    font-family: 'Commit Mono';
+    src: url({{ 'tk-sw-commitmono-400.otf' | asset_url }}) format('opentype');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+{% endstyle %}
+
+<div class="tokkey-software">
+  <main>
+    {% render 'tokkey-software-hero' %}
+    {% render 'tokkey-software-features' %}
+  </main>
+  {% render 'tokkey-footer' %}
+</div>
+
+<script src="{{ 'tokkey-software.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  /* --fx = one Figma pixel: the 1920 frames scale with the viewport from 768px, floored at 0.6px */
+  .tokkey-software {
+    --fx: 1px;
+    --tk-sw-mono: 'Commit Mono', 'Courier New', monospace;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, Helvetica Neue, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (min-width: 768px) {
+    .tokkey-software {
+      --fx: max(100vw / 1920, 0.6px);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.tokkey_software",
+  "tag": "section",
+  "class": "tokkey-software-section"
+}
+{% endschema %}

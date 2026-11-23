@@ -247,6 +247,8 @@
   },
   "names": {
     "tokkey_landing": "Tokkey landing page",
+    "tokkey_software": "Tokkey software page",
+    "tokkey_faq": "Tokkey FAQ page",
     "column": "עמודה",
     "product_title": "כותרת מוצר",
     "custom_liquid": "Custom Liquid",

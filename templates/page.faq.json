@@ -1,0 +1,106 @@
+{
+  "layout": "tokkey",
+  "sections": {
+    "tokkey_faq": {
+      "type": "tokkey-faq",
+      "blocks": {
+        "question_01": {
+          "type": "question",
+          "settings": {
+            "question": "What is Tokkey?",
+            "answer": "<p>A USB-C Local AI Key with Tokkey Runtime and a local API. It works with your Mac. It is not a new computer.</p>"
+          }
+        },
+        "question_02": {
+          "type": "question",
+          "settings": {
+            "question": "Which Macs and models are supported?",
+            "answer": "<p>Apple silicon Macs. More memory lets you run larger models; the Software page has a table to check your Mac. Not every Mac or model is guaranteed.</p>"
+          }
+        },
+        "question_03": {
+          "type": "question",
+          "settings": {
+            "question": "Does it add a GPU, NPU, or RAM?",
+            "answer": "<p>No. Your Mac provides compute and working memory.</p>"
+          }
+        },
+        "question_04": {
+          "type": "question",
+          "settings": {
+            "question": "Does Tokkey include a chat interface?",
+            "answer": "<p>Yes, Private Chat. Compatible external tools can connect through the local API.</p>"
+          }
+        },
+        "question_05": {
+          "type": "question",
+          "settings": {
+            "question": "Is Agent Hub a new Tokkey agent?",
+            "answer": "<p>No. It is the entry point to connect and manage compatible agents.</p>"
+          }
+        },
+        "question_06": {
+          "type": "question",
+          "settings": {
+            "question": "What is shared Memory?",
+            "answer": "<p>Saved user context that you choose to share across tools. It is not RAM expansion.</p>"
+          }
+        },
+        "question_07": {
+          "type": "question",
+          "settings": {
+            "question": "Does Router keep every request local?",
+            "answer": "<p>No. Router lets you choose between local and cloud, and shows the model, shared excerpt and expected cost first.</p>"
+          }
+        },
+        "question_08": {
+          "type": "question",
+          "settings": {
+            "question": "Can a task continue with the lid closed?",
+            "answer": "<p>On supported configurations, yes. Photos are not proof.</p>"
+          }
+        },
+        "question_09": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need the internet?",
+            "answer": "<p>Downloads, updates and cloud tasks need a connection. Installed local models work locally.</p>"
+          }
+        },
+        "question_10": {
+          "type": "question",
+          "settings": {
+            "question": "What do the performance numbers mean?",
+            "answer": "<p>Claims in the supplied artwork are not yet matched to reports. Treat them as placeholders until evidence is published.</p>"
+          }
+        },
+        "question_11": {
+          "type": "question",
+          "settings": {
+            "question": "How much will it cost?",
+            "answer": "<p>The planned one-time launch price is $129. Final pricing, availability and terms will be confirmed before orders open.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_01",
+        "question_02",
+        "question_03",
+        "question_04",
+        "question_05",
+        "question_06",
+        "question_07",
+        "question_08",
+        "question_09",
+        "question_10",
+        "question_11"
+      ],
+      "settings": {
+        "heading": "FAQ"
+      }
+    }
+  },
+  "order": [
+    "tokkey_faq"
+  ]
+}
