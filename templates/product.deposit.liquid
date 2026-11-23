@@ -1,0 +1,24 @@
+{% layout none %}<!doctype html>
+<html lang="en" data-only="1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tokkey | Reserve Your US$129 VIP Price for US$5</title>
+<meta name="description" content="Tokkey is a USB-C Local AI Key that helps supported Apple silicon Macs run larger AI models locally. Reserve your US$129 VIP price with a US$5 deposit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+{{ content_for_header }}
+<link rel="stylesheet" href="{{ 'tk18-deposit.css' | file_url }}">
+</head>
+<body class="hide-notes">
+<div id="tk-root"></div>
+<script>window.TK={checkout:"/cart/{{ product.selected_or_first_available_variant.id }}:1",base:"{{ 'tk18-deposit.css' | file_url | split: 'tk18-deposit.css' | first }}"};</script>
+<script src="{{ 'tk18-deposit-body.js' | file_url }}"></script>
+<script>
+document.getElementById('tk-root').innerHTML=window.TK_BODY.split('__A__').join(TK.base);
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.js-pay');if(a){e.preventDefault();e.stopPropagation();location.href=TK.checkout;}},true);
+</script>
+<script src="{{ 'tk18-deposit.js' | file_url }}"></script>
+</body>
+</html>
