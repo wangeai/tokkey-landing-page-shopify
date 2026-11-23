@@ -1,0 +1,670 @@
+{% doc %}
+  Renders the "Bigger models on the same Mac" section ported from the prototype homepage v3 (.s2-sec):
+  a headline whose numbers roll between 16GB and 48GB, a memory toggle, and a deck of model cards.
+  On desktop the section pins while scrolling and switches to 48GB past its midpoint; below 1024px it
+  stacks and the deck scrolls horizontally. Behaviour lives in assets/tokkey-bigger-models.js.
+
+  @example
+  {% render 'tokkey-bigger-models' %}
+{% enddoc %}
+
+<section aria-label="Bigger models on the same Mac">
+  <tokkey-bigger-models class="s2-sec" data-s="0">
+    <div class="s2-c">
+      <div class="s2-macro"><img src="{{ 'tk-s2-macro.webp' | asset_url }}" width="1680" height="1164" alt="Tokkey plugged into a MacBook. Concept render" loading="lazy"></div>
+      <div class="s2-glow"></div>
+      <div class="s2-hair"><i></i></div>
+      <h2 class="s2-h"><span>A</span><span>key</span><span class="s2-pill s2-pk" aria-hidden="true"><i></i><u></u></span><span>that</span><span>runs</span><span class="s2-roll" aria-live="polite"><span><b>35B</b><b>125B</b></span></span><b>AI</b><b>models</b><i class="s2br"></i><span>on</span><span>a</span><span class="s2-roll"><span><b>16GB</b><b>48GB</b></span></span><span>Mac.</span><span class="s2-pill s2-pl">LOCAL</span></h2>
+      <div class="s2-ctl">
+        <em>Your Mac</em>
+        <div class="s2-seg" role="group" aria-label="Mac memory"><span class="s2th"></span><button type="button" aria-pressed="true">16GB</button><button type="button" aria-pressed="false">48GB</button></div>
+        <span class="s2hint" data-down="Scroll to see 48GB" data-up="Scroll up for 16GB">Scroll to see 48GB</span>
+      </div>
+      <div class="s2-deck">
+      <div class="s2-card s2off" data-key="q9" role="button" tabindex="-1" aria-expanded="false" aria-label="Qwen3.5-9B, show details">
+        <div class="s2f">
+          <div class="s2l"><img src="{{ 'tk-s2-qwen.svg' | asset_url }}" width="201" height="204" alt="" loading="lazy"></div>
+          <div class="s2t"><span class="s2lc">Local</span><span class="s2n">Qwen3.5-9B</span></div>
+        </div>
+        <div class="s2d"><span class="s2lc">Local</span><span class="s2dn">Qwen3.5-9B</span><dl><div><dt>Parameters</dt><dd>9B</dd></div><div><dt>Architecture</dt><dd>Dense</dd></div><div><dt>Input</dt><dd>Text</dd></div><div><dt>Runs on</dt><dd>16GB Mac</dd></div></dl></div>
+      </div>
+      <div class="s2-card s2off" data-key="q27" role="button" tabindex="-1" aria-expanded="false" aria-label="Qwen3.8-27B, show details">
+        <div class="s2f">
+          <div class="s2l"><img src="{{ 'tk-s2-qwen.svg' | asset_url }}" width="201" height="204" alt="" loading="lazy"></div>
+          <div class="s2t"><span class="s2lc">Local</span><span class="s2n">Qwen3.8-27B</span></div>
+        </div>
+        <div class="s2d"><span class="s2lc">Local</span><span class="s2dn">Qwen3.8-27B</span><dl><div><dt>Parameters</dt><dd>27B</dd></div><div><dt>Architecture</dt><dd>Dense</dd></div><div><dt>Input</dt><dd>Text</dd></div><div><dt>Runs on</dt><dd>48GB Mac</dd></div></dl></div>
+      </div>
+      <div class="s2-card s2off" data-key="mc" role="button" tabindex="-1" aria-expanded="false" aria-label="MiniCPM-V-4.7-35B-A3B, show details">
+        <div class="s2f">
+          <div class="s2l s2m"><img src="{{ 'tk-s2-minicpm.svg' | asset_url }}" width="203" height="203" alt="" loading="lazy"></div>
+          <div class="s2t"><span class="s2lc">Local</span><span class="s2n s2sm">MiniCPM-V-4.7-35B-A3B</span></div>
+        </div>
+        <div class="s2d"><span class="s2lc">Local</span><span class="s2dn">MiniCPM-V-4.7-35B-A3B</span><dl><div><dt>Parameters</dt><dd>35B</dd></div><div><dt>Active</dt><dd>3B · MoE</dd></div><div><dt>Input</dt><dd>Text + image</dd></div><div><dt>Runs on</dt><dd>16GB Mac</dd></div></dl></div>
+      </div>
+      <div class="s2-card s2off" data-key="q35" role="button" tabindex="-1" aria-expanded="false" aria-label="Qwen3.6-35B-A3B, show details">
+        <div class="s2f">
+          <div class="s2l"><img src="{{ 'tk-s2-qwen.svg' | asset_url }}" width="201" height="204" alt="" loading="lazy"></div>
+          <div class="s2t"><span class="s2lc">Local</span><span class="s2n">Qwen3.6-35B-A3B</span></div>
+        </div>
+        <div class="s2d"><span class="s2lc">Local</span><span class="s2dn">Qwen3.6-35B-A3B</span><dl><div><dt>Parameters</dt><dd>35B</dd></div><div><dt>Active</dt><dd>3B · MoE</dd></div><div><dt>Input</dt><dd>Text</dd></div><div><dt>Runs on</dt><dd>16GB Mac</dd></div></dl></div>
+      </div>
+      <div class="s2-card s2off" data-key="fl" role="button" tabindex="-1" aria-expanded="false" aria-label="Qwen3.8-Flash-Next, show details">
+        <div class="s2f">
+          <div class="s2l"><img src="{{ 'tk-s2-qwen.svg' | asset_url }}" width="201" height="204" alt="" loading="lazy"></div>
+          <div class="s2t"><span class="s2lc">Local</span><span class="s2n">Qwen3.8-Flash-Next</span></div>
+        </div>
+        <div class="s2d"><span class="s2lc">Local</span><span class="s2dn">Qwen3.8-Flash-Next</span><dl><div><dt>Tuned for</dt><dd>Speed</dd></div><div><dt>Input</dt><dd>Text</dd></div><div><dt>Runs on</dt><dd>48GB Mac</dd></div></dl></div>
+      </div>
+      <div class="s2-card s2off" data-key="q122" role="button" tabindex="-1" aria-expanded="false" aria-label="Qwen3.5-122B-A10B, show details">
+        <div class="s2f">
+          <div class="s2l"><img src="{{ 'tk-s2-qwen.svg' | asset_url }}" width="201" height="204" alt="" loading="lazy"></div>
+          <div class="s2t"><span class="s2lc">Local</span><span class="s2n">Qwen3.5-122B-A10B</span></div>
+        </div>
+        <div class="s2d"><span class="s2lc">Local</span><span class="s2dn">Qwen3.5-122B-A10B</span><dl><div><dt>Parameters</dt><dd>122B</dd></div><div><dt>Active</dt><dd>10B · MoE</dd></div><div><dt>Input</dt><dd>Text</dd></div><div><dt>Runs on</dt><dd>48GB Mac</dd></div></dl></div>
+      </div>
+      </div>
+    </div>
+  </tokkey-bigger-models>
+</section>
+
+<script src="{{ 'tokkey-bigger-models.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  /* "Bigger models on the same Mac": a 1920px design canvas scaled by --z (set by the script) */
+  .s2-sec {
+    --z: 1;
+    --s2-sp: min(140px, 7.2917vw);
+    position: relative;
+    display: block;
+    height: calc(1156px * var(--z));
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    line-height: normal;
+  }
+
+  .s2-c {
+    position: absolute;
+    left: 50%;
+    top: calc(-7px * var(--z));
+    width: 1920px;
+    height: 1080px;
+    transform: translateX(-50%) scale(var(--z));
+    transform-origin: top center;
+    font-family: Geist, Inter, sans-serif;
+  }
+
+  .s2-macro {
+    position: absolute;
+    left: 800px;
+    top: 304px;
+    width: 1120px;
+    height: 776px;
+    overflow: hidden;
+  }
+
+  .s2-macro img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: screen;
+    mask-image: linear-gradient(90deg, transparent 0, #000 34%), linear-gradient(180deg, transparent 0, #000 176px, #000 72%, transparent 100%);
+    mask-composite: intersect;
+  }
+
+  .s2-glow {
+    position: absolute;
+    left: 1240px;
+    top: 700px;
+    width: 340px;
+    height: 340px;
+    margin: -170px 0 0 -170px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.04) 45%, rgb(255 255 255 / 0) 100%);
+    mix-blend-mode: screen;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .s2-sec.lit .s2-glow {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .s2-hair {
+    position: absolute;
+    left: 664px;
+    top: 788px;
+    width: 524px;
+    height: 1px;
+    background: #fff;
+    opacity: 0.65;
+    transform-origin: left;
+    transition: opacity 0.4s;
+  }
+
+  .s2-hair i {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgb(255 255 255 / 0), #fff);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .s2-sec.lit .s2-hair i {
+    opacity: 1;
+  }
+
+  .s2-h {
+    position: absolute;
+    left: 179px;
+    top: 147px;
+    width: 1003px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 14.616px;
+    margin: 0;
+    font-size: 62.638px;
+    font-weight: 300;
+    line-height: 76.21px;
+    letter-spacing: -1.8792px;
+    color: #808080;
+  }
+
+  .s2-h b {
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .s2br {
+    flex-basis: 100%;
+    height: 0;
+  }
+
+  .s2-roll {
+    position: relative;
+    display: inline-block;
+    height: 76.21px;
+    overflow: hidden;
+    vertical-align: top;
+    transition: width 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .s2-roll > span {
+    display: block;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .s2-roll > span > b {
+    display: block;
+    width: max-content;
+    height: 76.21px;
+  }
+
+  .s2-sec[data-s="1"] .s2-roll > span {
+    transform: translateY(-76.21px);
+  }
+
+  .s2-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 39.671px;
+    border: 1.044px solid rgb(255 255 255 / 0.2);
+    border-radius: 103px;
+    background: rgb(255 255 255 / 0.06);
+  }
+
+  .s2-pk {
+    width: 66.814px;
+    gap: 4.176px;
+    padding: 0 8.352px;
+  }
+
+  .s2-pk i {
+    position: relative;
+    width: 35.495px;
+    height: 29.231px;
+    border-radius: 5.22px;
+    background: #e9e9ec;
+  }
+
+  .s2-pk i::after {
+    content: "";
+    position: absolute;
+    left: 7.31px;
+    top: 9.4px;
+    width: 3.132px;
+    height: 10.44px;
+    border-radius: 1.044px;
+    background: #111;
+  }
+
+  .s2-pk u {
+    width: 14.616px;
+    height: 10.44px;
+    border-radius: 3.132px;
+    background: #55555a;
+  }
+
+  .s2-pl {
+    gap: 10.44px;
+    padding: 0 14.616px;
+    font: 500 25.055px/1 'Geist Mono', monospace;
+    letter-spacing: 0.5011px;
+    color: #fff;
+  }
+
+  .s2-pl::before {
+    content: "";
+    width: 14.616px;
+    height: 14.616px;
+    border-radius: 50%;
+    background: #4abe18;
+  }
+
+  .s2-ctl {
+    position: absolute;
+    left: 179px;
+    top: 322px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .s2-ctl em {
+    font: 500 13px/1 'Geist Mono', monospace;
+    font-style: normal;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8e8e93;
+  }
+
+  .s2-seg {
+    position: relative;
+    display: flex;
+    padding: 4px;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    border-radius: 99px;
+    background: rgb(255 255 255 / 0.06);
+  }
+
+  .s2-seg button {
+    position: relative;
+    z-index: 1;
+    height: 40px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 99px;
+    background: none;
+    font: 600 17px/1 Geist, Inter, sans-serif;
+    color: #b0b0ac;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .s2-seg button[aria-pressed="true"] {
+    color: #111110;
+  }
+
+  .s2-seg button:focus-visible {
+    outline: 2px solid #4abe18;
+    outline-offset: 2px;
+  }
+
+  .s2th {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    border-radius: 99px;
+    background: #f2f2f2;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1), width 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .s2hint {
+    font: 500 15px/1 'Geist Mono', monospace;
+    letter-spacing: 0.04em;
+    color: #8e8e93;
+  }
+
+  .s2-deck {
+    position: absolute;
+    left: 0;
+    top: 80px;
+    width: 1920px;
+    height: 1000px;
+    pointer-events: none;
+  }
+
+  .s2-card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    box-sizing: border-box;
+    width: 320px;
+    height: 320px;
+    padding: 34px 36px;
+    overflow: hidden;
+    border: 1px solid #dcdcdc;
+    border-radius: 24px;
+    background: rgb(34 34 32 / 0.8);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 4px 64px #000;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: opacity 0.55s ease, transform 0.7s cubic-bezier(0.65, 0, 0.35, 1), border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .s2-card:focus-visible {
+    outline: 2px solid #4abe18;
+    outline-offset: 4px;
+  }
+
+  .s2-card.s2off {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .s2-card.s2hov {
+    border-color: #fff;
+    box-shadow: 0 24px 80px #000, 0 0 0 1px rgb(255 255 255 / 0.2);
+  }
+
+  .s2l {
+    position: relative;
+    flex: none;
+    width: 184px;
+    height: 184px;
+  }
+
+  .s2l img {
+    position: absolute;
+    left: -4.54%;
+    top: -5.38%;
+    display: block;
+    width: 109.08%;
+    height: 110.75%;
+  }
+
+  .s2l.s2m img {
+    left: -5.38%;
+    width: 110.76%;
+  }
+
+  .s2t {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .s2lc {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 17.524px;
+    font-weight: 300;
+    letter-spacing: -0.5257px;
+    color: #dadad6;
+  }
+
+  .s2lc::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4abe18;
+  }
+
+  .s2n {
+    height: 31px;
+    font-size: 24px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #f2f2f2;
+  }
+
+  .s2n.s2sm {
+    font-size: 20px;
+  }
+
+  /* Card front (logo + name) and back (specs); the front card flips when opened */
+  .s2f,
+  .s2d {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 34px 36px;
+    transition: opacity 0.35s ease;
+  }
+
+  .s2f {
+    align-items: center;
+    gap: 8px;
+  }
+
+  .s2d {
+    gap: 8px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .s2-card.s2open .s2f {
+    opacity: 0;
+  }
+
+  .s2-card.s2open .s2d {
+    opacity: 1;
+  }
+
+  .s2dn {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.3px;
+    word-break: break-all;
+    color: #f2f2f2;
+  }
+
+  .s2d dl {
+    display: flex;
+    flex-direction: column;
+    margin: auto 0 0;
+  }
+
+  .s2d dl div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 9px 0;
+    border-top: 1px solid rgb(255 255 255 / 0.14);
+  }
+
+  .s2d dt {
+    font: 500 13px/1 'Geist Mono', monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8e8e93;
+  }
+
+  .s2d dd {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: #f2f2f2;
+  }
+
+  /* Desktop: the section pins so scrolling switches 16GB / 48GB */
+  @media (min-width: 1024px) {
+    .s2-sec {
+      height: calc(1156px * var(--z) + 90vh);
+      overflow: clip;
+    }
+
+    .s2-c {
+      position: sticky;
+      left: auto;
+      top: calc((100vh - 1156px * var(--z)) / 2);
+      margin-left: 50%;
+      margin-bottom: calc(1080px * var(--z) - 1080px);
+    }
+  }
+
+  /* Below 1024px the canvas becomes a stacked layout with a horizontally scrolling deck */
+  @media (max-width: 1023px) {
+    .s2-sec {
+      --s2-sp: 80px;
+      height: auto;
+    }
+
+    .s2-c {
+      position: static;
+      display: flex;
+      flex-direction: column;
+      width: auto;
+      height: auto;
+      padding: var(--s2-sp) 24px;
+      transform: none;
+    }
+
+    .s2-h {
+      position: static;
+      width: auto;
+      gap: 0 0.22em;
+      font-size: clamp(32px, 7vw, 48px);
+      line-height: 1.22;
+      letter-spacing: -0.03em;
+    }
+
+    .s2-pill {
+      height: 30px;
+      border-width: 1px;
+    }
+
+    .s2-pk {
+      width: 52px;
+      gap: 3px;
+      padding: 0 6px;
+    }
+
+    .s2-pk i {
+      width: 27px;
+      height: 22px;
+      border-radius: 4px;
+    }
+
+    .s2-pk i::after {
+      left: 6px;
+      top: 7px;
+      width: 2.4px;
+      height: 8px;
+    }
+
+    .s2-pk u {
+      width: 11px;
+      height: 8px;
+    }
+
+    .s2-pl {
+      gap: 8px;
+      padding: 0 12px;
+      font-size: 15px;
+    }
+
+    .s2-glow,
+    .s2-hair,
+    .s2br,
+    .s2hint {
+      display: none;
+    }
+
+    .s2-roll,
+    .s2-roll > span > b {
+      height: 1.22em;
+    }
+
+    .s2-sec[data-s="1"] .s2-roll > span {
+      transform: translateY(-1.22em);
+    }
+
+    .s2-ctl {
+      position: static;
+      flex-wrap: wrap;
+      gap: 12px 16px;
+      margin-top: 24px;
+    }
+
+    .s2-deck {
+      position: static;
+      order: 3;
+      display: flex;
+      gap: 16px;
+      width: auto;
+      height: auto;
+      margin: 40px -24px 0;
+      padding: 0 24px 8px;
+      overflow-x: auto;
+      scroll-padding: 0 24px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      pointer-events: auto;
+    }
+
+    .s2-card {
+      position: relative;
+      flex: 0 0 280px;
+      width: 280px;
+      height: 300px;
+      padding: 28px;
+      transform: none !important;
+      scroll-snap-align: start;
+    }
+
+    .s2-card.s2off {
+      display: none;
+    }
+
+    .s2l {
+      width: 150px;
+      height: 150px;
+    }
+
+    .s2f,
+    .s2d {
+      padding: 28px;
+    }
+
+    .s2-macro {
+      position: relative;
+      order: 4;
+      left: auto;
+      top: auto;
+      width: calc(100% + 24px);
+      height: auto;
+      aspect-ratio: 1120 / 776;
+      margin-top: 24px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .s2-card,
+    .s2-roll > span,
+    .s2th,
+    .s2-glow {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
