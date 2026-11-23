@@ -1,0 +1,26 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="285" height="285" viewBox="0 0 285 285" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Editable silver orbital sculpture">
+<path id="Vector" d="M142 240C196.676 240 241 195.676 241 141C241 86.3238 196.676 42 142 42C87.3238 42 43 86.3238 43 141C43 195.676 87.3238 240 142 240Z" fill="url(#paint0_radial_0_533)"/>
+<path id="Vector_2" d="M262.964 76.6824C272.557 94.725 226.177 138.147 159.37 173.669C92.564 209.191 30.6296 223.36 21.0362 205.318C11.4427 187.275 57.8231 143.853 124.63 108.331C191.436 72.8093 253.37 58.6398 262.964 76.6824Z" stroke-width="1.5" stroke="url(#paint1_linear_0_533)"/>
+<path id="Vector_3" d="M247.288 212.017C229.375 238.574 167.716 228.306 109.567 189.084C51.418 149.862 18.7999 96.5387 36.7122 69.9825C54.6246 43.4263 116.284 53.6939 174.433 92.9158C232.582 132.138 265.2 185.461 247.288 212.017Z" stroke-width="0.5" stroke="url(#paint2_linear_0_533)"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_0_533" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(94.48 81.6) scale(164.34)">
+<stop stop-color="#E5E8F1"/>
+<stop offset="0.22" stop-color="#A4AEC8"/>
+<stop offset="0.53" stop-color="#525F80"/>
+<stop offset="0.8" stop-color="#232B41"/>
+<stop offset="1" stop-color="#0C101C"/>
+</radialGradient>
+<linearGradient id="paint1_linear_0_533" x1="3.66573" y1="172.649" x2="101.317" y2="276.952" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.75"/>
+<stop offset="0.5" stop-color="#A2B7EE" stop-opacity="0.3"/>
+<stop offset="1" stop-color="#6B7097" stop-opacity="0.1"/>
+</linearGradient>
+<linearGradient id="paint2_linear_0_533" x1="69.1454" y1="21.8983" x2="34.4813" y2="230.066" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.75"/>
+<stop offset="0.5" stop-color="#A2B7EE" stop-opacity="0.3"/>
+<stop offset="1" stop-color="#6B7097" stop-opacity="0.1"/>
+</linearGradient>
+</defs>
+</svg>

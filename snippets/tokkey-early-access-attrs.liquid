@@ -1,0 +1,9 @@
+{% doc %}
+  Outputs the data attributes that assets/tokkey-early-access.js reads from an early-access <form>:
+  the sign-up endpoint (same as EarlyAccessForm in the tokkey-landing-page repo), where to send the
+  visitor afterwards, and the busy / error copy. Shared by every early-access form on the homepage.
+
+  @example
+  <form class="eb-form" {% render 'tokkey-early-access-attrs' %}>
+{% enddoc %}
+data-endpoint="https://amis-wifi-backend-947027167514.us-central1.run.app/api/v1/earlyaccess" data-redirect="/products/tokkey-deposit-reservation" data-busy-label="Sending…" data-error-message="Something went wrong. Please try again."

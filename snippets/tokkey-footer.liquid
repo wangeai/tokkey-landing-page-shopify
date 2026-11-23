@@ -1,0 +1,337 @@
+{% doc %}
+  Renders the homepage footer ported from the prototype homepage v3 (.fs-sec): wordmark and tagline,
+  Product and Resources link columns, the "Subscribe for updates" card, and the fine print. The card's
+  form posts to the early-access API and redirects like the "Get updates" form
+  (assets/tokkey-early-access.js, attributes from tokkey-early-access-attrs).
+
+  @example
+  {% render 'tokkey-footer' %}
+{% enddoc %}
+
+<footer class="fs-sec" id="fssec">
+  <div class="fs-wrap">
+    <div class="fs-top">
+      <div class="fs-brand">
+        <svg class="fs-logo" viewBox="150 0 436 111" xmlns="http://www.w3.org/2000/svg"><path d="M510.351 16.0464H529.373L547.69 50.6405H548.475L566.792 16.0464H585.814L556.515 67.9768V96.3737H539.65V67.9768L510.351 16.0464Z" fill="currentColor"/><path d="M439.889 96.3737V16.0464H494.016V30.0488H456.872V49.1893H491.231V63.1916H456.872V82.3714H494.173V96.3737H439.889Z" fill="currentColor"/><path d="M303.783 55.016C303.783 63.7757 302.123 71.2279 298.802 77.3727C295.507 83.5176 291.01 88.2112 285.309 91.4536C279.635 94.6698 273.255 96.2779 266.169 96.2779C259.03 96.2779 252.624 94.6567 246.95 91.4143C241.276 88.172 236.791 83.4783 233.497 77.3335C230.202 71.1887 228.555 63.7495 228.555 55.016C228.555 46.2563 230.202 38.8041 233.497 32.6593C236.791 26.5144 241.276 21.8339 246.95 18.6177C252.624 15.3753 259.03 13.7541 266.169 13.7541C273.255 13.7541 279.635 15.3753 285.309 18.6177C291.01 21.8339 295.507 26.5144 298.802 32.6593C302.123 38.8041 303.783 46.2563 303.783 55.016ZM286.565 55.016C286.565 49.3418 285.715 44.5567 284.015 40.6606C282.342 36.7645 279.975 33.8098 276.916 31.7964C273.856 29.783 270.274 28.7763 266.169 28.7763C262.064 28.7763 258.481 29.783 255.422 31.7964C252.363 33.8098 249.983 36.7645 248.284 40.6606C246.61 44.5567 245.773 49.3418 245.773 55.016C245.773 60.6902 246.61 65.4753 248.284 69.3714C249.983 73.2675 252.363 76.2222 255.422 78.2356C258.481 80.249 262.064 81.2557 266.169 81.2557C270.274 81.2557 273.856 80.249 276.916 78.2356C279.975 76.2222 282.342 73.2675 284.015 69.3714C285.715 65.4753 286.565 60.6902 286.565 55.016Z" fill="currentColor"/><path d="M150.979 30.0488V16.0464H216.95V30.0488H192.358V96.3737H175.571V30.0488H150.979Z" fill="currentColor"/><rect x="371.673" y="96.8224" width="18.4848" height="18.4848" rx="9.24238" transform="rotate(-180 371.673 96.8224)" fill="currentColor"/><path d="M372.267 68.7234L377.867 77.7806L378.434 78.7826L390.302 95.0697C390.868 95.8475 391.773 96.3076 392.735 96.3076H405.618C408.077 96.3076 409.499 93.5194 408.055 91.5286L391.964 69.3382C391.157 68.2254 391.206 66.7074 392.083 65.649L416.313 36.4132C417.94 34.4504 416.544 31.4805 413.995 31.4805H401.474C400.57 31.4805 399.713 31.887 399.141 32.5877L372.495 65.2358C371.683 66.2307 371.591 67.6311 372.267 68.7234Z" fill="currentColor"/><path d="M325.068 16.0468V96.3741H342.051V75.0902L351.248 64.8074L362.564 52.0136L392.373 16.0468H372.017L343.11 51.4645H342.051V16.0468H325.068Z" fill="currentColor"/></svg>
+        <p>Your AI,<br><b>on your Mac<i>.</i></b></p>
+      </div>
+      <div class="fs-col"><div class="fs-h">PRODUCT</div><a href="/pages/software">Software</a><a href="/pages/models">Models</a><a href="/pages/pricing">Pricing</a></div>
+      <div class="fs-col"><div class="fs-h">RESOURCES</div><a href="/pages/technology">Technology</a><a href="/pages/dev-doc">Dev Doc</a><a href="/pages/faq">FAQ</a></div>
+      <tokkey-early-access class="fs-card">
+        <div class="fs-eyebrow"><i></i>EARLY ACCESS</div>
+        <h3>Subscribe for updates</h3>
+        <p>Get product updates, launch dates and promotions in your inbox. Select early subscribers receive $30 in free Router credits.</p>
+        <form class="fs-form" {% render 'tokkey-early-access-attrs' %}>
+          <label class="fs-sr" for="fsEmail">Email</label>
+          <input id="fsEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+          <button type="submit">Subscribe</button>
+          <p class="fs-status" data-ref="status" role="status" aria-live="polite"></p>
+        </form>
+        <p class="fs-fine">Updates and promotions only. Unsubscribe anytime.</p>
+      </tokkey-early-access>
+    </div>
+    <div class="fs-hair"></div>
+    <div class="fs-bottom"><span>© 2026 Tokkey</span><span class="fs-note">*On supported Macs. Model compatibility varies. Hardware and resource blocks are illustrative.</span></div>
+  </div>
+</footer>
+
+<script src="{{ 'tokkey-early-access.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  /* Ported from the prototype homepage v3 */
+  .fs-sec {
+    --fs-sp: min(140px, 7.2917vw);
+    display: block;
+    line-height: normal;
+  }
+
+  /* Padding inside the card's width, so it never overflows narrow screens */
+  tokkey-early-access.fs-card {
+    display: block;
+    box-sizing: border-box;
+  }
+
+  /* The prototype reset link underlines globally; this theme does not */
+  .fs-sec a {
+    text-decoration: none;
+  }
+
+  /* Form status line (errors), full row under the field */
+  .fs-form {
+    flex-wrap: wrap;
+  }
+
+  .fs-status {
+    flex-basis: 100%;
+    margin: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    color: #ff8a80 !important;
+  }
+
+  .fs-status:empty {
+    display: none;
+  }
+
+  .fs-form button:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .fs-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  @media (max-width: 1023px) {
+    .fs-sec {
+      --fs-sp: 80px;
+    }
+  }
+
+  .fs-sec {
+    position: relative;
+    background: #000;
+    color: #fff;
+    font-family: 'Inter',sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    padding: var(--fs-sp) 0 48px;
+  }
+
+  .fs-wrap {
+    position: relative;
+    z-index: 1;
+    width: min(81.354vw,1562px);
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  @media (max-width:1023px) {
+    .fs-wrap {
+      width: auto;
+      padding: 0 24px;
+    }
+  }
+
+  .fs-top {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    gap: 48px;
+  }
+
+  @media (max-width:980px) {
+    .fs-top {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 24px;
+    }
+
+    .fs-brand,
+    .fs-card {
+      grid-column: 1/-1;
+    }
+
+    .fs-card {
+      margin-top: 8px;
+      max-width: none;
+    }
+  }
+
+  .fs-brand .fs-logo {
+    height: 27px;
+    display: block;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+
+  .fs-brand p {
+    margin: 0;
+    font: 300 min(62.638px,3.2624vw)/1.2167 'Geist','Inter',sans-serif;
+    letter-spacing: -.03em;
+    color: #808080;
+  }
+
+  .fs-brand p b {
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .fs-brand p i {
+    font-style: normal;
+    color: #4ABE18;
+  }
+
+  @media (max-width:1023px) {
+    .fs-brand p {
+      font-size: clamp(32px,7vw,48px);
+    }
+  }
+
+  .fs-brand .fs-logo {
+    margin-bottom: 40px!important;
+  }
+
+  .fs-col {
+    min-width: 90px;
+  }
+
+  .fs-col .fs-h {
+    font: 500 13px/16px 'Geist Mono',monospace;
+    letter-spacing: .06em;
+    color: #8e8e93;
+    margin-bottom: 24px;
+  }
+
+  .fs-col a {
+    display: block;
+    color: rgba(255,255,255,.85);
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .fs-card {
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    background: rgba(20,20,19,.78);
+    border: 1px solid #2e2e2b;
+    border-radius: 24px;
+    padding: 40px;
+    width: 100%;
+    max-width: 561px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.08) inset;
+  }
+
+  .fs-card .fs-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    letter-spacing: .06em;
+    color: #8e8e93;
+    margin-bottom: 24px;
+    font-family: 'Geist Mono',monospace;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .fs-card .fs-eyebrow i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4abe18;
+    display: block;
+  }
+
+  .fs-card h3 {
+    font: 600 40px/48px 'Geist','Inter',sans-serif;
+    letter-spacing: -.02em;
+    color: #fff;
+    margin: 0 0 16px;
+  }
+
+  .fs-card p {
+    font-size: 16px;
+    color: #B0B0AC;
+    line-height: 1.5;
+    margin: 0 0 32px;
+  }
+
+  .fs-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .fs-form input {
+    flex: 1;
+    min-width: 0;
+    height: 56px;
+    border-radius: 16px;
+    border: 1px solid #2e2e2b;
+    background: #000;
+    padding: 0 16px;
+    font-size: 16px;
+    color: #f2f2f2;
+    font-family: 'Inter',sans-serif;
+  }
+
+  .fs-form input::placeholder {
+    color: #5C5C58;
+  }
+
+  .fs-form input:focus {
+    outline: none;
+    border-color: #4ABE18;
+  }
+
+  .fs-form button {
+    height: 56px;
+    padding: 0 32px;
+    border-radius: 16px;
+    background: #fff;
+    color: #000;
+    border: 0;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter',sans-serif;
+    white-space: nowrap;
+  }
+
+  .fs-card .fs-fine {
+    font-size: 14px;
+    color: #808080;
+    margin: 0;
+  }
+
+  .fs-form button:hover {
+    opacity: .88;
+  }
+
+  .fs-form button:focus-visible {
+    outline: 2px solid #4ABE18;
+    outline-offset: 2px;
+  }
+
+  @media (max-width:560px) {
+    .fs-form {
+      flex-direction: column;
+    }
+
+    .fs-form input {
+      flex: none;
+    }
+
+    .fs-card {
+      padding: 32px 24px;
+      border-radius: 24px;
+    }
+  }
+
+  .fs-hair {
+    border-top: 1px solid rgba(255,255,255,.2);
+    margin: 64px 0 24px;
+  }
+
+  .fs-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 32px;
+    flex-wrap: wrap;
+    color: rgba(255,255,255,.7);
+    font-size: 16px;
+  }
+
+  .fs-bottom .fs-note {
+    font-size: 13px;
+    color: rgba(242,242,242,.5);
+  }
+
+  .fs-sec {
+    background: transparent!important;
+  }
+{% endstylesheet %}

@@ -1,0 +1,697 @@
+{% doc %}
+  Renders the "Everyday AI tasks. Done on your Mac." gallery from Figma
+  (Homepage 06 · Do more. Keep it yours. / V2 Graphite, node 1607:6942): a header, two independent
+  masonry columns of eight task cards, and a closing line. Each card is a caption plus a 788px-wide
+  scene drawn at design size; assets/tokkey-everyday-tasks.js zooms the scenes to the card width.
+  Below 1024px the cards stack in their numbered order.
+
+  @example
+  {% render 'tokkey-everyday-tasks' %}
+{% enddoc %}
+
+{%- liquid
+  # Meeting waveform bar heights (Figma "Audio waveform 0–71"); the first 48 bars are played
+  assign wave_heights = '20,31,30,20,16,25,34,31,18,10,15,24,23,11,4,11,24,27,19,12,19,32,35,26,16,18,27,30,19,7,8,18,24,17,8,10,23,32,28,18,17,28,35,29,15,10,18,25,21,9,4,14,25,25,16,12,22,34,34,23,15,20,29,28,16,6,10,21,23,15,7,12' | split: ','
+-%}
+
+<tokkey-everyday-tasks>
+  <section class="gl-sec" id="glsec" aria-labelledby="gl-title">
+    <div class="gl-wrap">
+      <header class="gl-head">
+        <p class="gl-eye">EVERYDAY POSSIBILITIES</p>
+        <h2 class="gl-title" id="gl-title"><b>Everyday AI tasks.</b> <span>Done on your Mac.</span></h2>
+        <div class="gl-intro">
+          <p>Write, code, summarize and organize. All on your Mac, nothing uploaded.</p>
+          <span class="gl-promise"><img src="{{ 'tk-gl-dot.svg' | asset_url }}" width="5" height="5" alt="" loading="lazy">LOCAL BY DEFAULT</span>
+        </div>
+      </header>
+
+      <div class="gl-cols">
+        {%- comment -%} Left column: build, code, write, remember {%- endcomment -%}
+        <div class="gl-col">
+          <article class="gl-card" style="--gl-order: 1">
+            {% render 'tokkey-gallery-part', part: 'caption', label: 'CREATE & BUILD', detail: 'Describe an app.', rest: 'Get a working one.' %}
+            <div class="gl-scene">
+              <div class="gl-stage" style="height: 448px">
+                <img class="gl-light" src="{{ 'tk-gl-quiet-blue-light.svg' | asset_url }}" width="610" height="290" alt="" loading="lazy" style="left:118px;top:168px">
+                <div class="gl-rim" style="left:45px;top:29px;width:698px;height:390px"></div>
+                <div class="gl-window" style="left:47px;top:31px;width:694px;height:386px">
+                  {% render 'tokkey-gallery-part', part: 'chrome' %}
+                  <div class="gl-content" style="background:linear-gradient(#181b24,#11131c)">
+                    <i class="gl-box" style="left:0;top:0;width:680px;height:340px;background:#10131c"></i>
+                    <img class="gl-abs" src="{{ 'tk-gl-app-glow.svg' | asset_url }}" width="400" height="260" alt="" loading="lazy" style="left:315px;top:100px">
+                    <p class="gl-x" style="left:27px;top:24px;font-size:24px;font-weight:500;letter-spacing:-0.8px;color:#f0f0f4">Orbit.</p>
+                    <p class="gl-x" style="left:460px;top:32px;font-size:10px;color:#8c8d9c">Product</p>
+                    <p class="gl-x" style="left:529px;top:32px;font-size:10px;color:#8c8d9c">About</p>
+                    <p class="gl-x" style="left:582px;top:32px;font-size:10px;color:#cdd0da">Get started</p>
+                    <p class="gl-x" style="left:29px;top:99px;font-size:9px;letter-spacing:1.7px;color:#7f8496">A SPACE FOR YOUR NEXT IDEA</p>
+                    <p class="gl-x" style="left:27px;top:124px;font-size:39px;line-height:1.12;letter-spacing:-1.4px;color:#e8e9f0">Make room<br>for possibility.</p>
+                    <p class="gl-x" style="left:29px;top:226px;font-size:12px;color:#9397a6">Think freely. Start something.</p>
+                    <span class="gl-x gl-pill" style="left:29px;top:263px">Find your space</span>
+                    <img class="gl-abs" src="{{ 'tk-gl-orbital-sculpture.svg' | asset_url }}" width="285" height="285" alt="" loading="lazy" style="left:366px;top:75px">
+                  </div>
+                </div>
+                {% render 'tokkey-gallery-part', part: 'status', label: 'Local build · no token fees', style: 'left:73px;top:373px' %}
+                <i class="gl-fade" style="top:404px;height:44px"></i>
+              </div>
+            </div>
+          </article>
+
+          <article class="gl-card" style="--gl-order: 3">
+            {% render 'tokkey-gallery-part', part: 'caption', label: 'CODE & DEBUG', detail: 'Fix your code.', rest: 'With AI on your Mac.' %}
+            <div class="gl-scene">
+              <div class="gl-stage" style="height: 348px">
+                <img class="gl-light" src="{{ 'tk-gl-muted-blue-light.svg' | asset_url }}" width="605" height="240" alt="" loading="lazy" style="left:91px;top:155px">
+                <div class="gl-window" style="left:45px;top:15px;width:698px;height:314px">
+                  {% render 'tokkey-gallery-part', part: 'chrome' %}
+                  <div class="gl-content" style="background:#18181c">
+                    <i class="gl-box" style="left:0;top:0;width:137px;height:280px;background:#1d1d22"></i>
+                    <p class="gl-x" style="left:16px;top:19px;font-size:9px;letter-spacing:1.5px;color:#686871">EXPLORER</p>
+                    <p class="gl-x" style="left:17px;top:51px;font-size:11px;color:#92929d">src</p>
+                    <i class="gl-box" style="left:7px;top:76px;width:122px;height:27px;border-radius:4px;background:rgb(255 255 255 / 0.04)"></i>
+                    <p class="gl-x" style="left:26px;top:82px;font-size:11px;color:#d7d7dd">App.tsx</p>
+                    <p class="gl-x" style="left:26px;top:119px;font-size:11px;color:#7d7d87">styles.css</p>
+                    <p class="gl-x" style="left:17px;top:156px;font-size:11px;color:#7d7d87">README.md</p>
+                    <p class="gl-x gl-m" style="left:157px;top:24px;font-size:13px;color:#a3a7b8">01   export default function App() {</p>
+                    <p class="gl-x gl-m" style="left:157px;top:57px;font-size:13px;color:#c7c7d1">02     return (</p>
+                    <i class="gl-box" style="left:148px;top:86px;width:512px;height:59px;border-radius:3px;background:rgb(147 179 140 / 0.05)"></i>
+                    <p class="gl-x gl-m" style="left:157px;top:92px;font-size:13px;color:#b1c2ad">03  +    &lt;YourNextIdea /&gt;</p>
+                    <p class="gl-x gl-m" style="left:157px;top:122px;font-size:13px;color:#b1c2ad">04  +    &lt;MadeReal /&gt;</p>
+                    <p class="gl-x gl-m" style="left:157px;top:163px;font-size:13px;color:#c7c7d1">05     )</p>
+                    <p class="gl-x gl-m" style="left:157px;top:196px;font-size:13px;color:#a3a7b8">06   }</p>
+                    <i class="gl-box" style="left:148px;top:235px;width:511px;height:1px;background:rgb(255 255 255 / 0.07)"></i>
+                    <p class="gl-x gl-m" style="left:157px;top:251px;font-size:9px;color:#767681">3 FILES UPDATED</p>
+                  </div>
+                </div>
+                {% render 'tokkey-gallery-part', part: 'status', label: '3 files updated · local agent', style: 'left:459px;top:291px' %}
+                <i class="gl-fade" style="top:320px;height:28px"></i>
+              </div>
+            </div>
+          </article>
+
+          <article class="gl-card" style="--gl-order: 5">
+            {% render 'tokkey-gallery-part', part: 'caption', label: 'WRITE & REFINE', detail: 'Polish your writing.', rest: 'Keep your voice.' %}
+            <div class="gl-scene">
+              <div class="gl-stage" style="height: 308px">
+                <img class="gl-light" src="{{ 'tk-gl-silver-editorial-light.svg' | asset_url }}" width="560" height="270" alt="" loading="lazy" style="left:172px;top:73px">
+                <div class="gl-window" style="left:54px;top:10px;width:680px;height:344px">
+                  {% render 'tokkey-gallery-part', part: 'chrome' %}
+                  <div class="gl-content">
+                    <p class="gl-x gl-m" style="left:34px;top:26px;font-size:9px;color:#6d6d78">DRAFT / A WORK IN PROGRESS</p>
+                    <p class="gl-x" style="left:34px;top:64px;font-size:33px;line-height:1.16;letter-spacing:-1.2px;color:#e0e0e7">The start of<br>something good.</p>
+                    <p class="gl-x" style="left:34px;top:161px;font-size:15px;color:#8b8b95">An idea worth putting into words.</p>
+                    <i class="gl-box" style="left:34px;top:201px;width:577px;height:30px;border-radius:4px;background:rgb(146 146 180 / 0.09)"></i>
+                    <p class="gl-x" style="left:43px;top:205px;font-size:14px;color:#bebecf">A little clearer. A little more you.</p>
+                    <i class="gl-box" style="left:34px;top:253px;width:577px;height:3px;border-radius:2px;background:rgb(116 116 128 / 0.15)"></i>
+                    <i class="gl-box" style="left:34px;top:268px;width:519px;height:3px;border-radius:2px;background:rgb(116 116 128 / 0.15)"></i>
+                    <i class="gl-box" style="left:34px;top:283px;width:556px;height:3px;border-radius:2px;background:rgb(116 116 128 / 0.15)"></i>
+                  </div>
+                </div>
+                <div class="gl-rewrite" style="left:320px;top:231px">
+                  <span>Keep my tone</span><i></i><span>Make it clearer</span>
+                  <img src="{{ 'tk-gl-arrow-up-right.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
+                </div>
+                <i class="gl-fade" style="top:269px;height:39px"></i>
+              </div>
+            </div>
+          </article>
+
+          <article class="gl-card" style="--gl-order: 7">
+            {% render 'tokkey-gallery-part', part: 'caption', label: 'PERSONAL MEMORY', detail: 'It remembers your projects.', rest: 'Privately.' %}
+            <div class="gl-scene">
+              <div class="gl-stage" style="height: 328px">
+                <img class="gl-photo" src="{{ 'tk-gl-lifestyle.webp' | asset_url }}" width="1576" height="1051" alt="A person carrying a MacBook with Tokkey" loading="lazy" style="height:328px">
+                <i class="gl-box" style="left:0;top:0;width:788px;height:328px;background:rgb(0 0 0 / 0.15)"></i>
+                <div class="gl-glass" style="left:37px;top:115px;width:330px;height:165px">
+                  <p class="gl-x gl-m" style="left:20px;top:18px;font-size:10px;color:#85858f">YOUR CONTEXT</p>
+                  <p class="gl-x" style="left:20px;top:47px;font-size:19px;font-weight:500;letter-spacing:-0.4px;color:#e3e3e8">Ready where you left off.</p>
+                  <p class="gl-x" style="left:20px;top:91px;font-size:12px;color:#a1a1ab">Project notes</p>
+                  <img class="gl-abs" src="{{ 'tk-gl-completed.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy" style="left:284px;top:91px;width:14px;height:14px">
+                  <p class="gl-x" style="left:20px;top:118px;font-size:12px;color:#a1a1ab">Your writing style</p>
+                  <img class="gl-abs" src="{{ 'tk-gl-completed.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy" style="left:284px;top:118px;width:14px;height:14px">
+                </div>
+                <i class="gl-fade gl-fade-top" style="top:0;height:74px"></i>
+                <i class="gl-fade" style="top:276px;height:52px"></i>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        {%- comment -%} Right column: private, listen, organize, continue {%- endcomment -%}
+        <div class="gl-col">
+          <article class="gl-card" style="--gl-order: 2">
+            {% render 'tokkey-gallery-part', part: 'caption', label: 'PRIVATE DOCUMENTS', detail: 'Summarize a contract.', rest: 'Without uploading it.' %}
+            <div class="gl-scene">
+              <div class="gl-stage" style="height: 278px">
+                <img class="gl-light" src="{{ 'tk-gl-silver-bounce-light.svg' | asset_url }}" width="660" height="220" alt="" loading="lazy" style="left:81px;top:55px">
+                <div class="gl-window" style="left:43px;top:16px;width:680px;height:236px">
+                  {% render 'tokkey-gallery-part', part: 'chrome' %}
+                  <div class="gl-content">
+                    <p class="gl-x" style="left:28px;top:22px;font-size:19px;font-weight:500;letter-spacing:-0.3px;color:#f0f0f2">Summarize this agreement.</p>
+                    <p class="gl-x" style="left:28px;top:57px;font-size:13px;color:#8f8f98">The essentials, without the upload.</p>
+                    <i class="gl-box" style="left:28px;top:89px;width:443px;height:1px;background:rgb(255 255 255 / 0.07)"></i>
+                    <p class="gl-x" style="left:28px;top:108px;font-size:10px;color:#74747e">01</p>
+                    <p class="gl-x" style="left:55px;top:104px;font-size:14px;color:#c9c9d0">Key dates and renewal terms</p>
+                    <p class="gl-x" style="left:28px;top:137px;font-size:10px;color:#74747e">02</p>
+                    <p class="gl-x" style="left:55px;top:133px;font-size:14px;color:#c9c9d0">What to review before you sign</p>
+                    {% render 'tokkey-gallery-part', part: 'status', style: 'left:28px;top:166px' %}
+                  </div>
+                </div>
+                {% render 'tokkey-gallery-part', part: 'file', label: 'Agreement.pdf', detail: 'Only on this Mac', style: 'left:568px;top:118px;transform:rotate(4deg)' %}
+                <i class="gl-fade" style="top:242px;height:36px"></i>
+              </div>
+            </div>
+          </article>
+
+          <article class="gl-card" style="--gl-order: 4">
+            {% render 'tokkey-gallery-part', part: 'caption', label: 'MEETINGS & NOTES', detail: 'Record a meeting.', rest: 'Get the notes.' %}
+            <div class="gl-scene">
+              <div class="gl-stage" style="height: 428px">
+                <img class="gl-light" src="{{ 'tk-gl-lavender-audio-light.svg' | asset_url }}" width="630" height="370" alt="" loading="lazy" style="left:70px;top:-18px">
+                {%- for h in wave_heights -%}
+                  {%- assign bar_h = h | plus: 0 -%}
+                  <i class="gl-bar{% if forloop.index0 >= 48 %} gl-bar-rest{% endif %}" style="left:{{ forloop.index0 | times: 7.5 | plus: 44 }}px;top:{{ bar_h | divided_by: 2.0 | minus: 51 | times: -1 }}px;height:{{ bar_h }}px"></i>
+                {%- endfor -%}
+                <p class="gl-x gl-m" style="left:635px;top:42px;font-size:11px;color:#8b8b98">32:16</p>
+                <div class="gl-window" style="left:54px;top:95px;width:680px;height:298px">
+                  {% render 'tokkey-gallery-part', part: 'chrome' %}
+                  <div class="gl-content">
+                    <p class="gl-x" style="left:28px;top:21px;font-size:23px;font-weight:500;letter-spacing:-0.6px;color:#e8e8ed">Weekly sync</p>
+                    <p class="gl-x" style="left:28px;top:59px;font-size:13px;color:#909099">The decisions. The next steps.</p>
+                    <i class="gl-box" style="left:28px;top:96px;width:620px;height:1px;background:rgb(255 255 255 / 0.07)"></i>
+                    <p class="gl-x gl-m" style="left:28px;top:117px;font-size:9px;color:#73737e">DECISIONS</p>
+                    <p class="gl-x" style="left:28px;top:145px;font-size:15px;color:#c5c5cf">Launch the beta next Friday.</p>
+                    <p class="gl-x gl-m" style="left:28px;top:189px;font-size:9px;color:#73737e">NEXT UP</p>
+                    <img class="gl-abs" src="{{ 'tk-gl-completed.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy" style="left:27px;top:219px;width:16px;height:16px">
+                    <p class="gl-x" style="left:54px;top:218px;font-size:14px;color:#babac5">Prepare the onboarding flow</p>
+                    <img class="gl-abs" src="{{ 'tk-gl-completed.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy" style="left:349px;top:219px;width:16px;height:16px">
+                    <p class="gl-x" style="left:377px;top:218px;font-size:14px;color:#babac5">Share the revised brief</p>
+                  </div>
+                </div>
+                {% render 'tokkey-gallery-part', part: 'status', label: 'Summarized on your Mac', style: 'left:79px;top:366px' %}
+                <i class="gl-fade" style="top:393px;height:35px"></i>
+              </div>
+            </div>
+          </article>
+
+          <article class="gl-card" style="--gl-order: 6">
+            {% render 'tokkey-gallery-part', part: 'caption', label: 'EVERYDAY AUTOMATION', detail: 'Tidy your files.', rest: 'Automatically.' %}
+            <div class="gl-scene">
+              <div class="gl-stage" style="height: 258px">
+                <img class="gl-light" src="{{ 'tk-gl-file-org-light.svg' | asset_url }}" width="610" height="240" alt="" loading="lazy" style="left:112px;top:62px">
+                {% render 'tokkey-gallery-part', part: 'file', label: 'final_final.pdf', detail: 'Downloads', style: 'left:79.5px;top:42.8px;transform:rotate(-6deg)' %}
+                {% render 'tokkey-gallery-part', part: 'file', label: 'notes_copy.txt', detail: 'Downloads', style: 'left:145px;top:38.3px;transform:rotate(5deg)' %}
+                <img class="gl-abs" src="{{ 'tk-gl-org-connections.svg' | asset_url }}" width="90" height="118" alt="" loading="lazy" style="left:319px;top:62px">
+                {% render 'tokkey-gallery-part', part: 'folder', label: 'Design', detail: '12', style: 'left:411px;top:42px' %}
+                {% render 'tokkey-gallery-part', part: 'folder', label: 'Research', detail: '08', style: 'left:411px;top:104px' %}
+                {% render 'tokkey-gallery-part', part: 'folder', label: 'Personal', detail: '06', style: 'left:411px;top:166px' %}
+                <i class="gl-fade" style="top:220px;height:38px"></i>
+              </div>
+            </div>
+          </article>
+
+          <article class="gl-card" style="--gl-order: 8">
+            {% render 'tokkey-gallery-part', part: 'caption', label: 'BACKGROUND TASKS', detail: 'Close the lid.', rest: 'Tasks keep running.' %}
+            <div class="gl-scene">
+              <div class="gl-stage" style="height: 418px">
+                <img class="gl-photo" src="{{ 'tk-gl-desk.webp' | asset_url }}" width="1576" height="1051" alt="A MacBook with Tokkey on a desk" loading="lazy" style="height:418px">
+                <i class="gl-box" style="left:0;top:0;width:788px;height:418px;background:rgb(5 5 7 / 0.21)"></i>
+                {% render 'tokkey-gallery-part', part: 'status', label: 'Compatible local task · running', style: 'left:34px;top:31px' %}
+                <div class="gl-glass" style="left:38px;top:282px;width:712px;height:92px">
+                  <p class="gl-x" style="left:19px;top:16px;font-size:17px;font-weight:500;color:#e0e0e7">Research, organized.</p>
+                  <p class="gl-x" style="left:19px;top:48px;font-size:12px;color:#9696a3">Your local agent is on it.</p>
+                  <i class="gl-box" style="left:480px;top:43px;width:202px;height:3px;border-radius:2px;background:rgb(255 255 255 / 0.09)"></i>
+                  <i class="gl-box" style="left:480px;top:43px;width:127px;height:3px;border-radius:2px;background:#d8d8e0"></i>
+                  <img class="gl-abs" src="{{ 'tk-gl-green-endpoint.svg' | asset_url }}" width="8" height="8" alt="" loading="lazy" style="left:602px;top:40px">
+                </div>
+                <i class="gl-fade gl-fade-top" style="top:0;height:84px"></i>
+                <i class="gl-fade" style="top:372px;height:46px"></i>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="gl-end">
+        <p class="gl-sent"><b>Your ideas.</b> <span>Your files. Your Mac.</span></p>
+        <a class="gl-link" href="/software">Explore Tokkey Software <img src="{{ 'tk-gl-arrow-up-right.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy"></a>
+      </div>
+    </div>
+  </section>
+</tokkey-everyday-tasks>
+
+<script src="{{ 'tokkey-everyday-tasks.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  /* "Everyday AI tasks" gallery (Figma 1607:6942). Scenes are drawn at the 788px design width and
+     zoomed to the card by --gl-z (set by assets/tokkey-everyday-tasks.js). */
+  tokkey-everyday-tasks {
+    display: block;
+  }
+
+  .gl-sec {
+    padding: 94px 8.333vw 84px;
+    background: #000;
+    font-family: Inter, sans-serif;
+    line-height: 1.4;
+    color: #a1a1a6;
+  }
+
+  .gl-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .gl-sec p,
+  .gl-sec h2,
+  .gl-sec h3 {
+    margin: 0;
+  }
+
+  /* Header */
+  .gl-head {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .gl-eye,
+  .gl-cat span {
+    font: 400 12px/18px 'JetBrains Mono', monospace;
+    letter-spacing: 1.7px;
+    color: #a1a1a6;
+  }
+
+  .gl-title {
+    font-size: clamp(40px, 3.958vw, 76px);
+    font-weight: 400;
+    line-height: 1.184;
+    letter-spacing: -0.0487em;
+    color: #86868b;
+  }
+
+  .gl-title b {
+    font-weight: 600;
+    color: #f2f2f2;
+  }
+
+  .gl-intro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    font-size: 18px;
+  }
+
+  .gl-promise {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font: 400 10px/1.4 'JetBrains Mono', monospace;
+    letter-spacing: 0.7px;
+    color: #86868b;
+  }
+
+  /* Two independent masonry columns */
+  .gl-cols {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .gl-col {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 0;
+  }
+
+  .gl-card {
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #27272b;
+    border-radius: 24px;
+    background: #0b0b0d;
+  }
+
+  /* Caption: sizes scale with the card (788px design width) */
+  .gl-cap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: min(142px, 18.02cqw);
+    padding: min(33px, 4.19cqw) min(38px, 4.82cqw) min(24px, 3.05cqw);
+    box-sizing: border-box;
+  }
+
+  .gl-cat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .gl-cat img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gl-cap h3 {
+    font-size: clamp(20px, 4.061cqw, 32px);
+    font-weight: 400;
+    line-height: 1.3125;
+    letter-spacing: -0.028em;
+    color: #86868b;
+  }
+
+  .gl-cap h3 b {
+    font-weight: 400;
+    color: #f2f2f2;
+  }
+
+  /* Scene: fixed design-size stage zoomed to the card width */
+  .gl-scene {
+    overflow: hidden;
+  }
+
+  .gl-stage {
+    position: relative;
+    width: 788px;
+    overflow: hidden;
+    background: #0b0b0d;
+    zoom: var(--gl-z, 1);
+  }
+
+  .gl-abs,
+  .gl-light,
+  .gl-box,
+  .gl-x,
+  .gl-bar {
+    position: absolute;
+  }
+
+  .gl-light {
+    max-width: none;
+    pointer-events: none;
+  }
+
+  .gl-photo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 788px;
+    object-fit: cover;
+  }
+
+  .gl-x {
+    margin: 0;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+    white-space: pre;
+  }
+
+  .gl-m {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.7px;
+  }
+
+  .gl-rim {
+    position: absolute;
+    border-radius: 18px;
+    background: linear-gradient(rgb(165 189 217 / 0.31), rgb(124 107 168 / 0.31));
+  }
+
+  /* App window: chrome bar plus a content area that children are absolutely placed in */
+  .gl-window {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.25);
+    border-radius: 16px;
+    background: linear-gradient(rgb(43 43 48 / 0.96), rgb(21 21 24 / 0.98));
+    box-shadow: 0 20px 32px rgb(0 0 0 / 0.56);
+  }
+
+  .gl-chrome {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 12px;
+    height: 34px;
+    padding: 0 13px;
+    background: linear-gradient(rgb(51 51 57 / 0.8), rgb(37 37 41 / 0.67));
+  }
+
+  .gl-chrome span {
+    flex: 1;
+    font: 400 10px/1.4 'JetBrains Mono', monospace;
+    letter-spacing: 0.7px;
+    text-align: center;
+    color: #9999a1;
+  }
+
+  .gl-chrome i {
+    width: 36px;
+  }
+
+  .gl-content {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .gl-pill {
+    padding: 9px 15px;
+    border-radius: 99px;
+    background: #dadde7;
+    font-size: 11px;
+    font-weight: 500;
+    color: #171820;
+  }
+
+  .gl-status {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 13px 7px 12px;
+    border: 1px solid rgb(255 255 255 / 0.13);
+    border-radius: 99px;
+    background: linear-gradient(rgb(54 54 59 / 0.85), rgb(32 32 36 / 0.92));
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    color: #a1a1a6;
+  }
+
+  .gl-file {
+    position: absolute;
+    box-sizing: border-box;
+    width: 150px;
+    height: 132px;
+    border: 1px solid rgb(255 255 255 / 0.19);
+    border-radius: 14px;
+    background: linear-gradient(#34343a, #242429);
+    filter: drop-shadow(0 20px 16px rgb(0 0 0 / 0.56));
+  }
+
+  .gl-file img {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+  }
+
+  .gl-file b,
+  .gl-file span {
+    position: absolute;
+    left: 16px;
+    white-space: nowrap;
+  }
+
+  .gl-file b {
+    top: 72px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #f2f2f2;
+  }
+
+  .gl-file span {
+    top: 98px;
+    font-size: 10px;
+    color: #86868b;
+  }
+
+  .gl-folder {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    width: 275px;
+    height: 49px;
+    padding: 0 15px;
+    border: 1px solid rgb(255 255 255 / 0.09);
+    border-radius: 11px;
+    background: linear-gradient(#2c2c32, #202025);
+  }
+
+  .gl-folder span {
+    flex: 1;
+    font-size: 13px;
+    color: #a1a1a6;
+  }
+
+  .gl-folder em {
+    font: 400 10px/1.4 'JetBrains Mono', monospace;
+    letter-spacing: 0.7px;
+    color: #86868b;
+  }
+
+  .gl-rewrite {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px 12px 16px;
+    border: 1px solid rgb(255 255 255 / 0.16);
+    border-radius: 11px;
+    background: linear-gradient(rgb(65 65 71 / 0.95), rgb(41 41 47 / 0.95));
+    box-shadow: 0 20px 32px rgb(0 0 0 / 0.56);
+    font-size: 12px;
+    white-space: nowrap;
+    color: #d1d1dc;
+  }
+
+  .gl-rewrite span + i + span {
+    color: #a2a2b0;
+  }
+
+  .gl-rewrite i {
+    width: 1px;
+    height: 15px;
+    background: rgb(255 255 255 / 0.11);
+  }
+
+  .gl-rewrite img {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Frosted panels over the photos */
+  .gl-glass {
+    position: absolute;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.21);
+    border-radius: 17px;
+    background: linear-gradient(rgb(50 50 54 / 0.85), rgb(29 29 33 / 0.9));
+    box-shadow: 0 20px 32px rgb(0 0 0 / 0.56);
+  }
+
+  .gl-bar {
+    width: 2px;
+    border-radius: 1px;
+    background: #c7c7db;
+  }
+
+  .gl-bar-rest {
+    background: #4c4c58;
+  }
+
+  /* Soft merge of each scene into the card's graphite */
+  .gl-fade {
+    position: absolute;
+    left: 0;
+    width: 788px;
+    background: linear-gradient(rgb(11 11 13 / 0), #0b0b0d);
+    pointer-events: none;
+  }
+
+  .gl-fade-top {
+    background: linear-gradient(#0b0b0d, rgb(11 11 13 / 0));
+  }
+
+  /* Closing line */
+  .gl-end {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 24px;
+    padding-top: 8px;
+  }
+
+  .gl-sent {
+    font-size: clamp(22px, 1.5625vw, 30px);
+    letter-spacing: -0.027em;
+    color: #86868b;
+  }
+
+  .gl-sent b {
+    font-weight: 600;
+    color: #f2f2f2;
+  }
+
+  .gl-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 15px;
+    color: #a1a1a6;
+    text-decoration: none;
+  }
+
+  .gl-link:hover {
+    color: #f2f2f2;
+  }
+
+  .gl-link:focus-visible {
+    outline: 2px solid #4abe18;
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  .gl-link img {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* Below 1024px: one column, cards in their numbered order */
+  @media (max-width: 1023px) {
+    .gl-sec {
+      padding: 64px 24px;
+    }
+
+    .gl-wrap {
+      gap: 32px;
+    }
+
+    .gl-cols {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 16px;
+    }
+
+    .gl-col {
+      display: contents;
+    }
+
+    .gl-card {
+      order: var(--gl-order);
+      border-radius: 20px;
+    }
+
+    .gl-intro {
+      font-size: 16px;
+    }
+  }
+{% endstylesheet %}

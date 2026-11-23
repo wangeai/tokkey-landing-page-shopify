@@ -1,0 +1,47 @@
+{% doc %}
+  Renders one of the small UI pieces repeated across the "Everyday AI tasks" scenes
+  (Figma "Tokkey / Gallery V2 / …" components). Positioning comes from the caller's `style`.
+
+  @param {string} part - 'caption' (card eyebrow + headline), 'chrome' (window title bar), 'status' (local status pill), 'file' (file tile) or 'folder' (folder row)
+  @param {string} [label] - Caption eyebrow, status text, or the file / folder name
+  @param {string} [detail] - Caption headline (bright part), file tile detail line, or folder item count
+  @param {string} [rest] - Caption headline (muted part)
+  @param {string} [style] - Inline style for absolute placement
+
+  @example
+  {% render 'tokkey-gallery-part', part: 'status', label: 'Ran locally · 0 B sent', style: 'left:28px;top:166px' %}
+{% enddoc %}
+
+{%- case part -%}
+  {%- when 'caption' -%}
+    <div class="gl-cap">
+      <div class="gl-cat">
+        <span>{{ label }}</span>
+        <img src="{{ 'tk-gl-arrow-up-right.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
+      </div>
+      <h3><b>{{ detail }}</b> {{ rest }}</h3>
+    </div>
+  {%- when 'chrome' -%}
+    <div class="gl-chrome">
+      <img src="{{ 'tk-gl-window-controls.svg' | asset_url }}" width="30" height="6" alt="" loading="lazy">
+      <span>On this Mac</span>
+      <i></i>
+    </div>
+  {%- when 'status' -%}
+    <div class="gl-status" style="{{ style }}">
+      <img src="{{ 'tk-gl-dot.svg' | asset_url }}" width="5" height="5" alt="" loading="lazy">
+      <span>{{ label | default: 'Ran locally · 0 B sent' }}</span>
+    </div>
+  {%- when 'file' -%}
+    <div class="gl-file" style="{{ style }}">
+      <img src="{{ 'tk-gl-file.svg' | asset_url }}" width="24" height="28" alt="" loading="lazy">
+      <b>{{ label }}</b>
+      <span>{{ detail }}</span>
+    </div>
+  {%- when 'folder' -%}
+    <div class="gl-folder" style="{{ style }}">
+      <img src="{{ 'tk-gl-folder.svg' | asset_url }}" width="21" height="20" alt="" loading="lazy">
+      <span>{{ label }}</span>
+      <em>{{ detail }}</em>
+    </div>
+{%- endcase -%}
