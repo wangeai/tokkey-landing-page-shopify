@@ -11,7 +11,7 @@
     <div class="stage" data-ref="stage">
       <img class="color" id="bg" src="{{ 'tk-about-bg.jpg' | asset_url }}" alt="" draggable="false" />
       <canvas id="fog"></canvas>
-      <img id="fig" src="{{ 'tk-about-figure.webp' | asset_url }}" alt="Prometheus reaching for the Tokkey cube" draggable="false" />
+      <picture><source media="(max-width: 768px)" srcset="{{ 'tk-about-figure-m.webp' | asset_url }}"><img id="fig" src="{{ 'tk-about-figure.webp' | asset_url }}" alt="Prometheus reaching for the Tokkey cube" draggable="false" /></picture>
       <canvas id="fire"></canvas>
       <i id="anchor"></i>
       <div class="hero-dark" data-ref="dark"></div>

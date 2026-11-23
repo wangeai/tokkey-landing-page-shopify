@@ -99,14 +99,46 @@
       height: 20px;
     }
 
+    .tk-topnav__menu {
+      gap: 16px;
+    }
+
     .tk-topnav__link {
-      display: none;
+      font-size: 14px;
     }
 
     .tk-topnav__cta {
       padding: 0 16px;
       font-size: 14px;
       line-height: 36px;
+    }
+  }
+
+  /* Phones: shrink everything so logo, both links and the CTA still fit on one row */
+  @media (max-width: 420px) {
+    .tk-topnav {
+      inset-inline: 8px;
+      gap: 10px;
+      padding: 8px 10px;
+    }
+
+    .tk-topnav .tk-topnav__logo img {
+      width: 75px;
+      height: 14px;
+    }
+
+    .tk-topnav__menu {
+      gap: 10px;
+    }
+
+    .tk-topnav__link {
+      font-size: 12px;
+    }
+
+    .tk-topnav__cta {
+      padding: 0 10px;
+      font-size: 12px;
+      line-height: 30px;
     }
   }
 {% endstylesheet %}

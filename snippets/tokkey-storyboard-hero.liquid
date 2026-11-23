@@ -1,28 +1,32 @@
 {% doc %}
   Renders the storyboard hero ported from the prototype homepage v3: a 1920×1080 stage where the
   MacBook lid opens (frame sequence drawn on a canvas), the camera pushes in on the key, the MacBook
-  dissolves into the Mac mini and the headline lands on "Own your intelligence". Below 1024px it shows
-  the final composition only. Animation is driven by assets/tokkey-storyboard-hero.js.
+  dissolves into the Mac mini and the headline lands on "Own your intelligence". Below 1024px the stage
+  is fitted to the viewport width (16:9) with 1080px frames, and the sub-lines render under it.
+  Animation is driven by assets/tokkey-storyboard-hero.js.
 
   @example
   {% render 'tokkey-storyboard-hero' %}
 {% enddoc %}
 
 {%- liquid
-  # The prototype's 36 frames are 9 distinct images; the script maps frame index onto these
+  # The prototype's 36 frames are 9 distinct images; the script maps frame index onto these.
+  # Each frame also has a 1080px-wide "-m" variant that the script loads on small screens.
   assign frame_names = 'f00,f05,f10,f15,f20,f25,f30,f34,hi' | split: ','
-  capture frames_json
-    echo '['
-    for name in frame_names
-      echo '"'
-      echo 'tk-hv-' | append: name | append: '.webp' | asset_url
-      echo '"'
-      unless forloop.last
-        echo ','
-      endunless
-    endfor
-    echo ']'
-  endcapture
+  assign frames_json = ''
+  assign frames_json_mobile = ''
+  for name in frame_names
+    assign frame_url = 'tk-hv-' | append: name | append: '.webp' | asset_url | json
+    assign frame_url_mobile = 'tk-hv-' | append: name | append: '-m.webp' | asset_url | json
+    unless forloop.first
+      assign frames_json = frames_json | append: ','
+      assign frames_json_mobile = frames_json_mobile | append: ','
+    endunless
+    assign frames_json = frames_json | append: frame_url
+    assign frames_json_mobile = frames_json_mobile | append: frame_url_mobile
+  endfor
+  assign frames_json = '[' | append: frames_json | append: ']'
+  assign frames_json_mobile = '[' | append: frames_json_mobile | append: ']'
 -%}
 
 {% style %}
@@ -44,25 +48,23 @@
 {% endstyle %}
 
 <section class="hv" id="storyboard" aria-label="Tokkey. Own your intelligence.">
-  <tokkey-storyboard-hero class="hv-view" data-frames="{{ frames_json | escape }}">
+  <tokkey-storyboard-hero class="hv-view" data-frames="{{ frames_json | escape }}" data-frames-mobile="{{ frames_json_mobile | escape }}">
     <div class="hv-preload" aria-hidden="true"><span style="font-family:'HV Inter';font-style:normal;font-weight:300">Aa</span><span style="font-family:'HV Inter';font-style:normal;font-weight:400">Aa</span><span style="font-family:'HV Inter';font-style:normal;font-weight:600">Aa</span><span style="font-family:'HV Inter';font-style:normal;font-weight:700">Aa</span><span style="font-family:'HV Ancizar';font-style:italic;font-weight:400">Aa</span><span style="font-family:'HV Playfair';font-style:normal;font-weight:400">Aa</span><span style="font-family:'HV Playfair';font-style:italic;font-weight:400">Aa</span><span style="font-family:'HV DMSerif';font-style:italic;font-weight:400">Aa</span><span style="font-family:'HV Bodoni';font-style:normal;font-weight:400">Aa</span><span style="font-family:'HV Bebas';font-style:normal;font-weight:400">Aa</span><span style="font-family:'HV Courier';font-style:normal;font-weight:400">Aa</span><span style="font-family:'HV Cormorant';font-style:normal;font-weight:300">Aa</span><span style="font-family:'HV Grotesk';font-style:normal;font-weight:300">Aa</span><span style="font-family:'HV Josefin';font-style:normal;font-weight:300">Aa</span><span style="font-family:'HV EBG';font-style:italic;font-weight:400">Aa</span></div>
     <div class="hv-stage" aria-hidden="true">
       <div class="hv-layer hv-mbw"><canvas class="hv-mb" width="1920" height="1080"></canvas></div>
-      <img class="hv-layer hv-cut" src="{{ 'tk-hv-mini-cut.webp' | asset_url }}" width="2197" height="1515" alt="" loading="lazy">
+      <picture><source media="(max-width: 1023px)" srcset="{{ 'tk-hv-mini-cut-m.webp' | asset_url }}"><img class="hv-layer hv-cut" src="{{ 'tk-hv-mini-cut.webp' | asset_url }}" width="2197" height="1515" alt="" loading="lazy"></picture>
       <div class="hv-shade"></div>
       <div class="hv-shade hv-shade-b"></div>
       <p class="hv-h1"><span class="hv-ph"><b class="on"><span>Bigger</span><em>AI models</em></b><b><span>Private</span><em>AI agents</em><span class="hv-pill hv-pl">LOCAL</span></b><b><span>A full</span><em>AI stack</em></b><b><span>Unlimited</span><em>AI tokens</em><span class="hv-pill hv-pl">$0</span></b><b><span>Own your</span><i class="hv-intl">intelligence</i></b></span><span class="hv-l2"><span class="hv-lt">for your device,</span><em>in one key</em><span class="hv-pill hv-pk"><i></i><u></u></span><span class="hv-gr hv-dot">.</span></span></p>
       <p class="hv-sub hv-sub-1">Plug in, run AI locally.</p>
       <p class="hv-sub hv-sub-2">Works with your PC, Mac mini and iPhone.</p>
     </div>
-    <div class="hv-mob">
-      <h2><span class="hv-m-l">Own your</span> <i class="hv-intl hv-intl-m">intelligence</i></h2>
-      <img class="hv-mob-im" src="{{ 'tk-hv-mini-cut.webp' | asset_url }}" width="2197" height="1515" alt="Tokkey plugged into the front of a Mac mini. Concept render" loading="lazy">
-      <p class="hv-mob-a">Plug in, run AI locally.</p>
-      <p class="hv-mob-b">Works with your PC, Mac mini and iPhone.</p>
-    </div>
     <h2 class="hv-sr">Own your intelligence. Bigger AI models, private AI agents and unlimited AI tokens for your device, in one key.</h2>
   </tokkey-storyboard-hero>
+  <div class="hv-mob">
+    <p class="hv-mob-a">Plug in, run AI locally.</p>
+    <p class="hv-mob-b">Works with your PC, Mac mini and iPhone.</p>
+  </div>
   <div class="hv-pband" aria-label="Partners">
     <span class="ptn-k">Partners</span>
     <div class="hv-partners"><span class="ptn-i" role="img" aria-label="NVIDIA"><svg class="ptn-l" style="position:static;inset:auto;width:32px;height:32px" width="32" height="32" fill="currentColor" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8.948 8.798v-1.43a6.7 6.7 0 0 1 .424-.018c3.922-.124 6.493 3.374 6.493 3.374s-2.774 3.851-5.75 3.851c-.398 0-.787-.062-1.158-.185v-4.346c1.528.185 1.837.857 2.747 2.385l2.04-1.714s-1.492-1.952-4-1.952a6.016 6.016 0 0 0-.796.035m0-4.735v2.138l.424-.027c5.45-.185 9.01 4.47 9.01 4.47s-4.08 4.964-8.33 4.964c-.37 0-.733-.035-1.095-.097v1.325c.3.035.61.062.91.062 3.957 0 6.82-2.023 9.593-4.408.459.371 2.34 1.263 2.73 1.652-2.633 2.208-8.772 3.984-12.253 3.984-.335 0-.653-.018-.971-.053v1.864H24V4.063zm0 10.326v1.131c-3.657-.654-4.673-4.46-4.673-4.46s1.758-1.944 4.673-2.262v1.237H8.94c-1.528-.186-2.73 1.245-2.73 1.245s.68 2.412 2.739 3.11M2.456 10.9s2.164-3.197 6.5-3.533V6.201C4.153 6.59 0 10.653 0 10.653s2.35 6.802 8.948 7.42v-1.237c-4.84-.6-6.492-5.936-6.492-5.936z"/></svg></span><span class="ptn-i" role="img" aria-label="Alibaba"><svg class="ptn-l" style="position:static;inset:auto;width:34px;height:34px" width="34" height="34" fill="currentColor" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.391 16.22c-.963.044-.865-.459-.302-1.234 1.32-1.768 3.82-4.236 3.906-5.982.151-2.283-2.143-3.026-4.501-3.004-1.645.022-3.344.492-4.501.906C5 8.315 2.489 10.576.909 13.076-.768 15.554-.216 17.923 3.322 18c2.716-.109 4.48-.862 6.32-1.802.01 0-5.086 1.453-6.958.383l-.008-.002c-.193-.11-.404-.264-.457-.683-.012-.885 1.46-1.802 2.283-2.097v-1.533a5.374 5.374 0 0 0 1.955.366 5.378 5.378 0 0 0 3.472-1.265c.037.13.056.278.044.447h.371c.048-.394-.172-.706-.172-.706-.333-.529-.915-.52-.915-.52s.315.137.529.466a4.953 4.953 0 0 1-4.665.932l1.21-1.2-.336-.874c2.435-.852 4.48-1.507 7.812-2.085l-.746-.624.389-.24c2.01.568 3.325.985 3.253 2.051a2.672 2.672 0 0 1-.202.611c-.584 1.158-2.326 3.09-3.029 3.898-.465.535-.92 1.06-1.245 1.562-.335.503-.54.971-.551 1.42.043 3.504 10.334-1.64 12.324-3.003-2.943 1.266-6.113 2.489-9.609 2.718Z"/></svg></span><span class="ptn-i" role="img" aria-label="Lenovo"><svg class="ptn-l" style="position:static;inset:auto;width:70px;height:70px" width="70" height="70" fill="currentColor" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21.044 12.288c0 .5-.343.867-.815.867-.464 0-.827-.38-.827-.867 0-.51.343-.868.815-.868.464 0 .827.381.827.868zm-14.305-.92a.787.787 0 0 0-.651.307.991.991 0 0 0-.172.738l1.479-.614a.708.708 0 0 0-.656-.43zm6.963.052c-.472 0-.816.358-.816.868 0 .486.364.867.828.867.472 0 .815-.368.815-.867 0-.487-.363-.868-.827-.868zM24 7.997v8.006H0V7.997h24zM5.01 13.05H3.088V9.825H2.23v4.003h2.78v-.777zm1.137-.094l2.163-.897a1.667 1.667 0 0 0-.37-.86c-.284-.33-.704-.505-1.216-.505-.931 0-1.633.686-1.633 1.593 0 .93.704 1.593 1.726 1.593.572 0 1.158-.272 1.432-.589l-.535-.411c-.357.264-.56.326-.885.326-.292 0-.52-.09-.682-.25zm5.57-1.039c0-.709-.507-1.223-1.252-1.223a1.28 1.28 0 0 0-1.005.494v-.442h-.846v3.081h.846v-1.753c0-.316.245-.651.698-.651.35 0 .712.243.712.651v1.753h.847v-1.91zm3.647.37c0-.904-.725-1.593-1.65-1.593-.933 0-1.663.7-1.663 1.593 0 .903.726 1.592 1.651 1.592.932 0 1.662-.7 1.662-1.592zm2.066 1.54l1.268-3.081h-.967l-.765 2.099-.765-2.1h-.966l1.268 3.081h.927zm4.449-1.54c0-.904-.725-1.593-1.65-1.593-.932 0-1.662.7-1.662 1.593 0 .903.725 1.592 1.65 1.592.932 0 1.662-.7 1.662-1.592z"/></svg></span><span class="ptn-i" role="img" aria-label="UGREEN"><span class="ptn-l ptn-t">UGREEN</span></span><span class="ptn-i" role="img" aria-label="Apple"><svg class="ptn-l" style="position:static;inset:auto;width:30px;height:30px" width="30" height="30" fill="currentColor" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span><span class="ptn-i" role="img" aria-label="Intel"><svg class="ptn-l" style="position:static;inset:auto;width:58px;height:58px" width="58" height="58" fill="currentColor" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.42 7.345v9.18h1.651v-9.18zM0 7.475v1.737h1.737V7.474zm9.78.352v6.053c0 .513.044.945.13 1.292.087.34.235.618.44.828.203.21.475.359.803.451.334.093.754.136 1.255.136h.216v-1.533c-.24 0-.445-.012-.593-.037a.672.672 0 0 1-.39-.173.693.693 0 0 1-.173-.377 4.002 4.002 0 0 1-.037-.606v-2.182h1.193v-1.416h-1.193V7.827zm-3.505 2.312c-.396 0-.76.08-1.082.241-.327.161-.6.384-.822.668l-.087.117v-.902H2.658v6.256h1.639v-3.214c.018-.588.16-1.02.433-1.299.29-.297.642-.445 1.044-.445.476 0 .841.149 1.082.433.235.284.359.686.359 1.2v3.324h1.663V12.97c.006-.89-.229-1.595-.686-2.09-.458-.495-1.1-.742-1.917-.742zm10.065.006a3.252 3.252 0 0 0-2.306.946c-.29.29-.525.637-.692 1.033a3.145 3.145 0 0 0-.254 1.273c0 .452.08.878.241 1.274.161.395.39.742.674 1.032.284.29.637.526 1.045.693.408.173.86.26 1.342.26 1.397 0 2.262-.637 2.782-1.23l-1.187-.904c-.248.297-.841.699-1.583.699-.464 0-.847-.105-1.138-.321a1.588 1.588 0 0 1-.593-.872l-.019-.056h4.915v-.587c0-.451-.08-.872-.235-1.267a3.393 3.393 0 0 0-.661-1.033 3.013 3.013 0 0 0-1.02-.692 3.345 3.345 0 0 0-1.311-.248zm-16.297.118v6.256h1.651v-6.256zm16.278 1.286c1.132 0 1.664.797 1.664 1.255l-3.32.006c0-.458.525-1.255 1.656-1.261zm7.073 3.814a.606.606 0 0 0-.606.606.606.606 0 0 0 .606.606.606.606 0 0 0 .606-.606.606.606 0 0 0-.606-.606zm-.008.105a.5.5 0 0 1 .002 0 .5.5 0 0 1 .5.501.5.5 0 0 1-.5.5.5.5 0 0 1-.5-.5.5.5 0 0 1 .498-.5zm-.233.155v.699h.13v-.285h.093l.173.285h.136l-.18-.297a.191.191 0 0 0 .118-.056c.03-.03.05-.074.05-.136 0-.068-.02-.117-.063-.154-.037-.038-.105-.056-.185-.056zm.13.099h.154c.019 0 .037.006.056.012a.064.064 0 0 1 .037.031c.013.013.012.031.012.056a.124.124 0 0 1-.012.055.164.164 0 0 1-.037.031c-.019.006-.037.013-.056.013h-.154Z"/></svg></span><span class="ptn-i" role="img" aria-label="AMD"><svg class="ptn-l" style="position:static;inset:auto;width:56px;height:56px" width="56" height="56" fill="currentColor" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.324 9.137l1.559 1.56h2.556v2.557L24 14.814V9.137zM2 9.52l-2 4.96h1.309l.37-.982H3.9l.408.982h1.338L3.432 9.52zm4.209 0v4.955h1.238v-3.092l1.338 1.562h.188l1.338-1.556v3.091h1.238V9.52H10.47l-1.592 1.845L7.287 9.52zm6.283 0v4.96h2.057c1.979 0 2.88-1.046 2.88-2.472 0-1.36-.937-2.488-2.747-2.488zm1.237.91h.792c1.17 0 1.63.711 1.63 1.57 0 .728-.372 1.572-1.616 1.572h-.806zm-10.985.273l.791 1.932H2.008zm17.137.307l-1.604 1.603v2.25h2.246l1.604-1.607h-2.246z"/></svg></span></div>
@@ -386,46 +388,23 @@
   }
 
   @media (max-width: 1023px) {
+    /* The stage plays here too, contain-fitted to a 16:9 box; the tiny in-stage sub-lines move below it */
     .hv-view {
       height: auto;
-      overflow: visible;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
     }
 
-    .hv-stage,
-    .hv-sr {
+    .hv-sub {
       display: none;
     }
 
     .hv-mob {
       display: block;
-      overflow: hidden;
-      padding: 64px 20px 8px;
+      padding: 8px 20px 8px;
       text-align: center;
       font-family: 'HV Inter', Inter, sans-serif;
       color: #fff;
-    }
-
-    .hv-mob h2 {
-      margin: 0;
-      font-weight: 600;
-      font-size: clamp(36px, 10vw, 64px);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-    }
-
-    .hv-m-l {
-      font-family: Geist, 'HV Inter', sans-serif;
-      font-weight: 300;
-      color: #808080;
-    }
-
-    .hv-mob-im {
-      display: block;
-      width: 160vw;
-      max-width: none;
-      height: auto;
-      margin: 24px 0 0 calc(25.2vw - 20px);
-      mask-image: linear-gradient(#000 70%, transparent);
     }
 
     .hv-mob-a {

@@ -120,7 +120,7 @@
             {% render 'tokkey-gallery-part', part: 'caption', label: 'PERSONAL MEMORY', detail: 'It remembers your projects.', rest: 'Privately.' %}
             <div class="gl-scene">
               <div class="gl-stage" style="height: 328px">
-                <img class="gl-photo" src="{{ 'tk-gl-lifestyle.webp' | asset_url }}" width="1576" height="1051" alt="A person carrying a MacBook with Tokkey" loading="lazy" style="height:328px">
+                <picture><source media="(max-width: 768px)" srcset="{{ 'tk-gl-lifestyle-m.webp' | asset_url }}"><img class="gl-photo" src="{{ 'tk-gl-lifestyle.webp' | asset_url }}" width="1576" height="1051" alt="A person carrying a MacBook with Tokkey" loading="lazy" style="height:328px"></picture>
                 <i class="gl-box" style="left:0;top:0;width:788px;height:328px;background:rgb(0 0 0 / 0.15)"></i>
                 <div class="gl-glass" style="left:37px;top:115px;width:330px;height:165px">
                   <p class="gl-x gl-m" style="left:20px;top:18px;font-size:10px;color:#85858f">YOUR CONTEXT</p>
@@ -214,7 +214,7 @@
             {% render 'tokkey-gallery-part', part: 'caption', label: 'BACKGROUND TASKS', detail: 'Close the lid.', rest: 'Tasks keep running.' %}
             <div class="gl-scene">
               <div class="gl-stage" style="height: 418px">
-                <img class="gl-photo" src="{{ 'tk-gl-desk.webp' | asset_url }}" width="1576" height="1051" alt="A MacBook with Tokkey on a desk" loading="lazy" style="height:418px">
+                <picture><source media="(max-width: 768px)" srcset="{{ 'tk-gl-desk-m.webp' | asset_url }}"><img class="gl-photo" src="{{ 'tk-gl-desk.webp' | asset_url }}" width="1576" height="1051" alt="A MacBook with Tokkey on a desk" loading="lazy" style="height:418px"></picture>
                 <i class="gl-box" style="left:0;top:0;width:788px;height:418px;background:rgb(5 5 7 / 0.21)"></i>
                 {% render 'tokkey-gallery-part', part: 'status', label: 'Compatible local task · running', style: 'left:34px;top:31px' %}
                 <div class="gl-glass" style="left:38px;top:282px;width:712px;height:92px">

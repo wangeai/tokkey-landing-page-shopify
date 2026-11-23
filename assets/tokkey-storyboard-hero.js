@@ -70,11 +70,13 @@ class TokkeyStoryboardHero extends HTMLElement {
   /**
    * Preload the sequence. The prototype's 36 frames are only 9 distinct images
    * (each held for 5 frames), so logical frame k maps onto one of the unique files.
+   * Small screens load the 1080px-wide variants.
    * @returns {HTMLImageElement[]}
    */
   loadFrames() {
+    const source = this.mobileQuery.matches ? this.dataset.framesMobile : this.dataset.frames;
     /** @type {string[]} */
-    const urls = JSON.parse(this.dataset.frames || '[]');
+    const urls = JSON.parse(source || '[]');
     const unique = urls.map((url) => {
       const image = new Image();
       image.src = url;
@@ -104,11 +106,6 @@ class TokkeyStoryboardHero extends HTMLElement {
   }
 
   play() {
-    // Phones show the final composition only; just flicker the headline word
-    if (this.mobileQuery.matches) {
-      this.flickerTimer = setTimeout(() => this.flicker(this.querySelector('.hv-intl-m')), 600);
-      return;
-    }
     let start = null;
     const loop = (now) => {
       if (start === null) start = now;
