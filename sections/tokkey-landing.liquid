@@ -28,6 +28,8 @@
         <span style="left:10.185%;top:14.342%;width:79.630%;font-size:6.4815cqw;line-height:1.200;text-align:center">Turn Your PC into AI PC.<br>This Time, <br>Own Your Intelligence</span>
       </div>
       <a class="hot hot-hero" href="/products/tokkey-deposit-reservation" aria-label="Deposit Now"></a>
+      {%- comment -%} The mobile hero image has no button drawn in, so mobile gets a real one {%- endcomment -%}
+      <a class="tk-hero-cta" href="/products/tokkey-deposit-reservation">Deposit Now <span aria-hidden="true">→</span></a>
     </section>
     <section class="sec" id="deposit">
       <picture>
@@ -74,6 +76,36 @@
   /* The homepage spans the full viewport; lift the 1920px cap tokkey.css sets for other pages */
   .tokkey-landing .lp {
     max-width: none;
+  }
+
+  /* Mobile "Deposit Now" pill under the hero title; same green as the button drawn in the desktop image */
+  .tk-hero-cta {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .tk-hero-cta {
+      position: absolute;
+      z-index: 2;
+      inset-block-start: 35.5%;
+      inset-inline-start: 50%;
+      display: flex;
+      align-items: center;
+      gap: 2cqw;
+      padding: 0 4.8cqw;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #82ea57, #49bd18);
+      color: #fff;
+      font: 600 3.4cqw/8.8cqw Inter, -apple-system, Helvetica Neue, Arial, sans-serif;
+      text-decoration: none;
+      white-space: nowrap;
+      transform: translateX(-50%);
+    }
+
+    .tk-hero-cta:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px;
+    }
   }
 {% endstylesheet %}
 
