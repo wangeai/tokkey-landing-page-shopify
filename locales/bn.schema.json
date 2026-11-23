@@ -246,6 +246,7 @@
     "show_physical_stores_help": "পিকআপ অফার না করলেও, ফিজিক্যাল স্টোরফ্রন্ট হিসেবে চিহ্নিত এবং পণ্যটি স্টকে আছে এমন লোকেশনগুলোও তালিকাভুক্ত করুন।"
   },
   "names": {
+    "tokkey_landing": "Tokkey landing page",
     "column": "কলাম",
     "product_title": "পণ্যের শিরোনাম",
     "custom_liquid": "Custom Liquid",

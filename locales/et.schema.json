@@ -246,6 +246,7 @@
     "show_physical_stores_help": "Kuva ka füüsiliseks müügikeskkonnaks märgitud asukohad, kus toode on laos, isegi kui seal ei pakuta järeletulemist."
   },
   "names": {
+    "tokkey_landing": "Tokkey landing page",
     "column": "Veerg",
     "product_title": "Toote pealkiri",
     "custom_liquid": "Kohandatud Liquid",

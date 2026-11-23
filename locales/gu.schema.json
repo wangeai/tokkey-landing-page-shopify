@@ -246,6 +246,7 @@
     "show_physical_stores_help": "ફિઝિકલ સ્ટોરફ્રન્ટ તરીકે ચિહ્નિત કરેલા અને પ્રોડક્ટ સ્ટૉકમાં હોય તેવા સ્થાનો પણ સૂચિબદ્ધ કરો, ભલે તેઓ પિકઅપ ઑફર ન કરતા હોય."
   },
   "names": {
+    "tokkey_landing": "Tokkey landing page",
     "column": "કૉલમ",
     "product_title": "પ્રોડક્ટનું શીર્ષક",
     "custom_liquid": "કસ્ટમ Liquid",

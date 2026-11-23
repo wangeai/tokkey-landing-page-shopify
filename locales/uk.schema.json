@@ -246,6 +246,7 @@
     "show_physical_stores_help": "Також показувати розташування, позначені як фізична вітрина, де товар є в наявності, навіть якщо вони не пропонують самовивіз."
   },
   "names": {
+    "tokkey_landing": "Tokkey landing page",
     "column": "Стовпець",
     "product_title": "Назва товару",
     "custom_liquid": "Спеціальний код Liquid",

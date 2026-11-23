@@ -246,6 +246,7 @@
     "show_physical_stores_help": "जरी तेथे पिकअपची सुविधा नसली, तरीही प्रत्यक्ष स्टोअरफ्रंट म्हणून चिन्हांकित केलेली आणि उत्पादन स्टॉकमध्ये असलेली ठिकाणे देखील सूचीबद्ध करा."
   },
   "names": {
+    "tokkey_landing": "Tokkey landing page",
     "column": "कॉलम",
     "product_title": "उत्पादन शीर्षक",
     "custom_liquid": "कस्टम Liquid",

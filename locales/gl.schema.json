@@ -246,6 +246,7 @@
     "show_physical_stores_help": "Listar tamén as localizacións marcadas como escaparate físico que teñan o produto en stock, aínda que non ofrezan a recollida."
   },
   "names": {
+    "tokkey_landing": "Tokkey landing page",
     "column": "Columna",
     "product_title": "Título do produto",
     "custom_liquid": "Liquid personalizado",

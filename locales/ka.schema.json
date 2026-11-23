@@ -246,6 +246,7 @@
     "show_physical_stores_help": "ასევე ჩამოთვალე ლოკაციები, რომლებიც მონიშნულია, როგორც ფიზიკური ვიტრინა და პროდუქტი მარაგში აქვთ, მაშინაც კი, თუ გატანას არ სთავაზობენ."
   },
   "names": {
+    "tokkey_landing": "Tokkey landing page",
     "column": "სვეტი",
     "product_title": "პროდუქტის სათაური",
     "custom_liquid": "მორგებული Liquid",

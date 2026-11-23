@@ -246,6 +246,7 @@
     "show_physical_stores_help": "Rādīt arī tās atrašanās vietas, kas atzīmētas kā fizisks veikals un kurās produkts ir krājumā, pat ja tajās netiek piedāvāta saņemšana."
   },
   "names": {
+    "tokkey_landing": "Tokkey landing page",
     "column": "Sleja",
     "product_title": "Produkta nosaukums",
     "custom_liquid": "Pielāgots Liquid",

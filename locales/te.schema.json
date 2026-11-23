@@ -246,6 +246,7 @@
     "show_physical_stores_help": "పికప్‌ను అందించనప్పటికీ, ఉత్పత్తి స్టాక్‌లో ఉన్న భౌతిక స్టోర్‌ఫ్రంట్‌గా మార్క్ చేయబడిన లొకేషన్‌లను కూడా జాబితా చేయండి."
   },
   "names": {
+    "tokkey_landing": "Tokkey landing page",
     "column": "నిలువు వరుస",
     "product_title": "ఉత్పత్తి శీర్షిక",
     "custom_liquid": "కస్టమ్ Liquid",

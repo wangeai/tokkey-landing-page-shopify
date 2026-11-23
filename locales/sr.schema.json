@@ -246,6 +246,7 @@
     "show_physical_stores_help": "Navedite i lokacije označene kao fizički izlog koje imaju proizvod na zalihama, čak i kada ne nude preuzimanje."
   },
   "names": {
+    "tokkey_landing": "Tokkey landing page",
     "column": "Kolona",
     "product_title": "Naziv proizvoda",
     "custom_liquid": "Prilagođeni Liquid",
