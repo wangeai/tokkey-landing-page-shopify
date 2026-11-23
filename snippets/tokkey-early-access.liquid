@@ -1,0 +1,205 @@
+{% doc %}
+  Renders the "Get updates" early-access card ported from the prototype homepage v3 (.eb-sec).
+  Subscribing POSTs the email to the early-access API, then redirects to the deposit reservation
+  product. Behaviour lives in assets/tokkey-early-access.js.
+
+  @example
+  {% render 'tokkey-early-access' %}
+{% enddoc %}
+
+<tokkey-early-access>
+  <section class="eb-sec" id="ebsec" aria-label="Get updates">
+    <div class="eb-card">
+      <div class="eb-txt">
+        <div class="eb-eye"><i></i>EARLY ACCESS</div>
+        <h3 class="eb-h">Be first to try Tokkey<span>.</span></h3>
+        <p>Selected early subscribers receive $30 in free Router credits.</p>
+      </div>
+      {%- comment -%} Same endpoint and payload as EarlyAccessForm in the tokkey-landing-page repo {%- endcomment -%}
+      <form
+        class="eb-form"
+        data-endpoint="https://amis-wifi-backend-947027167514.us-central1.run.app/api/v1/earlyaccess"
+        data-redirect="/products/tokkey-deposit-reservation"
+        data-busy-label="Sending…"
+        data-error-message="Something went wrong. Please try again."
+      >
+        <label class="eb-sr" for="ebEmail">Email</label>
+        <input id="ebEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <button type="submit">Subscribe</button>
+        <p class="eb-status" data-ref="status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</tokkey-early-access>
+
+<script src="{{ 'tokkey-early-access.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  /* "Get updates" card (prototype homepage v3 .eb-sec) */
+  tokkey-early-access {
+    display: block;
+    line-height: normal;
+  }
+
+  .eb-sec {
+    --eb-sp: min(140px, 7.2917vw);
+    padding: var(--eb-sp) 0;
+    font-family: Inter, sans-serif;
+  }
+
+  .eb-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+    width: min(81.354vw, 1562px);
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #2e2e2b;
+    border-radius: 24px;
+    background: rgb(20 20 19 / 0.72);
+    backdrop-filter: blur(18px);
+  }
+
+  .eb-eye {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font: 500 13px/16px 'Geist Mono', monospace;
+    letter-spacing: 0.06em;
+    color: #8e8e93;
+  }
+
+  .eb-eye i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4abe18;
+  }
+
+  .eb-h {
+    margin: 0 0 16px;
+    font: 600 40px/48px Geist, Inter, sans-serif;
+    letter-spacing: -0.025em;
+    color: #fff;
+  }
+
+  .eb-h span {
+    color: #4abe18;
+  }
+
+  .eb-txt p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #b0b0ac;
+  }
+
+  .eb-form {
+    display: flex;
+    flex: 0 0 520px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .eb-form input {
+    flex: 1;
+    min-width: 0;
+    height: 56px;
+    padding: 0 16px;
+    border: 1px solid #2e2e2b;
+    border-radius: 16px;
+    background: #000;
+    font: 16px Inter, sans-serif;
+    color: #f2f2f2;
+  }
+
+  .eb-form input::placeholder {
+    color: #5c5c58;
+  }
+
+  .eb-form input:focus {
+    outline: none;
+    border-color: #4abe18;
+  }
+
+  .eb-form button {
+    height: 56px;
+    padding: 0 32px;
+    border: 0;
+    border-radius: 16px;
+    background: #fff;
+    font: 600 16px Inter, sans-serif;
+    color: #000;
+    cursor: pointer;
+  }
+
+  .eb-form button:hover {
+    opacity: 0.88;
+  }
+
+  .eb-form button:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .eb-form button:focus-visible {
+    outline: 2px solid #4abe18;
+    outline-offset: 2px;
+  }
+
+  /* Error line, full row under the field */
+  .eb-status {
+    flex-basis: 100%;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #ff8a80;
+  }
+
+  .eb-status:empty {
+    display: none;
+  }
+
+  .eb-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  @media (max-width: 1023px) {
+    .eb-sec {
+      --eb-sp: 80px;
+      padding: var(--eb-sp) 24px;
+    }
+
+    .eb-card {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 28px;
+      width: auto;
+      padding: 32px 24px;
+    }
+
+    .eb-form {
+      flex: none;
+    }
+
+    .eb-h {
+      font-size: 32px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .eb-form {
+      flex-direction: column;
+    }
+
+    .eb-form input {
+      flex: none;
+    }
+  }
+{% endstylesheet %}

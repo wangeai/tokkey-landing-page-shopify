@@ -1,0 +1,419 @@
+{% doc %}
+  Renders "Meet Tokkey — the film" ported from the prototype homepage v3 (.fm-sec): a film card that
+  starts the YouTube film muted inline once scrolled into view, and the full-screen "Tokkey film"
+  player that grows out of the card on click and plays it with sound. Behaviour lives in
+  assets/tokkey-film.js.
+
+  @example
+  {% render 'tokkey-film' %}
+{% enddoc %}
+
+<tokkey-film>
+<section class="fm-sec" id="mtsec" aria-label="Meet Tokkey — the film">
+<div class="fm-c">
+  <div class="fm-rip"><img width="1440" height="900" loading="lazy" src="{{ 'tk-mt-ripple.jpg' | asset_url }}" alt=""></div>
+  <button class="fm-card" id="fmCard" type="button" aria-label="Play the Tokkey film">
+    <img width="2560" height="1440" loading="lazy" class="fm-img" src="{{ 'tk-mt-film-cover.jpg' | asset_url }}" alt="Tokkey plugged into a MacBook. Concept render"><span class="fm-cv" id="fmCv" aria-hidden="true"></span>
+    <span class="fm-tr"></span><span class="fm-vg"></span><span class="fm-hv"></span>
+    <span class="fm-play" aria-hidden="true"><img width="96" height="96" loading="lazy" class="r" src="{{ 'tk-mt-play-ring.svg' | asset_url }}" alt=""><img width="36" height="43" loading="lazy" class="t" src="{{ 'tk-mt-play-tri.svg' | asset_url }}" alt=""></span>
+  </button>
+  <h2 class="fm-h"><span>Meet</span> <b>Tokkey.</b></h2>
+  <p class="fm-k">Watch it work.</p>
+</div>
+</section>
+<div class="fm-fs" id="fmFs" role="dialog" aria-modal="true" aria-label="Tokkey film" hidden>
+  <div class="fm-yt" id="fmYt" data-yt="7RuqfsluFnU"></div>
+  <img width="2560" height="1440" loading="lazy" class="fm-img" src="{{ 'tk-mt-film-cover.jpg' | asset_url }}" alt="">
+  <span class="fm-tr"></span><span class="fm-vg"></span>
+  <button class="fm-close" id="fmClose" type="button">CLOSE</button>
+</div>
+</tokkey-film>
+
+<script src="{{ 'tokkey-film.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  /* Ported from the prototype homepage v3; a 1920px design canvas scaled by --z below 1920px */
+  tokkey-film {
+    display: block;
+    line-height: normal;
+  }
+
+  /* Locks page scroll while the full-screen player is open */
+  body.fm-lock {
+    overflow: hidden;
+  }
+
+  .fm-sec {
+    --z: 1;
+    position: relative;
+    height: calc(1161px * var(--z));
+    overflow: hidden;
+    background: radial-gradient(5344px 1080px at 50% 100%,#212121 0,#101010 50%,#080808 75%,#000 100%);
+  }
+
+  .fm-c {
+    position: absolute;
+    left: 50%;
+    top: calc(57px * var(--z));
+    width: 1920px;
+    height: 1000px;
+    transform: translateX(-50%) scale(var(--z));
+    transform-origin: top center;
+  }
+
+  .fm-rip {
+    position: absolute;
+    left: 0;
+    top: -365px;
+    width: 1920px;
+    height: 1365px;
+    opacity: .4;
+    mix-blend-mode: lighten;
+    -webkit-mask: radial-gradient(1275.27px 785.5px at 960px 838px,#fff 53.96%,transparent 100%);
+    mask: radial-gradient(1275.27px 785.5px at 960px 838px,#fff 53.96%,transparent 100%);
+  }
+
+  .fm-rip img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fm-card {
+    position: absolute;
+    left: 256px;
+    top: 104px;
+    width: 1408px;
+    height: 792px;
+    padding: 0;
+    border: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #0b0b0d;
+    cursor: pointer;
+    display: block;
+  }
+
+  .fm-card:focus-visible {
+    outline: 2px solid #4ABE18;
+    outline-offset: 4px;
+  }
+
+  .fm-cv {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .8s ease;
+  }
+
+  .fm-cv.on {
+    opacity: 1;
+  }
+
+  .fm-cv iframe,
+  .fm-cv video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+  }
+
+  .fm-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.2s cubic-bezier(.2,.8,.2,1),filter .45s ease;
+  }
+
+  .fm-tr {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 34.6%;
+    background: linear-gradient(90deg,#0b0b0d 19.669%,rgba(11,11,13,0));
+    pointer-events: none;
+  }
+
+  .fm-vg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 12.9%;
+    background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.39));
+    pointer-events: none;
+  }
+
+  .fm-hv {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: radial-gradient(704px 396px at 50% 50%,rgba(0,0,0,0),rgba(0,0,0,.44));
+    opacity: 0;
+    transition: opacity .45s ease;
+  }
+
+  .fm-play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 96.049px;
+    height: 96px;
+    margin: -48px 0 0 -48px;
+    opacity: 0;
+    transform: scale(.9);
+    transition: opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1);
+    pointer-events: none;
+  }
+
+  .fm-play .r {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .fm-play .t {
+    position: absolute;
+    left: calc(50% + 5.72px - 18.23px);
+    top: calc(50% - 1.62px - 21.38px);
+    width: 36.465px;
+    height: 42.757px;
+  }
+
+  .fm-h,
+  .fm-k {
+    position: absolute;
+    margin: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: opacity .4s ease,transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+
+  .fm-h {
+    left: 87px;
+    top: 500px;
+    transform: translateY(-50%);
+    font: 300 62.638px/76.21px 'Geist','Inter',sans-serif;
+    letter-spacing: -1.8792px;
+    color: #808080;
+  }
+
+  .fm-h b {
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .fm-k {
+    left: 1552px;
+    top: 472px;
+    font: 600 46px/56px 'Geist','Inter',sans-serif;
+    letter-spacing: -1.8px;
+    color: #f2f2f2;
+  }
+
+  .fm-sec.hov .fm-hv,
+  .fm-sec.hov .fm-play {
+    opacity: 1;
+  }
+
+  .fm-sec.hov .fm-play {
+    transform: none;
+  }
+
+  .fm-sec.hov .fm-card .fm-img {
+    transform: scale(1.02);
+    filter: blur(2.2px);
+  }
+
+  .fm-sec.hov .fm-h {
+    opacity: 0;
+    transform: translateY(calc(-50% - 48px));
+  }
+
+  .fm-sec.hov .fm-k {
+    opacity: 0;
+    transform: translateY(-48px);
+  }
+
+  @media (hover:none) {
+    .fm-play {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .fm-fs {
+    position: fixed;
+    z-index: 200;
+    overflow: hidden;
+    background: #0b0b0d;
+    transition: left .7s cubic-bezier(.65,0,.35,1),top .7s cubic-bezier(.65,0,.35,1),width .7s cubic-bezier(.65,0,.35,1),height .7s cubic-bezier(.65,0,.35,1),border-radius .7s cubic-bezier(.65,0,.35,1);
+  }
+
+  .fm-fs[hidden] {
+    display: none;
+  }
+
+  .fm-yt {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity .5s ease;
+  }
+
+  .fm-yt iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .fm-fs.has-yt .fm-yt {
+    opacity: 1;
+  }
+
+  .fm-fs.has-yt>.fm-img {
+    opacity: 0;
+  }
+
+  .fm-fs .fm-close {
+    z-index: 2;
+  }
+
+  .fm-fs .fm-v {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity .5s;
+  }
+
+  .fm-fs>.fm-img {
+    filter: blur(3px);
+  }
+
+  .fm-fs.play>.fm-img {
+    filter: none;
+  }
+
+  .fm-close {
+    position: absolute;
+    left: 28px;
+    top: 22px;
+    width: 96px;
+    height: 44px;
+    border: 1px solid #fff;
+    border-radius: 23px;
+    background: rgba(255,255,255,.2);
+    -webkit-backdrop-filter: blur(3.05px);
+    backdrop-filter: blur(3.05px);
+    font: 600 16px/1 'Geist','Inter',sans-serif;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .35s ease .35s,background .2s;
+  }
+
+  .fm-close:hover {
+    background: rgba(255,255,255,.3);
+  }
+
+  .fm-close:focus-visible {
+    outline: 2px solid #4ABE18;
+    outline-offset: 3px;
+  }
+
+  .fm-fs.open .fm-close {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion:reduce) {
+    .fm-fs,
+    .fm-img,
+    .fm-hv,
+    .fm-play,
+    .fm-h,
+    .fm-k {
+      transition: none!important;
+    }
+  }
+
+  @media (max-width:1023px) {
+    .fm-sec {
+      height: auto;
+    }
+
+    .fm-c {
+      position: static;
+      width: auto;
+      height: auto;
+      transform: none;
+      padding: var(--sp) 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .fm-h {
+      position: static;
+      width: auto;
+      white-space: normal;
+      font-size: clamp(32px,7vw,48px)!important;
+      line-height: 1.22!important;
+      letter-spacing: -.03em!important;
+      gap: 0 .22em;
+    }
+
+    .fm-rip,
+    .fm-tr {
+      display: none;
+    }
+
+    .fm-h {
+      transform: none!important;
+      opacity: 1!important;
+    }
+
+    .fm-card {
+      position: relative;
+      left: auto;
+      top: auto;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      border-radius: 16px;
+      margin-top: 32px;
+    }
+
+    .fm-play {
+      opacity: 1;
+      transform: scale(.7);
+    }
+
+    .fm-k {
+      position: static;
+      margin-top: 24px;
+      transform: none!important;
+      opacity: 1!important;
+      font-size: 24px;
+      line-height: 32px;
+      white-space: normal;
+    }
+  }
+
+  .fm-sec {
+    background: transparent!important;
+  }
+{% endstylesheet %}
