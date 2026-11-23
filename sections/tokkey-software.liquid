@@ -8,17 +8,7 @@
        template to the /pages/software page in Shopify Admin -->
 {% endcomment %}
 
-{%- comment -%} Asset URLs need Liquid, so the font face lives in a style tag rather than the static stylesheet {%- endcomment -%}
-{% style %}
-  /* Commit Mono for the software page's mono labels (brand fonts: Inter + Commit Mono) */
-  @font-face {
-    font-family: 'Commit Mono';
-    src: url({{ 'tk-sw-commitmono-400.otf' | asset_url }}) format('opentype');
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-  }
-{% endstyle %}
+{% render 'tokkey-mono-font' %}
 
 <div class="tokkey-software">
   <main>

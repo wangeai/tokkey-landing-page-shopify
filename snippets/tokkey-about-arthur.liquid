@@ -1,0 +1,187 @@
+{% doc %}
+  Renders Chapter III of the Tokkey About page (Arthur): the sword hero, the "A future of your own" principles
+  mask, and the sovereignty board with quote and FAQ. Behaviour: TokkeySceneFx (sword) and TokkeyBoardMocks in
+  assets/tokkey-about.js.
+
+  @example
+  {% render 'tokkey-about-arthur' %}
+{% enddoc %}
+<div class="chapter" id="ch3" style="--img: url({{ 'tk-about-king-sketch.jpg' | asset_url }})">
+  <section class="scene" data-fx="sword">
+    <img class="color" src="{{ 'tk-about-king.jpg' | asset_url }}" alt="" draggable="false" loading="lazy" />
+    <img class="charcoal" src="{{ 'tk-about-king-sketch.jpg' | asset_url }}" alt="" draggable="false" loading="lazy" />
+    <div class="veil"></div>
+    <canvas class="fx-canvas"></canvas>
+    <div class="spot"></div>
+    {% render 'tokkey-about-focus-box', up: true, label: 'Drawn for one hand', px: 0.318, py: 0.892, pw: 0.036, ph: 0.036 %}
+  </section>
+  <div class="copy">
+    <div class="headline">
+      <div class="eyebrow">The Arthur Edition</div>
+      <h1>The sword that <em>answers</em> to one hand<span class="p">.</span></h1>
+      <p class="lede">
+        The cloud offers power to anyone who pays the rent. A sword in the stone answers only to the one it was drawn for.
+        Your model should do the same.
+      </p>
+      <p class="own">Sovereignty, kept on the device.</p>
+    </div>
+    <div class="foot"><span>Move to tilt the scene.</span><span><em>Scroll</em></span></div>
+  </div>
+  <div class="hold" aria-hidden="true"></div>
+
+  <section class="mask">
+    {% render 'tokkey-about-tear' %}
+    <div class="inner">
+      <div class="kicker">The vision</div>
+      <h2>A future of <em>your own</em><span class="p">.</span></h2>
+      <p class="sub">
+        Five principles we build against. Intelligence should follow the work, stay on the device you own, and never cross
+        a boundary you did not choose.
+      </p>
+      <div class="principles">
+        <article class="pr">
+          <div class="num">01</div>
+          <h3>Flow</h3>
+          <span class="zh">流动</span>
+          <p>Intelligence follows the work. A useful system carries the right context to the right capability, and the path stays understandable to the person using it.</p>
+        </article>
+        <article class="pr">
+          <div class="num">02</div>
+          <h3>Ownership</h3>
+          <span class="zh">拥有</span>
+          <p>A foundation of your own. Keep useful capability on your device. Change a model without starting your relationship with intelligence from zero.</p>
+        </article>
+        <article class="pr">
+          <div class="num">03</div>
+          <h3>Possibility</h3>
+          <span class="zh">衍生</span>
+          <p>One foundation, many ways to work. Inference becomes valuable when it supports an application, a decision, or a finished piece of work.</p>
+        </article>
+        <article class="pr">
+          <div class="num">04</div>
+          <h3>Together</h3>
+          <span class="zh">共生</span>
+          <p>Local and cloud, by choice. Let routine and private work stay close. Ask for additional capability only within the boundaries you choose.</p>
+        </article>
+        <article class="pr">
+          <div class="num">05</div>
+          <h3>Privacy</h3>
+          <span class="zh">隐私</span>
+          <p>A boundary you can understand. Inspect the source, select what may be shared, and keep the ability to stop. Privacy is a set of controls, not a promise.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="run" aria-hidden="true"></div>
+  <div class="row">
+    <section class="board">
+      <div class="kicker">What sovereignty looks like</div>
+      <h2>A model that <em>answers to you</em><span class="p">.</span></h2>
+      <p class="intro">Ownership is a set of things you can see, change, and take with you. Try each control.</p>
+      <div class="tiles">
+        <article class="tile">
+          <div class="art" style="--tint:#8e3a4f;--pos:50% 40%">
+            <div class="slot" data-ui="swap">
+              <div class="mk">
+                <div class="c-title">Model</div>
+                <div class="seg" data-swap>
+                  <button class="on">Qwen 3.5 9B</button><button>Llama 3.1 8B</button><button>Gemma 3</button>
+                </div>
+                <div class="kv"><span>Memory</span><b>Kept · 1,284 notes</b></div>
+                <div class="kv"><span>Preferences</span><b>Kept</b></div>
+                <div class="w-foot" data-swapnote>Switched without starting over.</div>
+              </div>
+            </div>
+          </div>
+          <span class="meta-line">The model</span>
+          <h3>Yours to keep</h3>
+          <p>Swap the weights without resetting your relationship with intelligence. Memory and preferences stay when the model changes.</p>
+          <a class="chip-link" href="#">Learn more <span>↗</span></a>
+        </article>
+
+        <article class="tile">
+          <div class="art" style="--tint:#b38a45;--pos:30% 70%">
+            <div class="slot" data-ui="choose">
+              <div class="mk route">
+                <div class="c-title">Route for this task</div>
+                <div class="seg" data-choose><button class="on">Local</button><button>Cloud</button></div>
+                <div class="kv"><span>Model</span><b data-chmodel>Qwen 3.5 9B · on device</b></div>
+                <div class="kv"><span>Recorded in log</span><b>Yes</b></div>
+              </div>
+            </div>
+          </div>
+          <span class="meta-line">The route</span>
+          <h3>Yours to choose</h3>
+          <p>Local by default. A task reaches the cloud only when you say so, to a model you named.</p>
+          <a class="chip-link" href="#">Learn more <span>↗</span></a>
+        </article>
+
+        <article class="tile">
+          <div class="art" style="--tint:#5b6fa8;--pos:80% 30%">
+            <div class="slot" data-ui="boundary">
+              <div class="mk mem">
+                <div class="c-title">May leave this device</div>
+                <label><input type="checkbox" /> Documents</label>
+                <label><input type="checkbox" /> Photos</label>
+                <label><input type="checkbox" checked /> Public web pages</label>
+                <button class="stop" data-stop>Stop all sharing</button>
+              </div>
+            </div>
+          </div>
+          <span class="meta-line">The boundary</span>
+          <h3>Yours to draw</h3>
+          <p>Inspect what may leave, select it, and keep the ability to stop. Privacy as controls you operate.</p>
+          <a class="chip-link" href="#">Learn more <span>↗</span></a>
+        </article>
+
+        <article class="tile wide">
+          <div class="art" style="--tint:#7f9466;--pos:60% 85%">
+            <div class="slot" data-ui="remember">
+              <div class="mk remember">
+                <div class="c-title">What Tokkey remembers about you</div>
+                <ul data-memlist>
+                  <li><span>Prefers short summaries with action items</span><button>Forget</button></li>
+                  <li><span>Works in Pacific time</span><button>Forget</button></li>
+                  <li><span>Current project: Winter '26 launch</span><button>Forget</button></li>
+                </ul>
+                <div class="w-foot" data-memnote>Visible, editable, and deletable.</div>
+              </div>
+            </div>
+          </div>
+          <span class="meta-line">The memory</span>
+          <h3>Yours to correct</h3>
+          <p>
+            What the system remembers is visible and deletable. Continuity across devices never becomes hidden authority over
+            your data.
+          </p>
+          <a class="chip-link" href="#">Learn more <span>↗</span></a>
+        </article>
+      </div>
+      <div class="quote">
+        <q>Whoso pulleth out this sword of this stone and anvil, is rightwise king born of all England.</q><span
+          >Inscription on the stone, Le Morte d'Arthur</span
+        >
+      </div>
+      <div class="faq">
+        <h4>Questions we hear</h4>
+        <details>
+          <summary>Does Tokkey ever send my data to the cloud?</summary>
+          <p>Not by default. Everything runs on the device. If you choose to route a task to a cloud model, you name the model, you see what is sent, and the choice is recorded where you can read it back.</p>
+        </details>
+        <details>
+          <summary>What happens if I switch models?</summary>
+          <p>Your memory, preferences, and history stay with you. The model is a part you can replace; your relationship with it does not reset.</p>
+        </details>
+        <details>
+          <summary>Do I need to know how to set up a model?</summary>
+          <p>No. Plug the cube in and the runtime picks a model that fits your hardware and starts a local endpoint your tools already know how to use.</p>
+        </details>
+        <details>
+          <summary>Can I stop it?</summary>
+          <p>Always. Turn off the cloud route and nothing is sent anywhere. Unplug the cube and the local runtime stops.</p>
+        </details>
+      </div>
+    </section>
+  </div>
+</div>

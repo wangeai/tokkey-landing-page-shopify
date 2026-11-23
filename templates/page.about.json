@@ -1,0 +1,12 @@
+{
+  "layout": "tokkey",
+  "sections": {
+    "tokkey_about": {
+      "type": "tokkey-about",
+      "settings": {}
+    }
+  },
+  "order": [
+    "tokkey_about"
+  ]
+}

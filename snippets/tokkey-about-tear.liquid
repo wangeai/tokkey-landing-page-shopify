@@ -1,0 +1,11 @@
+{% doc %}
+  Renders the torn top edge of a Tokkey About paper mask; TokkeyTornEdge (assets/tokkey-about.js) draws the paths
+  each frame. The SVG filters it references (#tfib, #trag, #tsoft) are defined once in sections/tokkey-about.liquid.
+
+  @example
+  {% render 'tokkey-about-tear' %}
+{% enddoc %}
+<svg class="tear" aria-hidden="true">
+  <path class="tshadow"></path><path class="thalo"></path><path class="tfill"></path><path class="tglow"></path>
+  <path class="trim"></path><g class="motes"></g>
+</svg>

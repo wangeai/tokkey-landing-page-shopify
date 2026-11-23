@@ -1,0 +1,29 @@
+{% doc %}
+  Renders the product focus marker on a Tokkey About hero: corner brackets around the device, a leader line and a
+  small label. Positioned every frame by assets/tokkey-about.js (TokkeyPrometheusHero for chapter 1, TokkeySceneFx
+  for chapters 2 and 3, which read the data-px/py/pw/ph fractions).
+
+  @param {string} label - Label under "Tokkey"
+  @param {boolean} [up] - Place the label above the device instead of below
+  @param {boolean} [first] - Chapter 1 marker: hidden until the intro lights the scene
+  @param {number} [px] - Device centre x as a fraction of the source painting
+  @param {number} [py] - Device centre y as a fraction of the source painting
+  @param {number} [pw] - Device width as a fraction of the source painting
+  @param {number} [ph] - Device height as a fraction of the source painting
+
+  @example
+  {% render 'tokkey-about-focus-box', up: true, label: 'Drawn for one hand', px: 0.318, py: 0.892, pw: 0.036, ph: 0.036 %}
+{% enddoc %}
+<div
+  class="hot{% if up %} up{% endif %}{% if first %} first{% endif %}"
+  {% if first %}
+    data-ref="hot"
+  {% endif %}
+  {% if px != blank %}
+    data-px="{{ px }}" data-py="{{ py }}" data-pw="{{ pw }}" data-ph="{{ ph }}"
+  {% endif %}
+>
+  <div class="box"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
+  <span class="lead"></span>
+  <div class="lbl"><b>Tokkey</b>{{ label }}</div>
+</div>

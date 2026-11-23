@@ -1,0 +1,16 @@
+{% doc %}
+  Declares the Commit Mono face used for mono labels on the Tokkey pages (brand fonts: Inter + Commit Mono).
+  Asset URLs need Liquid, so the font face lives in a style tag rather than a static stylesheet.
+
+  @example
+  {% render 'tokkey-mono-font' %}
+{% enddoc %}
+{% style %}
+  @font-face {
+    font-family: 'Commit Mono';
+    src: url({{ 'tk-sw-commitmono-400.otf' | asset_url }}) format('opentype');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+{% endstyle %}
