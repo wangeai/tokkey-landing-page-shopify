@@ -20,7 +20,7 @@
 
   const FOOT = `
 <footer class="tkfoot">
-  <p>\u00A9 2026 Tokkey All Rights Reserved</p>
+  <p>\u00A9 2026 OneToken Intelligent Technology Co., Ltd. All Rights Reserved</p>
   <nav aria-label="Footer">
     <a href="/policies/privacy-policy">Privacy Policy</a>
     <a href="/pages/contact">Contact</a>
