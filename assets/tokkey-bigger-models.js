@@ -2,6 +2,7 @@
  * "Bigger models on the same Mac" section, ported from the prototype homepage v3 (.s2-sec).
  * A deck of model cards is laid out on a 1920px canvas scaled by --z. The memory toggle (16GB / 48GB)
  * swaps the visible set; on desktop the section pins and scrolling past its midpoint switches to 48GB.
+ * Below 1024px the same fan is scaled down onto the left of the laptop, with its horizontal step tightened.
  * While visible, the front card rotates to the back every second until the visitor interacts.
  */
 class TokkeyBiggerModels extends HTMLElement {
@@ -10,6 +11,13 @@ class TokkeyBiggerModels extends HTMLElement {
     { order: ['q9', 'mc', 'q35'], x: 179, y: 400, dx: 170, dy: 80 },
     { order: ['q27', 'q35', 'mc', 'fl', 'q122'], x: 181, y: 400, dx: 100, dy: 40 },
   ];
+
+  /** Mobile fan: horizontal step factor, left inset (px), the share of the width the fan may take, and its max scale */
+  static MOBILE = { spread: 0.5, inset: 16, share: 0.5, maxScale: 0.7 };
+
+  /** Unscaled size of a card, and the largest fan extent (48GB set) on the desktop canvas */
+  static CARD = 320;
+  static FAN = { x: 400, y: 160 };
 
   connectedCallback() {
     this.abort = new AbortController();
@@ -65,6 +73,9 @@ class TokkeyBiggerModels extends HTMLElement {
     window.addEventListener('scroll', () => this.onScroll(), { passive: true, signal });
     this.fit();
     document.fonts?.ready.then(() => this.isConnected && this.fit());
+    // Geist can arrive after fonts.ready (the Google Fonts @import starts late); re-measure the rolling words
+    // whenever a face finishes loading so a slot sized with the fallback font doesn't clip "35B" / "16GB"
+    document.fonts?.addEventListener('loadingdone', () => this.fit(), { signal });
     this.scrollCheck = setTimeout(() => this.onScroll(), 0);
 
     this.observer = new IntersectionObserver(
@@ -193,7 +204,7 @@ class TokkeyBiggerModels extends HTMLElement {
         card.classList.remove('s2hov');
         card.tabIndex = -1;
         const p = this.lastPos[key] || { x: set.x, y: set.y };
-        card.style.transform = `translate(${p.x + 60}px,${p.y + 30}px)`;
+        card.style.transform = this.transformAt(p.x + 60, p.y + 30);
         continue;
       }
       const x = set.x + set.dx * i;
@@ -207,9 +218,22 @@ class TokkeyBiggerModels extends HTMLElement {
       card.tabIndex = 0;
       card.setAttribute('aria-expanded', String(front && this.open));
       card.style.zIndex = String(i + 1);
-      card.style.transform = `translate(${x}px,${y + lift}px)`;
+      card.style.transform = this.transformAt(x, y + lift);
     }
     this.classList.toggle('lit', this.hovered !== null || this.pulse);
+  }
+
+  /**
+   * Turn a card position on the 1920px desktop canvas into a CSS transform. On mobile the fan is scaled
+   * by this.mobileScale and re-anchored to the deck's left edge, vertically centred.
+   */
+  transformAt(x, y) {
+    if (!this.mobileQuery.matches) return `translate(${x}px,${y}px)`;
+    const { MOBILE, SETS, CARD, FAN } = TokkeyBiggerModels;
+    const s = this.mobileScale;
+    const left = MOBILE.inset + (x - SETS[0].x) * MOBILE.spread * s;
+    const top = (this.deck.clientHeight - (CARD + FAN.y) * s) / 2 + (y - SETS[0].y) * s;
+    return `translate(${left}px,${top}px) scale(${s})`;
   }
 
   /** Switch between the 16GB (0) and 48GB (1) sets */
@@ -243,6 +267,8 @@ class TokkeyBiggerModels extends HTMLElement {
   /** Scale the 1920px canvas to the viewport */
   fit() {
     this.style.setProperty('--z', String(Math.min(1, document.documentElement.clientWidth / 1920)));
+    const { MOBILE, CARD, FAN } = TokkeyBiggerModels;
+    this.mobileScale = Math.min(MOBILE.maxScale, (this.deck.clientWidth * MOBILE.share) / (CARD + FAN.x * MOBILE.spread));
     this.setMemory(this.current, true);
     this.pulse = false;
     this.place();

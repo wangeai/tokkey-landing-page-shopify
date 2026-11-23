@@ -2,7 +2,7 @@
   Renders the "Bigger models on the same Mac" section ported from the prototype homepage v3 (.s2-sec):
   a headline whose numbers roll between 16GB and 48GB, a memory toggle, and a deck of model cards.
   On desktop the section pins while scrolling and switches to 48GB past its midpoint; below 1024px it
-  stacks and the deck scrolls horizontally. Behaviour lives in assets/tokkey-bigger-models.js.
+  stacks, and the deck fans out (scaled by the script) over the left of the laptop, as on desktop. Behaviour lives in assets/tokkey-bigger-models.js.
 
   @example
   {% render 'tokkey-bigger-models' %}
@@ -192,6 +192,9 @@
     display: inline-block;
     height: 76.21px;
     overflow: hidden;
+    /* Only the roll direction needs clipping; a slot sized a frame early must not cut the word's edge */
+    overflow-x: visible;
+    overflow-y: clip;
     vertical-align: top;
     transition: width 0.7s cubic-bezier(0.65, 0, 0.35, 1);
   }
@@ -523,7 +526,7 @@
     }
   }
 
-  /* Below 1024px the canvas becomes a stacked layout with a horizontally scrolling deck */
+  /* Below 1024px the canvas becomes a stacked layout; the laptop and the deck share the last grid cell */
   @media (max-width: 1023px) {
     .s2-sec {
       --s2-sp: 80px;
@@ -532,8 +535,8 @@
 
     .s2-c {
       position: static;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
       width: auto;
       height: auto;
       padding: var(--s2-sp) 24px;
@@ -607,55 +610,39 @@
       margin-top: 24px;
     }
 
+    /* Laptop on the right, model cards fanned over its dark left edge; card positions and scale come from the script */
+    .s2-macro,
     .s2-deck {
-      position: static;
-      order: 3;
-      display: flex;
-      gap: 16px;
-      width: auto;
-      height: auto;
-      margin: 40px -24px 0;
-      padding: 0 24px 8px;
-      overflow-x: auto;
-      scroll-padding: 0 24px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      pointer-events: auto;
-    }
-
-    .s2-card {
-      position: relative;
-      flex: 0 0 280px;
-      width: 280px;
-      height: 300px;
-      padding: 28px;
-      transform: none !important;
-      scroll-snap-align: start;
-    }
-
-    .s2-card.s2off {
-      display: none;
-    }
-
-    .s2l {
-      width: 150px;
-      height: 150px;
-    }
-
-    .s2f,
-    .s2d {
-      padding: 28px;
+      grid-row: 3;
+      grid-column: 1;
+      margin: 32px -24px 0;
     }
 
     .s2-macro {
       position: relative;
-      order: 4;
       left: auto;
       top: auto;
-      width: calc(100% + 24px);
+      width: auto;
       height: auto;
-      aspect-ratio: 1120 / 776;
-      margin-top: 24px;
+      aspect-ratio: 1120 / 970;
+    }
+
+    .s2-macro img {
+      inset: 0 auto auto 22%;
+      width: 125%;
+      height: auto;
+    }
+
+    .s2-deck {
+      position: relative;
+      z-index: 1;
+      top: auto;
+      width: auto;
+      height: auto;
+    }
+
+    .s2-card {
+      transform-origin: 0 0;
     }
   }
 
