@@ -7,6 +7,7 @@
   @param {string} [detail] - Caption headline (bright part), file tile detail line, or folder item count
   @param {string} [rest] - Caption headline (muted part)
   @param {string} [style] - Inline style for absolute placement
+  @param {string} [action] - Caption only: accessible name that turns the corner arrow into a full-screen button
 
   @example
   {% render 'tokkey-gallery-part', part: 'status', label: 'Ran locally · 0 B sent', style: 'left:28px;top:166px' %}
@@ -17,7 +18,13 @@
     <div class="gl-cap">
       <div class="gl-cat">
         <span>{{ label }}</span>
-        <img src="{{ 'tk-gl-arrow-up-right.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
+        {%- if action != blank -%}
+          <button class="gl-expand" type="button" aria-label="{{ action | escape }}" data-gl-fullscreen>
+            <img src="{{ 'tk-gl-arrow-up-right.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
+          </button>
+        {%- else -%}
+          <img src="{{ 'tk-gl-arrow-up-right.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
+        {%- endif -%}
       </div>
       <h3><b>{{ detail }}</b> {{ rest }}</h3>
     </div>
