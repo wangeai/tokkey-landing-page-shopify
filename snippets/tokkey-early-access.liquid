@@ -1,40 +1,25 @@
 {% doc %}
   Renders the "Get updates" early-access card ported from the prototype homepage v3 (.eb-sec).
-  Subscribing POSTs the email to the early-access API, then redirects to the deposit reservation
-  product. Behaviour lives in assets/tokkey-early-access.js.
+  Its button links to the deposit reservation product.
 
   @example
   {% render 'tokkey-early-access' %}
 {% enddoc %}
 
-<tokkey-early-access>
-  <section class="eb-sec" id="ebsec" aria-label="Get updates">
-    <div class="eb-card">
-      <div class="eb-txt">
-        <div class="eb-eye"><i></i>EARLY ACCESS</div>
-        <h3 class="eb-h">Be first to try Tokkey<span>.</span></h3>
-        <p>Selected early subscribers receive $20 in free Router credits.</p>
-      </div>
-      <form class="eb-form" {% render 'tokkey-early-access-attrs' %}>
-        <label class="eb-sr" for="ebEmail">Email</label>
-        <input id="ebEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
-        <button type="submit">Subscribe</button>
-        <p class="eb-status" data-ref="status" role="status" aria-live="polite"></p>
-      </form>
+<section class="eb-sec" id="ebsec" aria-label="Get updates">
+  <div class="eb-card">
+    <div class="eb-txt">
+      <div class="eb-eye"><i></i>EARLY ACCESS</div>
+      <h3 class="eb-h">Be first to try Tokkey<span>.</span></h3>
     </div>
-  </section>
-</tokkey-early-access>
-
-<script src="{{ 'tokkey-early-access.js' | asset_url }}" defer></script>
+    <a class="eb-btn" href="/products/tokkey-deposit-reservation">Reserve your spot</a>
+  </div>
+</section>
 
 {% stylesheet %}
   /* "Get updates" card (prototype homepage v3 .eb-sec) */
-  tokkey-early-access {
-    display: block;
-    line-height: normal;
-  }
-
   .eb-sec {
+    line-height: normal;
     --eb-sp: min(140px, 7.2917vw);
     padding: var(--eb-sp) 0;
     font-family: Inter, sans-serif;
@@ -72,7 +57,7 @@
   }
 
   .eb-h {
-    margin: 0 0 16px;
+    margin: 0;
     font: 600 40px/48px Geist, Inter, sans-serif;
     letter-spacing: -0.025em;
     color: #fff;
@@ -82,85 +67,28 @@
     color: #4abe18;
   }
 
-  .eb-txt p {
-    margin: 0;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #b0b0ac;
-  }
-
-  .eb-form {
-    display: flex;
-    flex: 0 0 520px;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .eb-form input {
-    flex: 1;
-    min-width: 0;
-    height: 56px;
-    padding: 0 16px;
-    border: 1px solid #2e2e2b;
-    border-radius: 16px;
-    background: #000;
-    font: 16px Inter, sans-serif;
-    color: #f2f2f2;
-  }
-
-  .eb-form input::placeholder {
-    color: #5c5c58;
-  }
-
-  .eb-form input:focus {
-    outline: none;
-    border-color: #4abe18;
-  }
-
-  .eb-form button {
+  /* Deposit CTA, styled like the former Subscribe button */
+  .eb-btn {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
     height: 56px;
     padding: 0 32px;
-    border: 0;
     border-radius: 16px;
     background: #fff;
     font: 600 16px Inter, sans-serif;
     color: #000;
-    cursor: pointer;
+    text-decoration: none;
   }
 
-  .eb-form button:hover {
+  .eb-btn:hover {
     opacity: 0.88;
   }
 
-  .eb-form button:disabled {
-    opacity: 0.6;
-    cursor: progress;
-  }
-
-  .eb-form button:focus-visible {
+  .eb-btn:focus-visible {
     outline: 2px solid #4abe18;
     outline-offset: 2px;
-  }
-
-  /* Error line, full row under the field */
-  .eb-status {
-    flex-basis: 100%;
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #ff8a80;
-  }
-
-  .eb-status:empty {
-    display: none;
-  }
-
-  .eb-sr {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
   }
 
   @media (max-width: 1023px) {
@@ -177,22 +105,8 @@
       padding: 32px 24px;
     }
 
-    .eb-form {
-      flex: none;
-    }
-
     .eb-h {
       font-size: 32px;
-    }
-  }
-
-  @media (max-width: 560px) {
-    .eb-form {
-      flex-direction: column;
-    }
-
-    .eb-form input {
-      flex: none;
     }
   }
 {% endstylesheet %}
