@@ -1,7 +1,7 @@
 {% doc %}
   Renders the "Everyday AI tasks. Done on your Mac." gallery from Figma
   (Homepage 06 · Do more. Keep it yours. / V2 Graphite, node 1607:6942): a header, two independent
-  masonry columns of eight task cards (the first plays the "Lantern Rise" game in an iframe), and a closing line. Each card is a caption plus a 788px-wide
+  masonry columns of eight task cards (the first plays the case_game.mp4 demo video), and a closing line. Each card is a caption plus a 788px-wide
   scene drawn at design size; assets/tokkey-everyday-tasks.js zooms the scenes to the card width.
   Below 1024px the cards stack in their numbered order.
 
@@ -30,24 +30,9 @@
         {%- comment -%} Left column: build, code, write, remember {%- endcomment -%}
         <div class="gl-col">
           <article class="gl-card" style="--gl-order: 1">
-            {% render 'tokkey-gallery-part', part: 'caption', label: 'CREATE & BUILD', detail: 'Describe an app.', rest: 'Get a working one.', action: 'Play Lantern Rise full screen' %}
-            {%- comment -%}
-              Playable "Lantern Rise" game (assets/tokkey-lantern-rise.js). An iframe keeps the game's
-              window-sized canvas, key handling and storage isolated from the page.
-            {%- endcomment -%}
-            {%- capture game_doc -%}
-              <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-              <style>html,body{margin:0;height:100%;overflow:hidden;background:#120f1f}canvas{display:block;width:100%;height:100%;touch-action:none}</style></head>
-              <body><canvas id="c"></canvas>
-              <script>addEventListener('keydown',function(e){if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].indexOf(e.code)>-1)e.preventDefault();if(e.key==='Escape')parent.document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'}))});</script>
-              <script src="{{ 'tokkey-lantern-rise.js' | asset_url }}" defer></script></body></html>
-            {%- endcapture -%}
-            <div class="gl-game-wrap">
-              <iframe class="gl-game" title="Lantern Rise, a playable mini-game" srcdoc="{{ game_doc | escape }}" loading="lazy"></iframe>
-              <button class="gl-game-close" type="button" aria-label="Exit full screen" data-gl-close>
-                {{- 'icon-close.svg' | inline_asset_content -}}
-              </button>
-            </div>
+            {% render 'tokkey-gallery-part', part: 'caption', label: 'CREATE & BUILD', detail: 'Describe a game.', rest: 'Get a working one.' %}
+            {%- comment -%} Demo clip, uploaded in Shopify Admin > Files; native controls give play/pause and full screen {%- endcomment -%}
+            <video class="gl-video" src="{{ 'case_game.mp4' | file_url }}" controls autoplay muted loop playsinline preload="metadata" aria-label="A game built from a one-line description"></video>
           </article>
 
           <article class="gl-card" style="--gl-order: 3">
@@ -110,23 +95,8 @@
           </article>
 
           <article class="gl-card" style="--gl-order: 7">
-            {% render 'tokkey-gallery-part', part: 'caption', label: 'PERSONAL MEMORY', detail: 'It remembers your projects.', rest: 'Privately.' %}
-            <div class="gl-scene">
-              <div class="gl-stage" style="height: 328px">
-                <picture><source media="(max-width: 768px)" srcset="{{ 'tk-gl-lifestyle-m.webp' | asset_url }}"><img class="gl-photo" src="{{ 'tk-gl-lifestyle.webp' | asset_url }}" width="1576" height="1051" alt="A person carrying a MacBook with Tokkey" loading="lazy" style="height:328px"></picture>
-                <i class="gl-box" style="left:0;top:0;width:788px;height:328px;background:rgb(0 0 0 / 0.15)"></i>
-                <div class="gl-glass" style="left:37px;top:115px;width:330px;height:165px">
-                  <p class="gl-x gl-m" style="left:20px;top:18px;font-size:10px;color:#85858f">YOUR CONTEXT</p>
-                  <p class="gl-x" style="left:20px;top:47px;font-size:19px;font-weight:500;letter-spacing:-0.4px;color:#e3e3e8">Ready where you left off.</p>
-                  <p class="gl-x" style="left:20px;top:91px;font-size:12px;color:#a1a1ab">Project notes</p>
-                  <img class="gl-abs" src="{{ 'tk-gl-completed.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy" style="left:284px;top:91px;width:14px;height:14px">
-                  <p class="gl-x" style="left:20px;top:118px;font-size:12px;color:#a1a1ab">Your writing style</p>
-                  <img class="gl-abs" src="{{ 'tk-gl-completed.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy" style="left:284px;top:118px;width:14px;height:14px">
-                </div>
-                <i class="gl-fade gl-fade-top" style="top:0;height:74px"></i>
-                <i class="gl-fade" style="top:276px;height:52px"></i>
-              </div>
-            </div>
+            {% render 'tokkey-gallery-part', part: 'caption', label: 'PERSONAL MEMORY', detail: 'It remembers your projects.', rest: 'Privately.', highlight_rest: true %}
+            <video class="gl-video" src="{{ 'case_privatefiles.mp4' | file_url }}" controls autoplay muted loop playsinline preload="metadata" aria-label="Tokkey remembering your projects privately on your Mac"></video>
           </article>
         </div>
 
@@ -227,7 +197,7 @@
 
       <div class="gl-end">
         <p class="gl-sent"><b>Your ideas.</b> <span>Your files. Your Mac.</span></p>
-        <a class="gl-link" href="/software">Explore Tokkey Software <img src="{{ 'tk-gl-arrow-up-right.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy"></a>
+        <a class="gl-link" href="/pages/software">Explore Tokkey Software <img src="{{ 'tk-gl-arrow-up-right.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy"></a>
       </div>
     </div>
   </section>
@@ -355,27 +325,6 @@
     height: 18px;
   }
 
-  /* Corner arrow that opens the game full screen */
-  .gl-expand {
-    display: inline-flex;
-    margin: -8px;
-    padding: 8px;
-    border: 0;
-    border-radius: 8px;
-    background: none;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-
-  .gl-expand:hover {
-    background: rgb(255 255 255 / 0.08);
-  }
-
-  .gl-expand:focus-visible {
-    outline: 2px solid #4abe18;
-    outline-offset: 2px;
-  }
-
   .gl-cap h3 {
     font-size: clamp(20px, 4.061cqw, 32px);
     font-weight: 400;
@@ -394,69 +343,13 @@
     overflow: hidden;
   }
 
-  /* Playable game in the "CREATE & BUILD" card */
-  .gl-game {
+  /* Demo videos (CREATE & BUILD, PERSONAL MEMORY): height follows the clip's own shape, so nothing is cropped */
+  .gl-video {
     display: block;
     width: 100%;
-    aspect-ratio: 788 / 560;
-    border: 0;
+    height: auto;
     border-top: 1px solid #27272b;
-    background: #120f1f;
-  }
-
-  .gl-game-close {
-    display: none;
-  }
-
-  /* Full-screen mode: the wrapper covers the viewport (also where the Fullscreen API is unavailable, e.g. iPhone) */
-  .gl-game-wrap.is-full {
-    position: fixed;
-    inset: 0;
-    z-index: 2147483647;
-    height: 100dvh;
-    background: #120f1f;
-  }
-
-  .gl-game-wrap.is-full .gl-game {
-    height: 100%;
-    aspect-ratio: auto;
-    border-top: 0;
-  }
-
-  .gl-game-wrap.is-full .gl-game-close {
-    position: absolute;
-    /* Top corner, just below the game's flame bar (drawn at y 40–55) */
-    inset-block-start: calc(68px + env(safe-area-inset-top));
-    inset-inline-end: 16px;
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    border: 1px solid rgb(255 255 255 / 0.2);
-    border-radius: 50%;
-    background: rgb(13 16 22 / 0.7);
-    color: #fbe8c8;
-    cursor: pointer;
-  }
-
-  .gl-game-close:focus-visible {
-    outline: 2px solid #4abe18;
-    outline-offset: 2px;
-  }
-
-  .gl-game-close svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* The card's container-type would make it the containing block of the fixed overlay */
-  .gl-card:has(.gl-game-wrap.is-full) {
-    container-type: normal;
-  }
-
-  /* Locks page scroll behind the full-screen game */
-  html:has(.gl-game-wrap.is-full) {
-    overflow: hidden;
+    background: #0b0b0d;
   }
 
   .gl-stage {
@@ -771,13 +664,6 @@
 
     .gl-intro {
       font-size: 16px;
-    }
-  }
-
-  /* Phones: taller frame so the game's title screen and HUD fit */
-  @media (max-width: 767px) {
-    .gl-game {
-      aspect-ratio: 4 / 5;
     }
   }
 {% endstylesheet %}
