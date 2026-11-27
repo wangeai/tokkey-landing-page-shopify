@@ -1,0 +1,312 @@
+{% doc %}
+  Renders the "Same results. 90% less cost." section from the Figma landing page (node 20): two cards
+  comparing a cloud-only run with Tokkey Router (local model + cloud fallback), each with a demo preview
+  window and its API cost and token count. Below 1024px the cards stack.
+
+  @example
+  {% render 'tokkey-router-compare' %}
+{% enddoc %}
+
+<section class="rc-sec" aria-labelledby="rc-h">
+  <div class="rc-in">
+    <div class="rc-head">
+      <h2 class="rc-h" id="rc-h"><span>Same results.</span> 90% less cost<i>.</i></h2>
+      <p class="rc-lead">Tokkey Router combines local and cloud AI to cut cloud spend on the same task.</p>
+    </div>
+    <div class="rc-grid">
+      <article class="rc-card">
+        <div class="rc-top">
+          <h3 class="rc-t">Cloud only</h3>
+          <div class="rc-models">
+            <p class="rc-badge"><small>CLOUD MODEL</small>Claude Opus 4.7</p>
+          </div>
+        </div>
+        <div class="rc-win">
+          <div class="rc-bar">
+            <img src="{{ 'tk-router-window-dots.svg' | asset_url }}" width="30.4552" height="6.09103" alt="">
+            <span>DEMO PREVIEW</span>
+          </div>
+          <img class="rc-media" src="{{ 'tk-router-demo.jpg' | asset_url }}" width="1600" height="1066" loading="lazy" alt="Laptop running a task with a cloud-only AI model">
+        </div>
+        <dl class="rc-cost">
+          <div><dt>API cost / task</dt><dd class="rc-dim">$3.36</dd></div>
+          <div class="rc-end"><dt>Tokens</dt><dd class="rc-dim">203,420</dd></div>
+        </dl>
+      </article>
+      <article class="rc-card rc-card--on">
+        <div class="rc-top">
+          <h3 class="rc-t">Tokkey Router</h3>
+          <div class="rc-models">
+            <p class="rc-badge rc-badge--local"><small>LOCAL MODEL</small>Qwen3.6 35B</p>
+            <span class="rc-plus" aria-hidden="true">+</span>
+            <p class="rc-badge"><small>FALLBACK</small>Claude Opus 4.7</p>
+          </div>
+        </div>
+        <div class="rc-win">
+          <div class="rc-bar">
+            <img src="{{ 'tk-router-window-dots.svg' | asset_url }}" width="30.4552" height="6.09103" alt="">
+            <span>DEMO PREVIEW</span>
+          </div>
+          <img class="rc-media" src="{{ 'tk-router-demo.jpg' | asset_url }}" width="1600" height="1066" loading="lazy" alt="Laptop running the same task with Tokkey Router">
+        </div>
+        <dl class="rc-cost">
+          <div><dt>API cost / task</dt><dd class="rc-ok">$0.00</dd></div>
+          <div class="rc-end"><dt>Tokens</dt><dd>198,720</dd></div>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  /* "Same results. 90% less cost." cloud vs. Tokkey Router comparison (Figma node 20).
+     Figma canvas is 1920px wide; every size is N × --u, where --u = 1px at 1920 and shrinks with the viewport */
+  .rc-sec {
+    container-type: inline-size;
+    line-height: normal;
+    background: linear-gradient(180deg, #141414, #000);
+    font-family: Inter, sans-serif;
+    color: #f2f2f2;
+  }
+
+  .rc-in {
+    --u: min(1px, 100cqw / 1920);
+    display: flex;
+    flex-direction: column;
+    gap: calc(105 * var(--u));
+    width: calc(1688 * var(--u));
+    margin: 0 auto;
+    padding: calc(116 * var(--u)) 0;
+  }
+
+  .rc-h {
+    margin: 0 0 calc(12 * var(--u));
+    font: 500 calc(64 * var(--u))/calc(72 * var(--u)) Inter, sans-serif;
+    letter-spacing: calc(-2.24 * var(--u));
+  }
+
+  .rc-h span {
+    color: #a3a3a0;
+  }
+
+  .rc-h i {
+    font-style: normal;
+    color: #4abe18;
+  }
+
+  .rc-lead {
+    margin: 0;
+    font-size: calc(20 * var(--u));
+    color: #a1a1a6;
+  }
+
+  .rc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(27.87 * var(--u));
+  }
+
+  .rc-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: calc(24 * var(--u));
+    min-width: 0;
+    height: calc(719 * var(--u));
+    padding: 0 calc(46 * var(--u));
+    border: 1px solid #57575f;
+    border-radius: calc(24 * var(--u));
+    background: #000;
+    overflow: hidden;
+  }
+
+  /* Highlighted Router card: pearl border, glow and silver top light */
+  .rc-card--on {
+    border-color: rgb(255 255 255 / 0.58);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0.04) 45%, rgb(255 255 255 / 0)), #0b0b0d;
+    box-shadow: 0 0 calc(13.2 * var(--u)) rgb(255 255 255 / 0.5);
+  }
+
+  .rc-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(12 * var(--u));
+  }
+
+  .rc-t {
+    margin: 0;
+    font: 600 calc(40 * var(--u)) Inter, sans-serif;
+    color: #f2f2f2;
+  }
+
+  .rc-models {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(9 * var(--u));
+  }
+
+  .rc-plus {
+    font-size: calc(16 * var(--u));
+    color: #a1a1a6;
+  }
+
+  /* Model badge: small role label above the model name */
+  .rc-badge {
+    display: flex;
+    flex-direction: column;
+    gap: calc(4 * var(--u));
+    margin: 0;
+    padding: calc(9 * var(--u)) calc(16 * var(--u));
+    border: 1px solid #57575f;
+    border-radius: calc(8 * var(--u));
+    background: #27272b;
+    font-size: calc(15 * var(--u));
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .rc-badge small {
+    font-size: calc(10 * var(--u));
+    font-weight: 500;
+    letter-spacing: calc(0.7 * var(--u));
+    color: #a1a1a6;
+  }
+
+  .rc-badge--local {
+    border-color: #d8d5df;
+    background: #d8d5df;
+    color: #111110;
+  }
+
+  .rc-badge--local small {
+    color: inherit;
+    opacity: 0.7;
+  }
+
+  /* Demo preview window frame */
+  .rc-win {
+    display: flex;
+    flex-direction: column;
+    gap: calc(11.167 * var(--u));
+    padding: calc(13.197 * var(--u));
+    border: 1px solid #57575f;
+    border-radius: calc(16.243 * var(--u));
+    background: linear-gradient(180deg, #333339, #252529);
+    opacity: 0.7;
+  }
+
+  .rc-bar {
+    display: grid;
+    grid-template-columns: calc(30.455 * var(--u)) 1fr calc(30.455 * var(--u));
+    align-items: center;
+    gap: calc(12.182 * var(--u));
+    height: calc(18.273 * var(--u));
+    padding: 0 calc(7.106 * var(--u));
+  }
+
+  .rc-bar img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .rc-bar span {
+    font-size: calc(10.152 * var(--u));
+    letter-spacing: calc(0.5076 * var(--u));
+    text-align: center;
+    color: #a1a1a6;
+  }
+
+  .rc-media {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 708 / 395;
+    object-fit: cover;
+    border-radius: calc(3.51 * var(--u));
+  }
+
+  .rc-cost {
+    display: flex;
+    justify-content: space-between;
+    gap: calc(16 * var(--u));
+    margin: 0;
+    padding-top: calc(4 * var(--u));
+  }
+
+  .rc-cost div {
+    display: flex;
+    flex-direction: column;
+    gap: calc(5 * var(--u));
+  }
+
+  .rc-cost .rc-end {
+    align-items: flex-end;
+  }
+
+  .rc-cost dt {
+    font-size: calc(20 * var(--u));
+    font-weight: 300;
+    color: #a1a1a6;
+  }
+
+  .rc-cost dd {
+    margin: 0;
+    font: 500 calc(56 * var(--u)) Geist, Inter, sans-serif;
+    letter-spacing: calc(-1.68 * var(--u));
+    color: #f2f2f2;
+  }
+
+  .rc-cost .rc-dim {
+    opacity: 0.64;
+  }
+
+  .rc-cost .rc-ok {
+    color: #4abe18;
+  }
+
+  /* Below 1024px the 1920 scale gets too small to read: fixed 0.75px unit, cards stacked */
+  @media (max-width: 1023px) {
+    .rc-in {
+      --u: 0.75px;
+      width: auto;
+      padding: 80px 24px;
+      gap: 40px;
+    }
+
+    .rc-h {
+      font-size: clamp(32px, 7vw, 48px);
+      line-height: 1.2;
+    }
+
+    .rc-lead,
+    .rc-cost dt {
+      font-size: 16px;
+    }
+
+    .rc-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .rc-card {
+      height: auto;
+      padding: 24px 20px;
+    }
+
+    .rc-badge {
+      font-size: 13px;
+    }
+
+    .rc-badge small {
+      font-size: 9px;
+    }
+
+    .rc-cost dd {
+      font-size: 36px;
+    }
+  }
+{% endstylesheet %}
